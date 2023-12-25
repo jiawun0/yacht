@@ -1,0 +1,8 @@
+.vs/                       
+packages/                  
+yacht/bin/       
+yacht/Content/  
+yacht/obj/
+yacht/Scripts/  
+*.user 
+*.config                                   
