@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace yacht
 {
-    public partial class ContactFront : System.Web.UI.Page
+    public partial class contactFront : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

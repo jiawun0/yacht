@@ -11,7 +11,7 @@ namespace yacht
 {
 
 
-    public partial class contact2
+    public partial class conpanyFront
     {
     }
 }

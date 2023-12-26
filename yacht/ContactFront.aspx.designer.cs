@@ -11,7 +11,7 @@ namespace yacht
 {
 
 
-    public partial class ContactFront
+    public partial class contactFront
     {
     }
 }
