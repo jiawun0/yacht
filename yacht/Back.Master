@@ -1,0 +1,178 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Back.master.cs" Inherits="yacht.Back" %>
+<%--Back的套版--%>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="cssnav/styles.css" rel="stylesheet" />
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <!-- Navigation-->
+            <nav class="navbar navbar-expand-lg bg-secondary text-uppercase " id="mainNav">
+                <div class="container">
+                    <a class="navbar-brand" href="#page-top">
+                        <asp:ContentPlaceHolder ID="HeaderTitle" runat="server">這個頁面的名稱</asp:ContentPlaceHolder>
+                    </a>
+                    <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        Menu
+                    <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="homepage.aspx">首頁</a></li>
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="Login2.aspx">登入</a></li>
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="Logout.aspx">登出</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="d-flex">
+            <!-- Sidebar -->
+            <ul class="navbar-nav bg-black sidebar sidebar-dark" id="accordionSidebar">
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i class="fa-sharp fa-light fa-circle-user"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3">
+                        目前登入者:
+                        <asp:ContentPlaceHolder ID="Sidebar" runat="server">未登入 <sup>村民</sup></asp:ContentPlaceHolder>
+                    </div>
+                </a>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
+
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item active">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>後台管理</span>
+                    <!-- 子選單開始 -->
+                    <ul class="nav flex-column sub-menu">
+                        <!-- Nav Item - 相簿 -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="相簿頁面的URL">
+                                <i class="fa-sharp fa-light fa-image"></i>
+                                <span class="fw-bold">相簿</span>
+                            </a>
+                        </li>
+
+                        <!-- Nav Item - 影片 -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="影片頁面的URL">
+                                <i class="fa-sharp fa-light fa-film"></i>
+                                <span class="fw-bold">影片</span>
+                            </a>
+                        </li>
+
+                        <!-- Nav Item - Q&A -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="Q&A頁面的URL">
+                                <i class="fa-sharp fa-light fa-comments"></i>
+                                <span class="fw-bold">Q&A</span>
+                            </a>
+                        </li>
+
+                        <!-- Nav Item - 連結 -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="LinkCategoryBack.aspx">
+                                <i class="fa-sharp fa-light fa-list"></i>
+                                <span class="fw-bold">連結</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- 子選單結束 -->
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="nav-item active">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>前台呈現</span>
+                </div>
+
+                <!-- Nav Item - 相簿 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="相簿頁面的URL">
+                        <i class="fa-sharp fa-light fa-image"></i>
+                        <span class="fw-bold">相簿</span>
+                    </a>
+                </li>
+
+                <!-- Nav Item - 影片 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="影片頁面的URL">
+                        <i class="fa-sharp fa-light fa-film"></i>
+                        <span class="fw-bold">影片</span>
+                    </a>
+                </li>
+
+                <!-- Nav Item - Q&A -->
+                <li class="nav-item">
+                    <a class="nav-link" href="Q&A頁面的URL">
+                        <i class="fa-sharp fa-light fa-comments"></i>
+                        <span class="fw-bold">Q&A</span>
+                    </a>
+                </li>
+
+                <!-- Nav Item - 連結 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="LinkCategoryFront.aspx">
+                        <i class="fa-sharp fa-light fa-list"></i>
+                        <span class="fw-bold">連結</span>
+                    </a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+            </ul>
+            <!-- End of Sidebar -->
+            <!-- Begin Page Content -->
+            <div class="container-fluid" style="padding-top: 70px;">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800" style="font-size: 24px;">
+                        <asp:ContentPlaceHolder ID="title" runat="server">Title</asp:ContentPlaceHolder>
+                    </h1>
+                </div>
+                <!-- Your Dashboard content -->
+                <div>
+                    <!-- Add your Dashboard content here -->
+                    <!-- For example: -->
+                    <p>
+                        <asp:ContentPlaceHolder ID="content" runat="server">gridview</asp:ContentPlaceHolder>
+                    </p>
+                    <!-- Include other Dashboard elements, charts, or data -->
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

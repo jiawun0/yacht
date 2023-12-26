@@ -128,6 +128,8 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="contact2.aspx" />
+    <Content Include="ContactFront.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -151,7 +153,12 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="homepage.aspx" />
     <Content Include="images\Thumbs.db" />
+    <Content Include="Back.Master" />
+    <Content Include="HeaderFooter.Master" />
+    <Content Include="New.Master" />
+    <Content Include="WebForm1.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="images\back.gif" />
     <Content Include="images\banner001.jpg" />
@@ -272,7 +279,6 @@
     <Content Include="images\yachts_2.jpg" />
     <Content Include="javascript\iepngfix_tilebg.js" />
     <Content Include="javascript\pngfix.js" />
-    <Content Include="Login.aspx" />
     <Content Include="RecaptchaNet.Readme.txt" />
     <Content Include="Scripts\AC_RunActiveContent.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -326,12 +332,33 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Back.Master.cs">
+      <DependentUpon>Back.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Back.Master.designer.cs">
+      <DependentUpon>Back.Master</DependentUpon>
+    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="contact2.aspx.cs">
+      <DependentUpon>contact2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="contact2.aspx.designer.cs">
+      <DependentUpon>contact2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContactFront.aspx.cs">
+      <DependentUpon>ContactFront.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContactFront.aspx.designer.cs">
+      <DependentUpon>ContactFront.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -343,12 +370,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
+    <Compile Include="HeaderFooter.Master.cs">
+      <DependentUpon>HeaderFooter.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
+    <Compile Include="HeaderFooter.Master.designer.cs">
+      <DependentUpon>HeaderFooter.Master</DependentUpon>
+    </Compile>
+    <Compile Include="homepage.aspx.cs">
+      <DependentUpon>homepage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="homepage.aspx.designer.cs">
+      <DependentUpon>homepage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="New.Master.cs">
+      <DependentUpon>New.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="New.Master.designer.cs">
+      <DependentUpon>New.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
@@ -372,12 +413,26 @@
     <Compile Include="Site1.Master.designer.cs">
       <DependentUpon>Site1.Master</DependentUpon>
     </Compile>
+    <Compile Include="Site2.Master.cs">
+      <DependentUpon>Site2.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site2.Master.designer.cs">
+      <DependentUpon>Site2.Master</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -387,6 +442,7 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Site2.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

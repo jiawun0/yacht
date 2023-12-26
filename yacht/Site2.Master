@@ -111,10 +111,10 @@
 
                 <!--------------------------------右邊選單開始---------------------------------------------------->
                 <asp:ContentPlaceHolder ID="RightContent" runat="server">
-                    <div id="crumb"><a href="#">Home</a> >> <a href="#">Company  </a>>> <a href="#"><span class="on1">About Us</span></a></div>
+                    <div id="crumb"><a href="#">Home</a> >> <a href="#">右邊選單Company  </a>>> <a href="#"><span class="on1">右邊選單About Us</span></a></div>
                     <div class="right">
                         <div class="right1">
-                            <div class="title"><span>About Us</span></div>
+                            <div class="title"><span>右邊選單About Us</span></div>
                 </asp:ContentPlaceHolder>
 
                 <!--------------------------------內容開始---------------------------------------------------->
