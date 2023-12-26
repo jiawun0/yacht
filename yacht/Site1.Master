@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="yacht.Site1" %>
+<%--Site1首頁套版--%>
 
 <!DOCTYPE html>
 
@@ -63,7 +64,8 @@
                 <div class="news">
                     <div class="newstitle">
                         <p class="newstitlep1">
-                            <img src="images/news.gif" alt="news" /></p>
+                            <img src="images/news.gif" alt="news" />
+                        </p>
                         <p class="newstitlep2"><a href="#">More>></a></p>
                     </div>
 
@@ -71,11 +73,13 @@
                         <!--TOP第一則最新消息-->
                         <li>
                             <div class="newstop">
-                                <img src="images/new_top01.png" alt="&quot;&quot;" /></div>
+                                <img src="images/new_top01.png" alt="&quot;&quot;" />
+                            </div>
                             <div class="news01">
                                 <div class="news02p1">
                                     <p class="news02p1img">
-                                        <img src="images/pit002.jpg" alt="&quot;&quot;" /></p>
+                                        <img src="images/pit002.jpg" alt="&quot;&quot;" />
+                                    </p>
                                 </div>
                                 <p class="news02p2">
                                     <span>Tayana 54 CE Certifica..</span>
@@ -90,7 +94,8 @@
                             <div class="news02">
                                 <div class="news02p1">
                                     <p class="news02p1img">
-                                        <img src="images/pit001.jpg" alt="&quot;&quot;" width="150" /></p>
+                                        <img src="images/pit001.jpg" alt="&quot;&quot;" width="150" />
+                                    </p>
                                 </div>
                                 <p class="news02p2">
                                     <span>Tayana 58 CE Certifica..</span>
@@ -104,7 +109,8 @@
                             <div class="news02">
                                 <div class="news02p1">
                                     <p class="news02p1img">
-                                        <img src="images/pit001.jpg" alt="&quot;&quot;" /></p>
+                                        <img src="images/pit001.jpg" alt="&quot;&quot;" />
+                                    </p>
                                 </div>
                                 <p class="news02p2">
                                     <span>Big Cruiser in a Small ..</span>
@@ -132,13 +138,9 @@
                     </div>
                 </div>
                 <!--------------------------------落款結束---------------------------------------------------->
-
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
             </div>
-</body>
-
-<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-</asp:ContentPlaceHolder>
-</div>
     </form>
 </body>
 </html>
