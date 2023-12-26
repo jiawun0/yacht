@@ -13,5 +13,33 @@ namespace yacht
         {
 
         }
+
+        protected void SubmitButton_Click(object sender, EventArgs e)
+        {
+
+            if (String.IsNullOrEmpty(Recaptcha1.Response))
+            {
+                lblMessage.Visible = true;
+                lblMessage.Text = "Captcha cannot be empty.";
+            }
+            else
+            {
+                var result = Recaptcha1.Verify();
+                if (result.Success)
+                {
+                    //此處可加入"我不是機器人驗證"成功後要做的事
+
+                }
+                else
+                {
+                    lblMessage.Text = "Error(s): ";
+
+                    foreach (var err in result.ErrorCodes)
+                    {
+                        lblMessage.Text = lblMessage.Text + err;
+                    }
+                }
+            }
+        }
     }
 }

@@ -2,7 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <%--<!--遮罩-->
     <div class="bannermasks">
         <img src="images/contact.jpg" alt="&quot;&quot;" width="967" height="371" /></div>
@@ -116,6 +118,14 @@
                         <tr>
                             <td class="from01td01">&nbsp;</td>
                             <td class="f_right"><a href="#">
+                                <!-- 上方自動產生的設定 -->
+                                <%@ Register Assembly="Recaptcha.Web" Namespace="Recaptcha.Web.UI.Controls" TagPrefix="cc1" %>
+
+                                <!-- Render recaptcha API script (非必要，同頁使用兩個以上時才需要)-->
+                                <cc1:RecaptchaApiScript ID="RecaptchaApiScript1" runat="server" />
+                                <!-- Render recaptcha widget -->
+                                <cc1:RecaptchaWidget ID="Recaptcha1" runat="server" RenderApiScript="False" />
+                                <asp:Label ID="lblMessage" runat="server" CssClass="error-message"></asp:Label>
                                 <img src="images/buttom03.gif" alt="submit" width="59" height="25" /></a></td>
                         </tr>
                     </table>
