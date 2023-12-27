@@ -79,54 +79,62 @@
                     <br />
                     <table>
                         <tr>
-                            <!--輸入姓名、Email、Phone-->
                             <td class="from01td01">Name :</td>
-                            <td><span>*</span><input type="text" name="textfield" id="textfield" />
+                            <td><span>*</span><asp:TextBox runat="server" name="Name" type="text" ID="Name" class="{validate:{required:true, messages:{required:'Required'}}}" Style="width: 250px;" required="" aria-required="true" oninput="setCustomValidity('');" oninvalid="setCustomValidity('Required!')" MaxLength="50"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
                             <td class="from01td01">Email :</td>
-                            <td><span>*</span><input type="text" name="textfield" id="textfield" /></td>
+                            <td><span>*</span><asp:TextBox runat="server" name="Email" type="text" ID="Email" class="{validate:{required:true, email:true, messages:{required:'Required', email:'Please check the E-mail format is correct'}}}" Style="width: 250px;" required="" aria-required="true" oninput="setCustomValidity('');" oninvalid="setCustomValidity('Required!')" MaxLength="50"></asp:TextBox>
+                            </td>
                         </tr>
                         <tr>
                             <td class="from01td01">Phone :</td>
-                            <td><span>*</span><input type="text" name="textfield" id="textfield" /></td>
+                            <td><span>*</span><asp:TextBox runat="server" name="Phone" type="text" ID="Phone" class="{validate:{required:true, messages:{required:'Required'}}}" Style="width: 250px;" required="" aria-required="true" oninput="setCustomValidity('');" oninvalid="setCustomValidity('Required!')" MaxLength="50"></asp:TextBox>
+                            </td>
                         </tr>
                         <tr>
                             <td class="from01td01">Country :</td>
                             <td><span>*</span>
-                                <select name="select" id="select">
-                                    <option>Annapolis</option>
-                                </select></td>
+                                <asp:DropDownList name="Country" ID="Country" runat="server" DataTextField="countrySort" DataValueField="countrySort" DataSourceID="SqlDataSource1"></asp:DropDownList>
+                                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TayanaYachtConnectionString %>" SelectCommand="SELECT [countrySort] FROM [CountrySort]"></asp:SqlDataSource>
+                            </td>
                         </tr>
                         <tr>
-                            <td colspan="2"><span>*</span>Brochure of interest  *Which Brochure would you like to view?</td>
+                            <td colspan="2"><span>*</span>Brochure of interest *Which Brochure would you like to view?</td>
                         </tr>
                         <tr>
-                            <td class="from01td01">&nbsp;</td>
+                            <td class="from01td01"></td>
                             <td>
-                                <select name="select" id="select">
-                                    <option>Dynasty 72 </option>
-                                </select>
+                                <asp:DropDownList name="Yachts" ID="Yachts" runat="server" DataTextField="type" DataValueField="type"></asp:DropDownList>
                             </td>
                         </tr>
                         <tr>
                             <td class="from01td01">Comments:</td>
                             <td>
-                                <textarea name="textarea" id="textarea" cols="45" rows="5"></textarea></td>
+                                <asp:TextBox runat="server" TextMode="MultiLine" name="Comments" Rows="2" cols="20" ID="Comments" Style="height: 150px; width: 330px;" MaxLength="500"></asp:TextBox>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="from01td01">&nbsp;</td>
-                            <td class="f_right"><a href="#">
-                                <!-- 上方自動產生的設定 -->
+                            <td class="from01td01"></td>
+                            <td class="f_right">
+
+                                <!-- 機器人在這: 上方自動產生的設定 -->
                                 <%@ Register Assembly="Recaptcha.Web" Namespace="Recaptcha.Web.UI.Controls" TagPrefix="cc1" %>
 
                                 <!-- Render recaptcha API script (非必要，同頁使用兩個以上時才需要)-->
                                 <cc1:RecaptchaApiScript ID="RecaptchaApiScript1" runat="server" />
                                 <!-- Render recaptcha widget -->
                                 <cc1:RecaptchaWidget ID="Recaptcha1" runat="server" RenderApiScript="False" />
-                                <asp:Label ID="lblMessage" runat="server" CssClass="error-message"></asp:Label>
-                                <img src="images/buttom03.gif" alt="submit" width="59" height="25" /></a></td>
+
+                                <asp:Label ID="lblMessage" runat="server" Visible="False" ForeColor="Red"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="from01td01"></td>
+                            <td class="f_right">
+                                <asp:ImageButton runat="server" type="image" name="ImageButton1" ID="ImageButton1" src="images/buttom03.gif" Style="border-width: 0px;" Height="25px" OnClick="ImageButton1_Click" />
+                            </td>
                         </tr>
                     </table>
                 </div>
