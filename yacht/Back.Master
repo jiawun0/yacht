@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Back.master.cs" Inherits="yacht.Back" %>
+
 <%--Back的套版--%>
 
 <!DOCTYPE html>
@@ -172,6 +173,8 @@
                     <!-- Include other Dashboard elements, charts, or data -->
                 </div>
             </div>
+            <asp:ContentPlaceHolder ID="body" runat="server">
+            </asp:ContentPlaceHolder>
         </div>
     </form>
 </body>

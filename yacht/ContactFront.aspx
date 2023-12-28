@@ -97,20 +97,21 @@
                             <td class="from01td01">Country :</td>
                             <td><span>*</span>
                                 <asp:DropDownList name="Country" ID="Country" runat="server" DataTextField="countrySort" DataValueField="countrySort" DataSourceID="SqlDataSource1"></asp:DropDownList>
-                                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TayanaYachtConnectionString %>" SelectCommand="SELECT [countrySort] FROM [CountrySort]"></asp:SqlDataSource>
+                                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectYacht3 %>" SelectCommand="SELECT [countrySort] FROM [countrySort]"></asp:SqlDataSource>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2"><span>*</span>Brochure of interest *Which Brochure would you like to view?</td>
                         </tr>
                         <tr>
-                            <td class="from01td01"></td>
+                            <td class="from01td01">Model :</td>
                             <td>
-                                <asp:DropDownList name="Yachts" ID="Yachts" runat="server" DataTextField="type" DataValueField="type"></asp:DropDownList>
+                                <asp:DropDownList name="Model" ID="Model" runat="server" DataTextField="yachtModel" DataValueField="yachtModel" DataSourceID="SqlDataSource2"></asp:DropDownList>
+                                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectYacht3 %>" SelectCommand="SELECT [yachtModel] FROM [Yachts]"></asp:SqlDataSource>
                             </td>
                         </tr>
                         <tr>
-                            <td class="from01td01">Comments:</td>
+                            <td class="from01td01">Comments :</td>
                             <td>
                                 <asp:TextBox runat="server" TextMode="MultiLine" name="Comments" Rows="2" cols="20" ID="Comments" Style="height: 150px; width: 330px;" MaxLength="500"></asp:TextBox>
                             </td>

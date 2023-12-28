@@ -24,7 +24,7 @@ namespace yacht
         private void loadModelList()
         {
             //1.連線資料庫
-            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtConnectionString"].ConnectionString);
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectYacht3"].ConnectionString);
             //2.sql語法
             string sql = "SELECT * FROM Yachts";
             //3.創建command物件
@@ -43,19 +43,19 @@ namespace yacht
                 {
                     listItem.Text = $"{typeStr} (New Design)";
                     listItem.Value = $"{typeStr} (New Design)";
-                    Yachts.Items.Add(listItem);
+                    Model.Items.Add(listItem);
                 }
                 else if (isNewBuilding.Equals("True"))
                 {
                     listItem.Text = $"{typeStr} (New Building)";
                     listItem.Value = $"{typeStr} (New Building)";
-                    Yachts.Items.Add(listItem);
+                    Model.Items.Add(listItem);
                 }
                 else
                 {
                     listItem.Text = typeStr;
                     listItem.Value = typeStr;
-                    Yachts.Items.Add(listItem);
+                    Model.Items.Add(listItem);
                 }
             }
             connection.Close();
@@ -76,7 +76,7 @@ namespace yacht
                 {
                     //此處可加入"我不是機器人驗證"成功後要做的事，導向送出文件並儲存
                     sendGmail();
-                    Response.Write("<script>alert('Thank you for contacting us!');location.href='contact.aspx';</script>");
+                    Response.Write("<script>alert('Thank you for contacting us!');location.href='contactFront.aspx';</script>");
                 }
                 else
                 {
@@ -94,11 +94,11 @@ namespace yacht
             //宣告使用 MimeMessage
             var message = new MimeMessage();
             //設定發信地址 ("發信人", "發信 email")
-            message.From.Add(new MailboxAddress("TayanaYacht", "XXXXXXX@gmail.com"));
+            message.From.Add(new MailboxAddress("TayanaYacht", "jia1023230@gmail.com"));
             //設定收信地址 ("收信人", "收信 email")
             message.To.Add(new MailboxAddress(Name.Text.Trim(), Email.Text.Trim()));
             //寄件副本email
-            message.Cc.Add(new MailboxAddress("收信人名稱", "XXXXXXX@gmail.com"));
+            //message.Cc.Add(new MailboxAddress("收信人名稱", "XXXXXXX@gmail.com"));
             //設定優先權
             //message.Priority = MessagePriority.Normal;
             //信件標題
@@ -111,7 +111,7 @@ namespace yacht
                 $"<h3>Email : {Email.Text.Trim()}</h3>" +
                 $"<h3>Phone : {Phone.Text.Trim()}</h3>" +
                 $"<h3>Country : {Country.SelectedValue}</h3>" +
-                $"<h3>Type : {Yachts.SelectedValue}</h3>" +
+                $"<h3>Type : {Model.SelectedValue}</h3>" +
                 $"<h3>Comments : </h3>" +
                 $"<p>{Comments.Text.Trim()}</p>";
             //設定郵件內容
@@ -125,7 +125,7 @@ namespace yacht
                 client.Connect("smtp.gmail.com", 587, false); // localhost 測試使用加密需先關閉 
 
                 // Note: only needed if the SMTP server requires authentication
-                client.Authenticate("XXXXXXX@gmail.com", "16碼應用程式密碼");
+                client.Authenticate("jia1023230@gmail.com", "ovyqguiokzzccgqo");
                 //發信
                 client.Send(message);
                 //結束連線
