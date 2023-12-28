@@ -25,6 +25,7 @@
     <br />
     <br />
     <asp:Button ID="Button_login" runat="server" Text="登入" Style="height: 32px" OnClick="Button_login_Click" />
+    <asp:Label ID="Label4" runat="server"></asp:Label>
     <br />
     <br />
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1">

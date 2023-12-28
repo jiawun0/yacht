@@ -70,7 +70,8 @@ namespace yacht
             if (readerCountry.Read())
             {
                 haveSameAccount = true;
-                LabelAdd.Visible = true; //帳號重複通知
+                //帳號重複通知
+                Response.Write("<script>alert('帳號已經存在');</script>");
             }
             connection.Close();
 
@@ -112,9 +113,12 @@ namespace yacht
                 //畫面渲染
                 GridView_Register.DataBind();
                 //清空輸入欄位
+                TextBox_name.Text = "";
                 TextBox_account.Text = "";
                 TextBox_password.Text = "";
                 LabelAdd.Visible = false;
+
+                Response.Redirect("Register.aspx");
             }
         }
 
