@@ -28,7 +28,7 @@ namespace yacht
         {
             string password = TextBox_password.Text;
 
-            // 1.連線資料庫
+            //連線資料庫
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectYachtLogin2"].ConnectionString);
 
             if (connection.State != System.Data.ConnectionState.Open)
@@ -36,90 +36,124 @@ namespace yacht
                 connection.Open();
             }
 
-            // 2.sql語法 (@參數化避免隱碼攻擊)
             //查詢跟參數的部分很難寫成方法，需自行研究
             string sql = $"select * from Login where account = @account ";
 
-            // 3.創建 command 物件
-            //發送SQL語法，取得結果
+            //創建 command 物件發送SQL語法，取得結果
             SqlCommand sqlCommand = new SqlCommand(sql, connection);
-            //sqlCommand.Connection = connection;
+            sqlCommand.Connection = connection;
 
-            //4.增加參數並設定值，記得用.叫出來
+            //增加參數並設定值，記得用.叫出來
             sqlCommand.Parameters.AddWithValue("@account", TextBox_account.Text.Trim());
 
-            // 5.資料庫用 Adapter 執行指令
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
-            // 6.建立一個空的 Table
-            DataTable dataTable = new DataTable();
-            // 7.將資料放入 Table
-            dataAdapter.Fill(dataTable);
-            // 登入流程管理 (Cookie)
-            if (dataTable.Rows.Count > 0)
-            {
-                // SQL 有找到資料時執行
+            //將準備的SQL指令給操作物件
+            sqlCommand.CommandText = sql;
 
-                //將字串轉回 byte
-                byte[] hash = Convert.FromBase64String(dataTable.Rows[0]["password"].ToString());
-                byte[] salt = Convert.FromBase64String(dataTable.Rows[0]["salt"].ToString());
-                //驗證密碼
+            //執行該SQL查詢，用reader接資料
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+
+            //int count = Convert.ToInt32(sqlCommand.ExecuteScalar());
+            //object result = sqlCommand.ExecuteScalar();
+
+            //用read先叫出來，while也可以
+            if (reader.Read())
+            {
+                byte[] hash = Convert.FromBase64String(reader["password"].ToString());
+                byte[] salt = Convert.FromBase64String(reader["salt"].ToString());
+
+                // 驗證密碼
                 bool success = VerifyHash(password, salt, hash);
 
                 if (success)
                 {
-                    //宣告驗證票要夾帶的資料 (用;區隔)
-                    string userData = dataTable.Rows[0]["isManger"].ToString() + ";" + dataTable.Rows[0]["account"].ToString() + ";" + dataTable.Rows[0]["name"].ToString() + ";" + dataTable.Rows[0]["email"].ToString();
-                    //設定驗證票(夾帶資料，cookie 命名) // 需額外引入using System.Web.Configuration;
+                    // 取得需要的使用者資料
+                    string userData = reader["isManger"].ToString() + ";" + reader["account"].ToString() + ";" + reader["name"].ToString() + ";" + reader["email"].ToString();
+
+                    // 設定驗證票
                     SetAuthenTicket(userData, TextBox_account.Text);
-                    //導頁至權限分流頁
-                    //Response.Redirect("CheckAccount.ashx");
+
+                    // 登入成功，存儲到 Session 中
+                    Session["LoginId"] = reader["Id"];
+                    Session["IsManger"] = Convert.ToBoolean(reader["IsManger"]);
+
+                    // 重定向到指定頁面
+                    Response.Redirect("Register.aspx");
                 }
                 else
                 {
-                    //資料庫裡找不到相同資料時，表示密碼有誤!
-                    Label4.Text = "password error, login failed!";
+                    // 密碼錯誤
+                    Label4.Text = "密碼錯誤，請重新輸入。";
                     Label4.Visible = true;
-                    connection.Close();
-                    return;
                 }
             }
             else
             {
-                //資料庫裡找不到相同資料時，表示帳號有誤!
-                Label4.Text = "Account error, login failed!";
+                // 帳號錯誤
+                Label4.Text = "帳號錯誤，請重新輸入。";
                 Label4.Visible = true;
-                //終止程式
-                //Response.End(); //會清空頁面
-                return;
             }
             connection.Close();
-        
-            ////將準備的SQL指令給操作物件
-            //sqlCommand.CommandText = sql;
 
-            ////執行該SQL查詢，用reader接資料
-            //SqlDataReader reader = sqlCommand.ExecuteReader();
+            ////將是否為管理者設為boolean
+            //bool IsManger = Convert.ToBoolean(reader["IsManger"]);
 
-            ////int count = Convert.ToInt32(sqlCommand.ExecuteScalar());
-            ////object result = sqlCommand.ExecuteScalar();
+            //        // 登入成功，取得使用者 ID，並存儲到 Session 中
+            //        Session["LoginId"] = reader["Id"];
 
-            //用read先叫出來，while也可以
-            //if (reader.Read())
+            //        Session["IsManger"] = IsManger;
+
+            //        Response.Redirect("Register.aspx");
+            //    }
+            //    else
+            //    {
+            //        // 登入失敗
+            //        Response.Write("<script>alert('帳號或密碼錯誤，請重新輸入');</script>");
+            //    }
+            //    connection.Close();
+
+            //// 5.資料庫用 Adapter 執行指令
+            //SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
+            //// 6.建立一個空的 Table
+            //DataTable dataTable = new DataTable();
+            //// 7.將資料放入 Table
+            //dataAdapter.Fill(dataTable);
+            //// 登入流程管理 (Cookie)
+            //if (dataTable.Rows.Count > 0)
             //{
-            //    //將是否為管理者設為boolean
-            //    bool IsManger = Convert.ToBoolean(reader["IsManger"]);
+            //    // SQL 有找到資料時執行
 
-            //    // 登入成功，取得使用者 ID，並存儲到 Session 中
-            //    Session["LoginId"] = reader["Id"];
+            //    //將字串轉回 byte
+            //    byte[] hash = Convert.FromBase64String(dataTable.Rows[0]["password"].ToString());
+            //    byte[] salt = Convert.FromBase64String(dataTable.Rows[0]["salt"].ToString());
+            //    //驗證密碼
+            //    bool success = VerifyHash(password, salt, hash);
 
-            //    Session["IsManger"] = IsManger;
-
-            //    Response.Redirect("Register.aspx");
+            //    if (success)
+            //    {
+            //        //宣告驗證票要夾帶的資料 (用;區隔)
+            //        string userData = dataTable.Rows[0]["isManger"].ToString() + ";" + dataTable.Rows[0]["account"].ToString() + ";" + dataTable.Rows[0]["name"].ToString() + ";" + dataTable.Rows[0]["email"].ToString();
+            //        //設定驗證票(夾帶資料，cookie 命名) // 需額外引入using System.Web.Configuration;
+            //        SetAuthenTicket(userData, TextBox_account.Text);
+            //        //導頁至權限分流頁
+            //        Response.Redirect("CheckAccount.ashx");
+            //    }
+            //    else
+            //    {
+            //        //資料庫裡找不到相同資料時，表示密碼有誤!
+            //        Label4.Text = "password error, login failed!";
+            //        Label4.Visible = true;
+            //        connection.Close();
+            //        return;
+            //    }
             //}
             //else
             //{
-            //    // 登入失敗
-            //    Response.Write("<script>alert('帳號或密碼錯誤，請重新輸入');</script>");
+            //    //資料庫裡找不到相同資料時，表示帳號有誤!
+            //    Label4.Text = "Account error, login failed!";
+            //    Label4.Visible = true;
+            //    //終止程式
+            //    //Response.End(); //會清空頁面
+            //    return;
             //}
             //connection.Close();
         }

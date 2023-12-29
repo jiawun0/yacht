@@ -197,6 +197,7 @@
     <Content Include="Back.Master" />
     <Content Include="Login.aspx" />
     <Content Include="New.Master" />
+    <Content Include="CheckAccount.ashx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="images\back.gif" />
     <Content Include="images\banner001.jpg" />
@@ -377,6 +378,9 @@
     </Compile>
     <Compile Include="Back.Master.designer.cs">
       <DependentUpon>Back.Master</DependentUpon>
+    </Compile>
+    <Compile Include="CheckAccount.ashx.cs">
+      <DependentUpon>CheckAccount.ashx</DependentUpon>
     </Compile>
     <Compile Include="conpanyFront.aspx.cs">
       <DependentUpon>conpanyFront.aspx</DependentUpon>
