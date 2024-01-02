@@ -67,10 +67,10 @@ namespace yacht
                 if (success)
                 {
                     // 取得需要的使用者資料
-                    string userData = reader["isManger"].ToString() + ";" + reader["account"].ToString() + ";" + reader["name"].ToString() + ";" + reader["email"].ToString();
+                    //string userData = reader["isManger"].ToString() + ";" + reader["account"].ToString() + ";" + reader["name"].ToString() + ";" + reader["email"].ToString();
 
                     // 設定驗證票
-                    SetAuthenTicket(userData, TextBox_account.Text);
+                    //SetAuthenTicket(userData, TextBox_account.Text);
 
                     // 登入成功，存儲到 Session 中
                     Session["LoginId"] = reader["Id"];

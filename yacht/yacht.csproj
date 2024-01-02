@@ -181,6 +181,8 @@
     <Content Include="css\js.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\style.css" />
+    <Content Include="dealers.aspx" />
+    <Content Include="dealersCountryBack.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -402,6 +404,20 @@
     </Compile>
     <Compile Include="contactFront.aspx.designer.cs">
       <DependentUpon>contactFront.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dealers.aspx.cs">
+      <DependentUpon>dealers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dealers.aspx.designer.cs">
+      <DependentUpon>dealers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="dealersCountryBack.aspx.cs">
+      <DependentUpon>dealersCountryBack.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="dealersCountryBack.aspx.designer.cs">
+      <DependentUpon>dealersCountryBack.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
