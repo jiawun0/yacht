@@ -488,6 +488,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Album\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
