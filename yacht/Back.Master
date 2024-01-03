@@ -172,9 +172,10 @@
                     </p>
                     <!-- Include other Dashboard elements, charts, or data -->
                 </div>
+
+                <asp:ContentPlaceHolder ID="body" runat="server">
+                </asp:ContentPlaceHolder>
             </div>
-            <asp:ContentPlaceHolder ID="body" runat="server">
-            </asp:ContentPlaceHolder>
         </div>
     </form>
 </body>
