@@ -84,7 +84,7 @@ namespace yacht
             //Response.Redirect("dealersCountryBack.aspx");
             ShowDB();
         }
-        
+
         //顯示目前國家
         void ShowDB()
         {
@@ -421,18 +421,40 @@ namespace yacht
         {
             GridView_arealist.EditIndex = e.NewEditIndex;
             ShowDB2();
+
+            //GridViewRow row = GridView_arealist.Rows[e.NewEditIndex];
+            //if (GridView_arealist.EditIndex == e.NewEditIndex)
+            //{
+            //    // 取得編輯模板中的控制項
+            //    FileUpload fileUpload_FileUpload_ImgT = row.FindControl("FileUpload_FileUpload_ImgT") as FileUpload;
+            //    string filePath = fileUpload_FileUpload_ImgT.FileName; // 取得上傳檔案的路徑
+            //}
         }
+
         protected void GridView_arealist_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             GridViewRow row = GridView_arealist.Rows[e.RowIndex];
 
             int boardId = Convert.ToInt32(GridView_arealist.DataKeys[e.RowIndex].Value);
 
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectarealist"].ConnectionString);
+
             TextBox textBox_areaT = row.FindControl("TextBox_areaT") as TextBox;
             string changeText_areaT = textBox_areaT.Text;
 
-            TextBox textBox_FileUpload_ImgT = row.FindControl("TextBox_FileUpload_ImgT") as TextBox;
-            string changeText_FileUpload_ImgT = textBox_FileUpload_ImgT.Text;
+            // 取得編輯模板中的控制項
+            FileUpload fileUpload_ImgT = row.FindControl("FileUpload_ImgT") as FileUpload;
+            if (fileUpload_ImgT.HasFile)
+            {
+                string FileName = Path.GetFileName(fileUpload_ImgT.PostedFile.FileName); // 取得上傳檔案的路徑
+                string saveDirectory = Server.MapPath("~/Album/");
+                string savePath = Path.Combine(saveDirectory, FileName);
+                fileUpload_ImgT.SaveAs(savePath);
+            }
+            string changeFileUpload_ImgT = fileUpload_ImgT.ToString();
+
+            //TextBox textBox_FileUpload_ImgT = row.FindControl("TextBox_FileUpload_ImgT") as TextBox;
+            //string changeText_FileUpload_ImgT = textBox_FileUpload_ImgT.Text;
 
             TextBox textBox_nameT = row.FindControl("TextBox_nameT") as TextBox;
             string changeText_nameT = textBox_nameT.Text;
@@ -455,8 +477,6 @@ namespace yacht
             TextBox textBox_linkT = row.FindControl("TextBox_linkT") as TextBox;
             string changeText_linkT = textBox_linkT.Text;
 
-            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectarealist"].ConnectionString);
-
             if (connection.State != System.Data.ConnectionState.Open)
             {
                 connection.Open();
@@ -469,7 +489,8 @@ namespace yacht
 
             sqlCommand.Parameters.AddWithValue("@BoardId", boardId);
             sqlCommand.Parameters.AddWithValue("@area", changeText_areaT);
-            sqlCommand.Parameters.AddWithValue("@dealerImgPath", changeText_FileUpload_ImgT);
+            //sqlCommand.Parameters.AddWithValue("@dealerImgPath", changeText_FileUpload_ImgT);
+            sqlCommand.Parameters.AddWithValue("@dealerImgPath", changeFileUpload_ImgT);
             sqlCommand.Parameters.AddWithValue("@name", changeText_nameT);
             sqlCommand.Parameters.AddWithValue("@contact", changeText_contactT);
             sqlCommand.Parameters.AddWithValue("@address", changeText_addressT);
