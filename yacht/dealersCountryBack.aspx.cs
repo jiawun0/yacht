@@ -105,6 +105,9 @@ namespace yacht
 
             GridView_country.DataBind();
 
+            // 重新繫結 DropDownList1
+            DropDownList1.DataBind();
+
             connection.Close();
         }
 
@@ -197,6 +200,9 @@ namespace yacht
             connection.Close();
 
             Response.Write("<script>alert('刪除成功');</script>");
+
+            // 重新繫結 DropDownList1
+            DropDownList1.DataBind();
 
             ShowDB();
         }
@@ -480,7 +486,7 @@ namespace yacht
 
         protected void GridView_arealist_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            int boardId = Convert.ToInt32(GridView_country.DataKeys[e.RowIndex].Value);
+            int boardId = Convert.ToInt32(GridView_arealist.DataKeys[e.RowIndex].Value);
 
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectarealist"].ConnectionString);
 
@@ -489,7 +495,7 @@ namespace yacht
                 connection.Open();
             }
 
-            string deleteSql = $"delete from [dealers] where [country_ID] = @boardId; delete from countrySort where Id = @boardId ";
+            string deleteSql = $"delete from dealers where Id = @boardId ";
             SqlCommand deleteCommand = new SqlCommand(deleteSql, connection);
             deleteCommand.Parameters.AddWithValue("@boardId", boardId);
             deleteCommand.ExecuteNonQuery();

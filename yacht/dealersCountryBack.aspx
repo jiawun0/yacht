@@ -146,7 +146,7 @@
     <asp:Button ID="BtnAddArea" runat="server" Text="新增區域" OnClick="BtnAddArea_Click" />
     <br />
     <br />
-    <asp:GridView ID="GridView_arealist" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowCancelingEdit="GridView_arealist_RowCancelingEdit" OnRowDeleting="GridView_arealist_RowDeleting" OnRowEditing="GridView_arealist_RowEditing" OnRowUpdating="GridView_arealist_RowUpdating" OnSelectedIndexChanged="GridView_arealist_SelectedIndexChanged">
+    <asp:GridView ID="GridView_arealist" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowCancelingEdit="GridView_arealist_RowCancelingEdit" OnRowDeleting="GridView_arealist_RowDeleting" OnRowEditing="GridView_arealist_RowEditing" OnRowUpdating="GridView_arealist_RowUpdating" >
         <columns>
             <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id"></asp:BoundField>
             <asp:BoundField DataField="country_ID" HeaderText="country_ID" SortExpression="country_ID"></asp:BoundField>
@@ -166,13 +166,7 @@
                     <asp:Label ID="Label_FileUpload_ImgT" runat="server" Text='<%# Bind("dealerImgPath") %>'></asp:Label>
                 </itemtemplate>
             </asp:TemplateField>
-            <%--<asp:TemplateField HeaderText="dealerImgPath" SortExpression="dealerImgPath">
-                <itemtemplate>
-                    <asp:Label ID="Label_FileUpload_ImgT" runat="server" Text='<%# Eval("dealerImgPath") %>'></asp:Label>
-                    <input type="file" id="fileInput" style="display: none;" onchange="uploadFile(this)" />
-                    <input type="button" value="選擇圖片" onclick="document.getElementById('fileInput').click();" />
-                </itemtemplate>
-            </asp:TemplateField>--%>
+            
             <asp:TemplateField HeaderText="name" SortExpression="name">
                 <edititemtemplate>
                     <asp:TextBox ID="TextBox_nameT" runat="server" Text='<%# Bind("name") %>'></asp:TextBox>
@@ -268,6 +262,13 @@
             <asp:Parameter Name="Id" Type="Int32" />
         </updateparameters>
     </asp:SqlDataSource>
+    <%--<asp:TemplateField HeaderText="dealerImgPath" SortExpression="dealerImgPath">
+                <itemtemplate>
+                    <asp:Label ID="Label_FileUpload_ImgT" runat="server" Text='<%# Eval("dealerImgPath") %>'></asp:Label>
+                    <input type="file" id="fileInput" style="display: none;" onchange="uploadFile(this)" />
+                    <input type="button" value="選擇圖片" onclick="document.getElementById('fileInput').click();" />
+                </itemtemplate>
+            </asp:TemplateField>--%>
    <%-- <script>
         function uploadFile(input) {
             var file = input.files[0];
