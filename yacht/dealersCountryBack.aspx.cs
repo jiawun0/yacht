@@ -14,6 +14,7 @@ namespace yacht
 {
     public partial class dealersCountryBack : System.Web.UI.Page
     {
+        //先把管理者卡登入註解，等完成再開啟
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -52,6 +53,7 @@ namespace yacht
             }
         }
 
+        //增加國家
         protected void Button_add_Click(object sender, EventArgs e)
         {
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectcountry"].ConnectionString);
@@ -82,7 +84,8 @@ namespace yacht
             //Response.Redirect("dealersCountryBack.aspx");
             ShowDB();
         }
-
+        
+        //顯示目前國家
         void ShowDB()
         {
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectcountry"].ConnectionString);
@@ -111,6 +114,7 @@ namespace yacht
             connection.Close();
         }
 
+        //顯示登入者
         string Showusername(string LoginId)
         {
             string name = "";
@@ -295,7 +299,7 @@ namespace yacht
             ShowDB2();
         }
 
-        //增加國家區域
+        //增加區域
         protected void BtnAddArea_Click(object sender, EventArgs e)
         {
             //取得下拉選單國家的值 (id)

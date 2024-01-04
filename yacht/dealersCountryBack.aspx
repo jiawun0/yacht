@@ -158,6 +158,7 @@
                     <asp:Label ID="Label_areaT" runat="server" Text='<%# Bind("area") %>'></asp:Label>
                 </itemtemplate>
             </asp:TemplateField>
+
             <asp:TemplateField HeaderText="dealerImgPath" SortExpression="dealerImgPath">
                 <edititemtemplate>
                     <asp:TextBox ID="TextBox_FileUpload_ImgT" runat="server" Text='<%# Bind("dealerImgPath") %>'></asp:TextBox>
