@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
@@ -17,33 +18,37 @@ namespace yacht
         {
             if (!IsPostBack)
             {
-                if (Session["LoginId"] != null)
-                {
-                    string loginId = Session["LoginId"].ToString();
-                    bool isManger = (Session["isManger"] != null) ? (bool)Session["isManger"] : false;
-
-                    if (loginId != null && isManger)
-                    {
-                        //顯示登入者
-                        string name = Showusername(loginId);
-                        Literal_name.Text = "歡迎, " + name + "!";
-                        ShowDB();
-                    }
-                    else
-                    {
-                        //非IsManger，請重新登入
-                        Response.Redirect("Login.aspx");
-                    }
-                }
-                else
-                {
-                    //尚未登入，請登入
-                    Response.Redirect("Login.aspx");
-                }
-
-                //先綁定取得選取預設值:國家的
+                //先綁定取得選取預設值:國家
                 DropDownList1.DataBind();
                 showDealerList();
+
+                //if (Session["LoginId"] != null)
+                //{
+                //    string loginId = Session["LoginId"].ToString();
+                //    bool isManger = (Session["isManger"] != null) ? (bool)Session["isManger"] : false;
+
+                //    if (loginId != null && isManger)
+                //    {
+                //        //顯示登入者
+                //        string name = Showusername(loginId);
+                //        Literal_name.Text = "歡迎, " + name + "!";
+                //        ShowDB();
+                //        ShowDB2();
+                //    }
+                //    else
+                //    {
+                //        //非IsManger，請重新登入
+                //        Response.Redirect("Login.aspx");
+                //    }
+                //}
+                //else
+                //{
+                //    //尚未登入，請登入
+                //    Response.Redirect("Login.aspx");
+                //}
+                ShowDB();
+                ShowDB2();
+
             }
         }
 
@@ -209,35 +214,7 @@ namespace yacht
             DropDownList1.DataBind();
         }
 
-        ////國家區域GV
-        //void ShowDB2()
-        //{
-        //    //依下拉選單選取國家的值 (id) 取得地區分類
-        //    string selCountry_id = DropDownList1.SelectedValue;
-
-        //    SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectarea"].ConnectionString);
-
-        //    if (connection.State != System.Data.ConnectionState.Open)
-        //    {
-        //        connection.Open();
-        //    }
-
-        //    string sql = "SELECT area FROM Dealers WHERE country_ID = @selCountry_id ";
-        //    SqlCommand sqlCommand = new SqlCommand(sql, connection);
-        //    sqlCommand.Parameters.AddWithValue("@selCountry_id", selCountry_id);
-
-        //    sqlCommand.CommandText = sql;
-
-        //    SqlDataReader reader = sqlCommand.ExecuteReader();
-
-        //    GridView_area.DataSource = reader;
-
-        //    GridView_area.DataBind();
-
-        //    connection.Close();
-        //}
-
-        //顯示國家區域RBL~目前隱藏未使用
+        //顯示國家區域RBL(會全部顯示)~目前隱藏未使用
         private void showDealerList()
         {
             //依下拉選單選取國家的值 (id) 取得地區分類
@@ -270,7 +247,7 @@ namespace yacht
 
             //刪除實際圖檔檔案
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectarea"].ConnectionString);
-            string sql = "SELECT dealerImgPath FROM Dealers WHERE area = @selAreaStr";
+            string sql = "SELECT dealerImgPath FROM dealers WHERE area = @selAreaStr";
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.AddWithValue("@selAreaStr", selAreaStr);
             connection.Open();
@@ -287,7 +264,7 @@ namespace yacht
             connection.Close();
 
             //刪除資料庫該筆資料
-            string sqlDel = "DELETE FROM Dealers WHERE area = @selAreaStr";
+            string sqlDel = "DELETE FROM dealers WHERE area = @selAreaStr";
             SqlCommand commandDel = new SqlCommand(sqlDel, connection);
             commandDel.Parameters.AddWithValue("@selAreaStr", selAreaStr);
             connection.Open();
@@ -315,6 +292,7 @@ namespace yacht
             //UpdateDealerListLab.Visible = false;
             showDealerList();
             GridView_area.DataBind();
+            ShowDB2();
         }
 
         //增加國家區域
@@ -381,6 +359,7 @@ namespace yacht
                         // 新增成功
                         RadioButtonList1.Items.Clear(); // 清除舊資料
                         showDealerList(); // 重新讀取資料
+                        ShowDB2();
 
                         // 清空輸入欄位
                         TextBox_area.Text = "";
@@ -403,6 +382,34 @@ namespace yacht
                     Response.Write(ex.Message);
                 }
             }
+            connection.Close();
+        }
+
+        //顯示目前區域
+        void ShowDB2()
+        {
+            //依下拉選單選取國家的值 (id) 取得地區分類
+            //string selCountry_id = "1";
+            string selCountry_id = DropDownList1.SelectedValue;
+
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectarealist"].ConnectionString);
+            connection.Open();
+
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.Connection = connection;
+
+            string sql = "SELECT * FROM dealers WHERE country_ID = @selCountry_id ";
+
+            sqlCommand.Parameters.AddWithValue("@selCountry_id", selCountry_id);
+            //將準備的SQL指令給操作物件
+            sqlCommand.CommandText = sql;
+
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+
+            GridView_arealist.DataSource = reader;
+
+            GridView_arealist.DataBind();
+
             connection.Close();
         }
 

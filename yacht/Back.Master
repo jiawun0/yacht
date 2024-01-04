@@ -74,11 +74,11 @@
                     <span>後台管理</span>
                     <!-- 子選單開始 -->
                     <ul class="nav flex-column sub-menu">
-                        <!-- Nav Item - 相簿 -->
+                        <!-- Nav Item - 代理商 -->
                         <li class="nav-item">
-                            <a class="nav-link" href="相簿頁面的URL">
+                            <a class="nav-link" href="https://localhost:44310/dealersCountryBack">
                                 <i class="fa-sharp fa-light fa-image"></i>
-                                <span class="fw-bold">相簿</span>
+                                <span class="fw-bold">代理商</span>
                             </a>
                         </li>
 

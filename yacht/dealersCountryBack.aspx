@@ -73,6 +73,7 @@
             <asp:BoundField DataField="contact" HeaderText="contact" SortExpression="contact"></asp:BoundField>
             <asp:BoundField DataField="address" HeaderText="address" SortExpression="address"></asp:BoundField>
             <asp:BoundField DataField="tel" HeaderText="tel" SortExpression="tel"></asp:BoundField>
+            <asp:BoundField DataField="fax" HeaderText="fax" SortExpression="fax"></asp:BoundField>
             <asp:BoundField DataField="email" HeaderText="email" SortExpression="email"></asp:BoundField>
             <asp:BoundField DataField="link" HeaderText="link" SortExpression="link"></asp:BoundField>
             <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate"></asp:BoundField>
@@ -90,7 +91,7 @@
             <asp:Parameter Name="contact" Type="String" />
             <asp:Parameter Name="address" Type="String" />
             <asp:Parameter Name="tel" Type="String" />
-            <asp:Parameter Name="fax" Type="Object" />
+            <asp:Parameter Name="fax" Type="String" />
             <asp:Parameter Name="email" Type="String" />
             <asp:Parameter Name="link" Type="String" />
             <asp:Parameter Name="CreatDate" Type="DateTime" />
@@ -103,7 +104,7 @@
             <asp:Parameter Name="contact" Type="String" />
             <asp:Parameter Name="address" Type="String" />
             <asp:Parameter Name="tel" Type="String" />
-            <asp:Parameter Name="fax" Type="Object" />
+            <asp:Parameter Name="fax" Type="String" />
             <asp:Parameter Name="email" Type="String" />
             <asp:Parameter Name="link" Type="String" />
             <asp:Parameter Name="CreatDate" Type="DateTime" />
@@ -142,7 +143,7 @@
     <asp:Button ID="BtnAddArea" runat="server" Text="新增區域" OnClick="BtnAddArea_Click" />
     <br />
     <br />
-    <asp:GridView ID="GridView_arealist" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource_arealist" OnRowCancelingEdit="GridView_arealist_RowCancelingEdit" OnRowDeleting="GridView_arealist_RowDeleting" OnRowEditing="GridView_arealist_RowEditing" OnRowUpdating="GridView_arealist_RowUpdating">
+    <asp:GridView ID="GridView_arealist" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowCancelingEdit="GridView_arealist_RowCancelingEdit" OnRowDeleting="GridView_arealist_RowDeleting" OnRowEditing="GridView_arealist_RowEditing" OnRowUpdating="GridView_arealist_RowUpdating">
         <Columns>
             <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id"></asp:BoundField>
             <asp:BoundField DataField="country_ID" HeaderText="country_ID" SortExpression="country_ID"></asp:BoundField>
