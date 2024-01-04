@@ -282,15 +282,9 @@ namespace yacht
             TextBox_area.Text = "";
         }
 
-        //當DDL選擇國家改變時刷新畫面資料
+        //當DDL選擇國家改變時刷新畫面資料(本次最重要功能)
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            RadioButtonList1.Items.Clear();
-            //BtnDelArea.Visible = false;
-            //DealerList.Visible = false;
-            //LabUploadImg.Visible = false;
-            //UpdateDealerListLab.Visible = false;
-            showDealerList();
             GridView_area.DataBind();
             ShowDB2();
         }
@@ -413,24 +407,104 @@ namespace yacht
             connection.Close();
         }
 
-        protected void GridView_arealist_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-
-        }
-
         protected void GridView_arealist_RowEditing(object sender, GridViewEditEventArgs e)
         {
+            GridView_arealist.EditIndex = e.NewEditIndex;
+            ShowDB2();
+        }
+        protected void GridView_arealist_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            GridViewRow row = GridView_arealist.Rows[e.RowIndex];
 
+            int boardId = Convert.ToInt32(GridView_arealist.DataKeys[e.RowIndex].Value);
+
+            TextBox textBox_areaT = row.FindControl("TextBox_areaT") as TextBox;
+            string changeText_areaT = textBox_areaT.Text;
+
+            TextBox textBox_FileUpload_ImgT = row.FindControl("TextBox_FileUpload_ImgT") as TextBox;
+            string changeText_FileUpload_ImgT = textBox_FileUpload_ImgT.Text;
+
+            TextBox textBox_nameT = row.FindControl("TextBox_nameT") as TextBox;
+            string changeText_nameT = textBox_nameT.Text;
+
+            TextBox textBox_contactT = row.FindControl("TextBox_contactT") as TextBox;
+            string changeText_contactT = textBox_contactT.Text;
+
+            TextBox textBox_addressT = row.FindControl("TextBox_addressT") as TextBox;
+            string changeText_addressT = textBox_addressT.Text;
+
+            TextBox textBox_telT = row.FindControl("TextBox_telT") as TextBox;
+            string changeText_telT = textBox_telT.Text;
+
+            TextBox textBox_faxT = row.FindControl("TextBox_faxT") as TextBox;
+            string changeText_faxT = textBox_faxT.Text;
+
+            TextBox textBox_emailT = row.FindControl("TextBox_emailT") as TextBox;
+            string changeText_emailT = textBox_emailT.Text;
+
+            TextBox textBox_linkT = row.FindControl("TextBox_linkT") as TextBox;
+            string changeText_linkT = textBox_linkT.Text;
+
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectarealist"].ConnectionString);
+
+            if (connection.State != System.Data.ConnectionState.Open)
+            {
+                connection.Open();
+            }
+
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.Connection = connection;
+
+            string sql = $"update dealers set area = @area, dealerImgPath= @dealerImgPath, name = @name, contact = @contact, address = @address, tel = @tel, fax = @fax, email = @email, link = @link where Id = @BoardId ";
+
+            sqlCommand.Parameters.AddWithValue("@BoardId", boardId);
+            sqlCommand.Parameters.AddWithValue("@area", changeText_areaT);
+            sqlCommand.Parameters.AddWithValue("@dealerImgPath", changeText_FileUpload_ImgT);
+            sqlCommand.Parameters.AddWithValue("@name", changeText_nameT);
+            sqlCommand.Parameters.AddWithValue("@contact", changeText_contactT);
+            sqlCommand.Parameters.AddWithValue("@address", changeText_addressT);
+            sqlCommand.Parameters.AddWithValue("@tel", changeText_telT);
+            sqlCommand.Parameters.AddWithValue("@fax", changeText_faxT);
+            sqlCommand.Parameters.AddWithValue("@email", changeText_emailT);
+            sqlCommand.Parameters.AddWithValue("@link", changeText_linkT);
+            sqlCommand.CommandText = sql;
+
+            sqlCommand.ExecuteNonQuery();
+
+            connection.Close();
+
+            Response.Write("<script>alert('更新成功');</script>");
+            GridView_arealist.EditIndex = -1;
+            ShowDB2();
         }
 
         protected void GridView_arealist_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            int boardId = Convert.ToInt32(GridView_country.DataKeys[e.RowIndex].Value);
 
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectarealist"].ConnectionString);
+
+            if (connection.State != System.Data.ConnectionState.Open)
+            {
+                connection.Open();
+            }
+
+            string deleteSql = $"delete from [dealers] where [country_ID] = @boardId; delete from countrySort where Id = @boardId ";
+            SqlCommand deleteCommand = new SqlCommand(deleteSql, connection);
+            deleteCommand.Parameters.AddWithValue("@boardId", boardId);
+            deleteCommand.ExecuteNonQuery();
+
+            connection.Close();
+
+            Response.Write("<script>alert('刪除成功');</script>");
+
+            ShowDB2();
         }
 
         protected void GridView_arealist_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
-
+            GridView_arealist.EditIndex = -1;
+            ShowDB2();
         }
     }
 }
