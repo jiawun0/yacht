@@ -164,7 +164,7 @@
                     <asp:FileUpload ID="FileUpload_ImgT" runat="server" ></asp:FileUpload>
                 </edititemtemplate>
                 <itemtemplate>
-                    <asp:Label ID="Label_FileUpload_ImgT" runat="server" Text='<%# Bind("dealerImgPath") %>'></asp:Label>
+                    <asp:Label ID="Label_FileUpload_ImgT" runat="server" Text='<%# Bind("dealerImgPath") %>' style="max-width: 50px;" ></asp:Label>
                 </itemtemplate>
             </asp:TemplateField>
 

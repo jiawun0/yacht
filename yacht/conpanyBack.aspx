@@ -42,6 +42,17 @@
     <asp:Label ID="uploadCertificatLab" runat="server" Visible="False" ForeColor="#009933" class="d-flex justify-content-center"></asp:Label>
     <asp:Button ID="uploadCertificatBtn" runat="server" Text="確認上傳" class="btn btn-outline-primary btn-block mt-3" OnClick="uploadCertificatBtn_Click" />
     <br />
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1" Visible="False">
+        <Columns>
+            <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id"></asp:BoundField>
+            <asp:BoundField DataField="aboutUsHtml" HeaderText="aboutUsHtml" SortExpression="aboutUsHtml"></asp:BoundField>
+            <asp:BoundField DataField="certificatHtml" HeaderText="certificatHtml" SortExpression="certificatHtml"></asp:BoundField>
+            <asp:BoundField DataField="certificatVerticalImgJSON" HeaderText="certificatVerticalImgJSON" SortExpression="certificatVerticalImgJSON"></asp:BoundField>
+            <asp:BoundField DataField="certificatHorizontalImgJSON" HeaderText="certificatHorizontalImgJSON" SortExpression="certificatHorizontalImgJSON"></asp:BoundField>
+            <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate"></asp:BoundField>
+        </Columns>
+    </asp:GridView>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:YachtConnectionString %>" SelectCommand="SELECT * FROM [company]"></asp:SqlDataSource>
 </asp:Content>
 
 <%--<asp:Label ID="Label_Certificat1" runat="server" Text="Certificat 內容 :"></asp:Label>

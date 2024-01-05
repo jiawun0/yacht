@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CKFinder;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -15,6 +16,11 @@ namespace yacht
         {
             if (!IsPostBack)
             {
+                FileBrowser fileBrowser = new FileBrowser();
+                fileBrowser.BasePath = "/ckfinder";
+                fileBrowser.SetupCKEditor(CKEditorControl_aboutUs);
+                fileBrowser.SetupCKEditor(CKEditorControl_Certificat);
+
                 loadCkeditorContent();
                 loadCertificatContent();
             }
@@ -23,7 +29,7 @@ namespace yacht
         private void loadCkeditorContent()
         {
             //取得 About Us 頁面 HTML 資料
-            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings[""].ConnectionString);
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["YachtConnectionString"].ConnectionString);
             string sql = "SELECT aboutUsHtml FROM Company WHERE Id = 1";
             SqlCommand command = new SqlCommand(sql, connection);
             connection.Open();
@@ -41,7 +47,7 @@ namespace yacht
             //取得 CKEditorControl 的 HTML 內容
             string aboutUsHtmlStr = HttpUtility.HtmlEncode(CKEditorControl_aboutUs.Text);
             //更新 About Us 頁面 HTML 資料
-            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["TayanaYachtConnectionString"].ConnectionString);
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["YachtConnectionString"].ConnectionString);
             string sql = "UPDATE company SET aboutUsHtml = @aboutUsHtml WHERE Id = 1";
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.AddWithValue("@aboutUsHtml", aboutUsHtmlStr);
@@ -58,7 +64,7 @@ namespace yacht
         private void loadCertificatContent()
         {
             //取得 Certificat 頁文字說明資料
-            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings[""].ConnectionString);
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["YachtConnectionString"].ConnectionString);
             string sql = "SELECT certificatHtml FROM Company WHERE Id = 1";
             SqlCommand command = new SqlCommand(sql, connection);
             connection.Open();
@@ -66,7 +72,7 @@ namespace yacht
             if (reader.Read())
             {
                 //渲染畫面
-                CKEditorControl_Certificat.Text = reader["certificatContent"].ToString();
+                CKEditorControl_Certificat.Text = reader["certificatHtml"].ToString();
             }
             connection.Close();
         }
@@ -76,7 +82,7 @@ namespace yacht
             //取得 CKEditorControl 的 HTML 內容
             string certificatHtmlStr = HttpUtility.HtmlEncode(CKEditorControl_aboutUs.Text);
             //更新 About Us 頁面 HTML 資料
-            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings[""].ConnectionString);
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["YachtConnectionString"].ConnectionString);
             string sql = "UPDATE company SET certificatHtml = @certificatHtml WHERE Id = 1";
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.AddWithValue("@certificatHtml", certificatHtmlStr);

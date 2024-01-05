@@ -22,15 +22,15 @@ namespace yacht
         private void loadContentText()
         {
             //從資料庫取內文資料
-            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings[""].ConnectionString);
-            string sqlCountry = "SELECT TOP 1 certificatContent FROM Company";
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["YachtConnectionString"].ConnectionString);
+            string sqlCountry = "SELECT TOP 1 certificatHtml FROM company";
             SqlCommand command = new SqlCommand(sqlCountry, connection);
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             if (reader.Read())
             {
                 //渲染畫面
-                Literal1.Text = reader["certificatContent"].ToString();
+                Literal1.Text = reader["certificatHtml"].ToString();
             }
             connection.Close();
         }
