@@ -9,28 +9,28 @@ using System.Web.UI.WebControls;
 
 namespace yacht
 {
-    public partial class conpanyFront : System.Web.UI.Page
+    public partial class conpanyCertificatFront : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                loadContent();
+                loadContentText();
             }
         }
 
-        private void loadContent()
+        private void loadContentText()
         {
-            //從資料庫取資料
+            //從資料庫取內文資料
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings[""].ConnectionString);
-            string sqlCountry = "SELECT TOP 1 aboutUsHtml FROM Company";
+            string sqlCountry = "SELECT TOP 1 certificatContent FROM Company";
             SqlCommand command = new SqlCommand(sqlCountry, connection);
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             if (reader.Read())
             {
                 //渲染畫面
-                Literal1.Text = HttpUtility.HtmlDecode(reader["aboutUsHtml"].ToString());
+                Literal1.Text = reader["certificatContent"].ToString();
             }
             connection.Close();
         }

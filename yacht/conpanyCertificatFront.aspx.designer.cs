@@ -11,7 +11,7 @@ namespace yacht
 {
 
 
-    public partial class conpanyFront
+    public partial class conpanyCertificatFront
     {
 
         /// <summary>

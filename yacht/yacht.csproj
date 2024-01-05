@@ -819,6 +819,7 @@
     <Content Include="ckfinder\skins\v1\uipanel.css" />
     <Content Include="ckfinder\translations.txt" />
     <Content Include="conpanyBack.aspx" />
+    <Content Include="conpanyCertificatFront.aspx" />
     <Content Include="conpanyFront.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="contactFront.aspx" />
@@ -1397,6 +1398,13 @@
     </Compile>
     <Compile Include="conpanyBack.aspx.designer.cs">
       <DependentUpon>conpanyBack.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="conpanyCertificatFront.aspx.cs">
+      <DependentUpon>conpanyCertificatFront.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="conpanyCertificatFront.aspx.designer.cs">
+      <DependentUpon>conpanyCertificatFront.aspx</DependentUpon>
     </Compile>
     <Compile Include="conpanyFront.aspx.cs">
       <DependentUpon>conpanyFront.aspx</DependentUpon>
