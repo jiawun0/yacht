@@ -738,3 +738,13 @@ body {
 	clear: both;
 	width: 100%;
 }
+.button-link {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #f0f0f0;
+	color: #333;
+	text-decoration: none;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+}
