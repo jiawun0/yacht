@@ -444,14 +444,18 @@ namespace yacht
 
             // 取得編輯模板中的控制項
             FileUpload fileUpload_ImgT = row.FindControl("FileUpload_ImgT") as FileUpload;
+            string fullFilePath = "";
             if (fileUpload_ImgT.HasFile)
             {
                 string FileName = Path.GetFileName(fileUpload_ImgT.PostedFile.FileName); // 取得上傳檔案的路徑
                 string saveDirectory = Server.MapPath("~/Album/");
                 string savePath = Path.Combine(saveDirectory, FileName);
                 fileUpload_ImgT.SaveAs(savePath);
+
+                // 用完整的網址表示已上傳的檔案路徑
+                fullFilePath = Request.Url.GetLeftPart(UriPartial.Authority) + VirtualPathUtility.ToAbsolute("~/Album/" + FileName);
             }
-            string changeFileUpload_ImgT = fileUpload_ImgT.ToString();
+            string changeFileUpload_ImgT = Server.MapPath(new Uri(fullFilePath).PathAndQuery);
 
             //TextBox textBox_FileUpload_ImgT = row.FindControl("TextBox_FileUpload_ImgT") as TextBox;
             //string changeText_FileUpload_ImgT = textBox_FileUpload_ImgT.Text;
