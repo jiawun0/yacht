@@ -92,7 +92,7 @@
 
                         <!-- Nav Item - Q&A -->
                         <li class="nav-item">
-                            <a class="nav-link" href="Q&A頁面的URL">
+                            <a class="nav-link" href="https://localhost:44310/conpanyBack">
                                 <i class="fa-sharp fa-light fa-comments"></i>
                                 <span class="fw-bold">公司</span>
                             </a>

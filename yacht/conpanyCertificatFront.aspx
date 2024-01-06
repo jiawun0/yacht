@@ -62,8 +62,8 @@
             <div class="left1">
                 <p><span>COMPANY </span></p>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Certificat</a></li>
+                    <li><a href="https://localhost:44310/conpanyFront">About Us</a></li>
+                    <li><a href="https://localhost:44310/conpanyCertificatFront">Certificat</a></li>
                 </ul>
             </div>
         </div>
@@ -73,7 +73,7 @@
         <div id="crumb"><a href="#">Home</a> >> <a href="#">Company  </a>>> <a href="#"><span class="on1">About Us</span></a></div>
         <div class="right">
             <div class="right1">
-                <div class="title"><span>About Us</span></div>
+                <div class="title"><span>Certificat</span></div>
 
                 <!--------------------------------內容開始---------------------------------------------------->
                 <div class="box3">

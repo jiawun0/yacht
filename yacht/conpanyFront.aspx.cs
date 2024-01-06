@@ -23,7 +23,7 @@ namespace yacht
         {
             //從資料庫取資料
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["YachtConnectionString"].ConnectionString);
-            string sqlCountry = "SELECT TOP 1 aboutUsHtml FROM Company";
+            string sqlCountry = "select top 1 aboutUsHtml from company ";
             SqlCommand command = new SqlCommand(sqlCountry, connection);
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();

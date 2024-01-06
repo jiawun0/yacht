@@ -849,6 +849,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="images\aboutus.jpg" />
     <Content Include="images\Thumbs.db" />
     <Content Include="Back.Master" />
     <Content Include="Login.aspx" />

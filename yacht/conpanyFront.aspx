@@ -62,8 +62,8 @@
             <div class="left1">
                 <p><span>COMPANY </span></p>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Certificat</a></li>
+                    <li><a href="https://localhost:44310/conpanyFront">About Us</a></li>
+                    <li><a href="https://localhost:44310/conpanyCertificatFront">Certificat</a></li>
                 </ul>
             </div>
         </div>
