@@ -30,7 +30,7 @@ namespace yacht
             if (reader.Read())
             {
                 //渲染畫面
-                Literal1.Text = reader["certificatHtml"].ToString();
+                Literal1.Text = HttpUtility.HtmlDecode(reader["certificatHtml"].ToString());
             }
             connection.Close();
         }
