@@ -20,9 +20,12 @@
     <br />
     <asp:CheckBox ID="CheckBox_IsTop" runat="server" Text="置頂標籤" Width="100%"></asp:CheckBox>
     <br />
-    <asp:Button ID="Button_addHeadline" runat="server" Text="新增標題" class="btn btn-outline-primary btn-block mt-3" OnClick="Button_addHeadline_Click"/>
+    <asp:Button ID="Button_addHeadline" runat="server" Text="新增新聞" class="btn btn-outline-primary btn-block mt-3" OnClick="Button_addHeadline_Click"/>
+    <br />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="body" runat="server">
+    <asp:DropDownList ID="DropDownList_Headline" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="dateTitle" DataValueField="Id"></asp:DropDownList>
+    <br />
     <%--DataSourceID="SqlDataSource1"--%>
     <asp:ListView ID="ListView_news" runat="server" DataKeyNames="Id" > 
         <AlternatingItemTemplate>

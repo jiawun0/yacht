@@ -16,8 +16,73 @@ namespace yacht
         {
             if (!IsPostBack)
             {
+                //// 頁面首次加載時執行
+                //string selectedDate = GetSelectedDate();
+                //// 將選擇的日期設置回TextBox_Date
+                //TextBox_Date.Text = selectedDate;
+                //loadDayNewsHeadline(selectedDate);
+
+                //先綁定取得選取預設值:日期
+                DropDownList_Headline.DataBind();
+
                 loadDayNewsHeadline();
             }
+        }
+        //判斷是否有日期~結果無法成功
+        private string GetSelectedDate()
+        {
+            // 如果TextBox中有選擇日期，則返回選擇的日期
+            if (DateTime.TryParse(TextBox_Date.Text, out DateTime selectedDate))
+            {
+                return selectedDate.ToString("yyyy-M-dd");
+            }
+            // 如果TextBox中沒有選擇日期，返回今天的日期
+            return DateTime.Now.ToString("yyyy-M-dd");
+        }
+
+        private void loadDayNewsHeadline()
+        {
+            //// 取得日曆選取日期，如果未選擇日期，則預設為今天日期
+            //DateTime selectedDate = DateTime.Now;
+            //selNewsDate = selectedDate.ToString("yyyy-M-dd");
+
+            //// 檢查TextBox中是否有選擇日期
+            //if (DateTime.TryParse(TextBox_Date.Text, out DateTime _))
+            //{
+            //    selNewsDate = selectedDate.ToString("yyyy-M-dd");
+            //}
+
+            // 從 Session 變量中檢索選擇的日期
+            //Session["SelectedDate"] = TextBox_Date.Text;
+            //selectedDate = Session["SelectedDate"] as string;
+
+
+            //依下拉選單選取國家的值 (id) 取得地區分類
+            //string selHeadline_id = "1";
+            string selHeadline_id = DropDownList_Headline.SelectedValue;
+
+            //依選取日期取得資料庫新聞內容
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews"].ConnectionString);
+            //string sql = "SELECT * FROM news WHERE dateTitle = @dateTitle ORDER BY Id asc ";
+            string sql = "SELECT * FROM news WHERE Id = @Id ORDER BY Id asc ";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@Id", selHeadline_id);
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            ListView_news.DataSource = reader;
+            ListView_news.DataBind();
+
+            //SqlDataAdapter adapter = new SqlDataAdapter(command);
+            //DataTable newsDataTable = new DataTable();
+            //adapter.Fill(newsDataTable);
+            //ListView_news.DataSource = newsDataTable;
+
+            // 重新繫結 DropDownList
+            DropDownList_Headline.DataBind();
+
+            connection.Close();
         }
 
         protected void Button_addHeadline_Click(object sender, EventArgs e)
@@ -54,38 +119,6 @@ namespace yacht
 
             //清空輸入欄位
             TextBox_Headline.Text = "";
-        }
-
-        private void loadDayNewsHeadline()
-        {
-            // 取得日曆選取日期，如果未選擇日期，則預設為今天日期
-            DateTime selectedDate = DateTime.Now;
-            string selNewsDate = selectedDate.ToString("yyyy-M-dd");
-
-            // 檢查TextBox中是否有選擇日期
-            if (DateTime.TryParse(TextBox_Date.Text, out DateTime _))
-            {
-                selNewsDate = selectedDate.ToString("yyyy-M-dd");
-            }
-
-            //依選取日期取得資料庫新聞內容
-            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews"].ConnectionString);
-            string sql = "SELECT * FROM news WHERE dateTitle = @dateTitle ORDER BY Id asc ";
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@dateTitle", selNewsDate);
-            connection.Open();
-
-            //SqlDataReader reader = command.ExecuteReader();
-
-            //ListView_news.DataSource = reader;
-
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
-            DataTable newsDataTable = new DataTable();
-            adapter.Fill(newsDataTable);
-            ListView_news.DataSource = newsDataTable;
-            ListView_news.DataBind();
-
-            connection.Close();
         }
     }
 }
