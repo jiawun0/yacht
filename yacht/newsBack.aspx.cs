@@ -62,7 +62,7 @@ namespace yacht
             string selHeadline_id = DropDownList_Headline.SelectedValue;
 
             //依選取日期取得資料庫新聞內容
-            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews"].ConnectionString);
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
             //string sql = "SELECT * FROM news WHERE dateTitle = @dateTitle ORDER BY Id asc ";
             string sql = "SELECT * FROM news WHERE Id = @Id ORDER BY Id asc ";
             SqlCommand command = new SqlCommand(sql, connection);
@@ -71,8 +71,20 @@ namespace yacht
 
             SqlDataReader reader = command.ExecuteReader();
 
-            ListView_news.DataSource = reader;
-            ListView_news.DataBind();
+            if (reader.HasRows)
+            {
+                DetailsView_news.DataSource = reader;
+                DetailsView_news.DataBind();
+            }
+            else
+            {
+                // 如果沒有匹配的記錄，清空 ListView
+                DetailsView_news.DataSource = null;
+                DetailsView_news.DataBind();
+            }
+
+            //ListView_news.DataSource = reader;
+            //ListView_news.DataBind();
 
             //SqlDataAdapter adapter = new SqlDataAdapter(command);
             //DataTable newsDataTable = new DataTable();
@@ -80,7 +92,7 @@ namespace yacht
             //ListView_news.DataSource = newsDataTable;
 
             // 重新繫結 DropDownList
-            DropDownList_Headline.DataBind();
+            //DropDownList_Headline.DataBind();
 
             connection.Close();
         }
@@ -103,7 +115,7 @@ namespace yacht
             //取得是否勾選
             string isTop = CheckBox_IsTop.Checked.ToString();
 
-            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews"].ConnectionString);
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
             string sql = "INSERT INTO news (dateTitle, headline, guid, isTop) VALUES (@dateTitle, @headline, @guid, @isTop)";
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.AddWithValue("@dateTitle", selNewsDate);
@@ -119,6 +131,13 @@ namespace yacht
 
             //清空輸入欄位
             TextBox_Headline.Text = "";
+        }
+
+        //當DDL選擇日期改變時刷新畫面資料(本次最重要功能)
+        protected void DropDownList_Headline_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DetailsView_news.DataBind();
+            loadDayNewsHeadline();
         }
     }
 }

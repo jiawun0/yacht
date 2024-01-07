@@ -24,179 +24,24 @@
     <br />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="body" runat="server">
-    <asp:DropDownList ID="DropDownList_Headline" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="dateTitle" DataValueField="Id"></asp:DropDownList>
+    <asp:DropDownList ID="DropDownList_Headline" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="dateTitle" DataValueField="Id" OnSelectedIndexChanged="DropDownList_Headline_SelectedIndexChanged"></asp:DropDownList>
     <br />
     <%--DataSourceID="SqlDataSource1"--%>
-    <asp:ListView ID="ListView_news" runat="server" DataKeyNames="Id" > 
-        <AlternatingItemTemplate>
-            <li style="">Id:
-                <asp:Label ID="IdLabel" runat="server" Text='<%# Eval("Id") %>' />
-                <br />
-                dateTitle:
-                <asp:Label ID="dateTitleLabel" runat="server" Text='<%# Eval("dateTitle") %>' />
-                <br />
-                headline:
-                <asp:Label ID="headlineLabel" runat="server" Text='<%# Eval("headline") %>' />
-                <br />
-                guid:
-                <asp:Label ID="guidLabel" runat="server" Text='<%# Eval("guid") %>' />
-                <br />
-                <asp:CheckBox ID="isTopCheckBox" runat="server" Checked='<%# Eval("isTop") %>' Enabled="false" Text="isTop" />
-                <br />
-                summary:
-                <asp:Label ID="summaryLabel" runat="server" Text='<%# Eval("summary") %>' />
-                <br />
-                thumbnailPath:
-                <asp:Label ID="thumbnailPathLabel" runat="server" Text='<%# Eval("thumbnailPath") %>' />
-                <br />
-                newsContentHtml:
-                <asp:Label ID="newsContentHtmlLabel" runat="server" Text='<%# Eval("newsContentHtml") %>' />
-                <br />
-                newsImageJson:
-                <asp:Label ID="newsImageJsonLabel" runat="server" Text='<%# Eval("newsImageJson") %>' />
-                <br />
-                CreatDate:
-                <asp:Label ID="CreatDateLabel" runat="server" Text='<%# Eval("CreatDate") %>' />
-                <br />
-            </li>
-        </AlternatingItemTemplate>
-        <EditItemTemplate>
-            <li style="">Id:
-                <asp:Label ID="IdLabel1" runat="server" Text='<%# Eval("Id") %>' />
-                <br />
-                dateTitle:
-                <asp:TextBox ID="dateTitleTextBox" runat="server" Text='<%# Bind("dateTitle") %>' />
-                <br />
-                headline:
-                <asp:TextBox ID="headlineTextBox" runat="server" Text='<%# Bind("headline") %>' />
-                <br />
-                guid:
-                <asp:TextBox ID="guidTextBox" runat="server" Text='<%# Bind("guid") %>' />
-                <br />
-                <asp:CheckBox ID="isTopCheckBox" runat="server" Checked='<%# Bind("isTop") %>' Text="isTop" />
-                <br />
-                summary:
-                <asp:TextBox ID="summaryTextBox" runat="server" Text='<%# Bind("summary") %>' />
-                <br />
-                thumbnailPath:
-                <asp:TextBox ID="thumbnailPathTextBox" runat="server" Text='<%# Bind("thumbnailPath") %>' />
-                <br />
-                newsContentHtml:
-                <asp:TextBox ID="newsContentHtmlTextBox" runat="server" Text='<%# Bind("newsContentHtml") %>' />
-                <br />
-                newsImageJson:
-                <asp:TextBox ID="newsImageJsonTextBox" runat="server" Text='<%# Bind("newsImageJson") %>' />
-                <br />
-                CreatDate:
-                <asp:TextBox ID="CreatDateTextBox" runat="server" Text='<%# Bind("CreatDate") %>' />
-                <br />
-                <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="更新" />
-                <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="取消" />
-            </li>
-        </EditItemTemplate>
-        <EmptyDataTemplate>
-            未傳回資料。
-        </EmptyDataTemplate>
-        <InsertItemTemplate>
-            <li style="">dateTitle:
-                <asp:TextBox ID="dateTitleTextBox" runat="server" Text='<%# Bind("dateTitle") %>' />
-                <br />headline:
-                <asp:TextBox ID="headlineTextBox" runat="server" Text='<%# Bind("headline") %>' />
-                <br />guid:
-                <asp:TextBox ID="guidTextBox" runat="server" Text='<%# Bind("guid") %>' />
-                <br />
-                <asp:CheckBox ID="isTopCheckBox" runat="server" Checked='<%# Bind("isTop") %>' Text="isTop" />
-                <br />summary:
-                <asp:TextBox ID="summaryTextBox" runat="server" Text='<%# Bind("summary") %>' />
-                <br />thumbnailPath:
-                <asp:TextBox ID="thumbnailPathTextBox" runat="server" Text='<%# Bind("thumbnailPath") %>' />
-                <br />newsContentHtml:
-                <asp:TextBox ID="newsContentHtmlTextBox" runat="server" Text='<%# Bind("newsContentHtml") %>' />
-                <br />newsImageJson:
-                <asp:TextBox ID="newsImageJsonTextBox" runat="server" Text='<%# Bind("newsImageJson") %>' />
-                <br />CreatDate:
-                <asp:TextBox ID="CreatDateTextBox" runat="server" Text='<%# Bind("CreatDate") %>' />
-                <br />
-                <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="插入" />
-                <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="清除" />
-            </li>
-        </InsertItemTemplate>
-        <itemseparatortemplate>
-<br />
-        </itemseparatortemplate>
-        <ItemTemplate>
-            <li style="">Id:
-                <asp:Label ID="IdLabel" runat="server" Text='<%# Eval("Id") %>' />
-                <br />
-                dateTitle:
-                <asp:Label ID="dateTitleLabel" runat="server" Text='<%# Eval("dateTitle") %>' />
-                <br />
-                headline:
-                <asp:Label ID="headlineLabel" runat="server" Text='<%# Eval("headline") %>' />
-                <br />
-                guid:
-                <asp:Label ID="guidLabel" runat="server" Text='<%# Eval("guid") %>' />
-                <br />
-                <asp:CheckBox ID="isTopCheckBox" runat="server" Checked='<%# Eval("isTop") %>' Enabled="false" Text="isTop" />
-                <br />
-                summary:
-                <asp:Label ID="summaryLabel" runat="server" Text='<%# Eval("summary") %>' />
-                <br />
-                thumbnailPath:
-                <asp:Label ID="thumbnailPathLabel" runat="server" Text='<%# Eval("thumbnailPath") %>' />
-                <br />
-                newsContentHtml:
-                <asp:Label ID="newsContentHtmlLabel" runat="server" Text='<%# Eval("newsContentHtml") %>' />
-                <br />
-                newsImageJson:
-                <asp:Label ID="newsImageJsonLabel" runat="server" Text='<%# Eval("newsImageJson") %>' />
-                <br />
-                CreatDate:
-                <asp:Label ID="CreatDateLabel" runat="server" Text='<%# Eval("CreatDate") %>' />
-                <br />
-            </li>
-        </ItemTemplate>
-        <LayoutTemplate>
-            <ul id="itemPlaceholderContainer" runat="server" style="">
-                <li runat="server" id="itemPlaceholder" />
-            </ul>
-            <div style="">
-            </div>
-        </LayoutTemplate>
-        <SelectedItemTemplate>
-            <li style="">Id:
-                <asp:Label ID="IdLabel" runat="server" Text='<%# Eval("Id") %>' />
-                <br />
-                dateTitle:
-                <asp:Label ID="dateTitleLabel" runat="server" Text='<%# Eval("dateTitle") %>' />
-                <br />
-                headline:
-                <asp:Label ID="headlineLabel" runat="server" Text='<%# Eval("headline") %>' />
-                <br />
-                guid:
-                <asp:Label ID="guidLabel" runat="server" Text='<%# Eval("guid") %>' />
-                <br />
-                <asp:CheckBox ID="isTopCheckBox" runat="server" Checked='<%# Eval("isTop") %>' Enabled="false" Text="isTop" />
-                <br />
-                summary:
-                <asp:Label ID="summaryLabel" runat="server" Text='<%# Eval("summary") %>' />
-                <br />
-                thumbnailPath:
-                <asp:Label ID="thumbnailPathLabel" runat="server" Text='<%# Eval("thumbnailPath") %>' />
-                <br />
-                newsContentHtml:
-                <asp:Label ID="newsContentHtmlLabel" runat="server" Text='<%# Eval("newsContentHtml") %>' />
-                <br />
-                newsImageJson:
-                <asp:Label ID="newsImageJsonLabel" runat="server" Text='<%# Eval("newsImageJson") %>' />
-                <br />
-                CreatDate:
-                <asp:Label ID="CreatDateLabel" runat="server" Text='<%# Eval("CreatDate") %>' />
-                <br />
-            </li>
-        </SelectedItemTemplate>
-    </asp:ListView>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Connectnews %>" DeleteCommand="DELETE FROM [news] WHERE [Id] = @Id" InsertCommand="INSERT INTO [news] ([dateTitle], [headline], [guid], [isTop], [summary], [thumbnailPath], [newsContentHtml], [newsImageJson], [CreatDate]) VALUES (@dateTitle, @headline, @guid, @isTop, @summary, @thumbnailPath, @newsContentHtml, @newsImageJson, @CreatDate)" SelectCommand="SELECT * FROM [news]" UpdateCommand="UPDATE [news] SET [dateTitle] = @dateTitle, [headline] = @headline, [guid] = @guid, [isTop] = @isTop, [summary] = @summary, [thumbnailPath] = @thumbnailPath, [newsContentHtml] = @newsContentHtml, [newsImageJson] = @newsImageJson, [CreatDate] = @CreatDate WHERE [Id] = @Id">
+    <asp:DetailsView ID="DetailsView_news" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" DataKeyNames="Id" >
+        <Fields>
+            <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
+            <asp:BoundField DataField="dateTitle" HeaderText="dateTitle" SortExpression="dateTitle" />
+            <asp:BoundField DataField="headline" HeaderText="headline" SortExpression="headline" />
+            <asp:BoundField DataField="guid" HeaderText="guid" SortExpression="guid" />
+            <asp:CheckBoxField DataField="isTop" HeaderText="isTop" SortExpression="isTop" />
+            <asp:BoundField DataField="summary" HeaderText="summary" SortExpression="summary" />
+            <asp:BoundField DataField="thumbnailPath" HeaderText="thumbnailPath" SortExpression="thumbnailPath" />
+            <asp:BoundField DataField="newsContentHtml" HeaderText="newsContentHtml" SortExpression="newsContentHtml" />
+            <asp:BoundField DataField="newsImageJson" HeaderText="newsImageJson" SortExpression="newsImageJson" />
+            <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate" />
+        </Fields>
+</asp:DetailsView>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Connectnews2 %>" DeleteCommand="DELETE FROM [news] WHERE [Id] = @Id" InsertCommand="INSERT INTO [news] ([dateTitle], [headline], [guid], [isTop], [summary], [thumbnailPath], [newsContentHtml], [newsImageJson], [CreatDate]) VALUES (@dateTitle, @headline, @guid, @isTop, @summary, @thumbnailPath, @newsContentHtml, @newsImageJson, @CreatDate)" SelectCommand="SELECT * FROM [news]" UpdateCommand="UPDATE [news] SET [dateTitle] = @dateTitle, [headline] = @headline, [guid] = @guid, [isTop] = @isTop, [summary] = @summary, [thumbnailPath] = @thumbnailPath, [newsContentHtml] = @newsContentHtml, [newsImageJson] = @newsImageJson, [CreatDate] = @CreatDate WHERE [Id] = @Id">
         <DeleteParameters>
             <asp:Parameter Name="Id" Type="Int32" />
         </DeleteParameters>
@@ -223,5 +68,5 @@
             <asp:Parameter Name="CreatDate" Type="DateTime" />
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
-    </asp:SqlDataSource>
+</asp:SqlDataSource>
     </asp:Content>
