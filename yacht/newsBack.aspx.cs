@@ -23,28 +23,28 @@ namespace yacht
                 //loadDayNewsHeadline(selectedDate);
 
                 //先綁定取得選取預設值:日期
-                DropDownList_Headline.DataBind();
+                //DropDownList_Headline.DataBind();
 
                 loadDayNewsHeadline();
             }
         }
-        //判斷是否有日期~結果無法成功
+        //判斷是否有日期~結果無法成功，先隱藏不使用
         private string GetSelectedDate()
         {
             // 如果TextBox中有選擇日期，則返回選擇的日期
             if (DateTime.TryParse(TextBox_Date.Text, out DateTime selectedDate))
             {
-                return selectedDate.ToString("yyyy-M-dd");
+                return selectedDate.ToString();
             }
             // 如果TextBox中沒有選擇日期，返回今天的日期
-            return DateTime.Now.ToString("yyyy-M-dd");
+            return DateTime.Now.ToString();
         }
 
         private void loadDayNewsHeadline()
         {
-            //// 取得日曆選取日期，如果未選擇日期，則預設為今天日期
+            // 取得日曆選取日期，如果未選擇日期，則預設為今天日期
             //DateTime selectedDate = DateTime.Now;
-            //selNewsDate = selectedDate.ToString("yyyy-M-dd");
+            string selNewsDate  = TextBox_Date.Text.ToString();
 
             //// 檢查TextBox中是否有選擇日期
             //if (DateTime.TryParse(TextBox_Date.Text, out DateTime _))
@@ -63,10 +63,11 @@ namespace yacht
 
             //依選取日期取得資料庫新聞內容
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
-            //string sql = "SELECT * FROM news WHERE dateTitle = @dateTitle ORDER BY Id asc ";
-            string sql = "SELECT * FROM news WHERE Id = @Id ORDER BY Id asc ";
+            string sql = "SELECT * FROM news WHERE dateTitle = @dateTitle ORDER BY Id asc ";
+            //string sql = "SELECT * FROM news WHERE Id = @Id ORDER BY Id asc ";
             SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@Id", selHeadline_id);
+            command.Parameters.AddWithValue("@dateTitle", selNewsDate);
+            //command.Parameters.AddWithValue("@Id", selHeadline_id);
             connection.Open();
 
             SqlDataReader reader = command.ExecuteReader();
@@ -137,6 +138,11 @@ namespace yacht
         protected void DropDownList_Headline_SelectedIndexChanged(object sender, EventArgs e)
         {
             DetailsView_news.DataBind();
+            loadDayNewsHeadline();
+        }
+
+        protected void TextBox_Date_TextChanged(object sender, EventArgs e)
+        {
             loadDayNewsHeadline();
         }
     }

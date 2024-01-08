@@ -13,7 +13,7 @@
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="content" runat="server">
     <asp:Label ID="Label_Date" runat="server" Text="選擇日期 :"></asp:Label>
-    <asp:TextBox ID="TextBox_Date" runat="server" TextMode="Date" AutoPostBack="True"></asp:TextBox>
+    <asp:TextBox ID="TextBox_Date" runat="server" TextMode="Date" AutoPostBack="True" OnTextChanged="TextBox_Date_TextChanged"></asp:TextBox>
     <br />
     <asp:Label ID="Label_Headline" runat="server" Text="標題 :"></asp:Label>
     <asp:TextBox ID="TextBox_Headline" runat="server" type="text" class="form-control" Placeholder="請輸入標題" MaxLength="75"></asp:TextBox>
@@ -24,7 +24,7 @@
     <br />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="body" runat="server">
-    <asp:DropDownList ID="DropDownList_Headline" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="dateTitle" DataValueField="Id" OnSelectedIndexChanged="DropDownList_Headline_SelectedIndexChanged"></asp:DropDownList>
+    <asp:DropDownList ID="DropDownList_Headline" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="dateTitle" DataValueField="Id" OnSelectedIndexChanged="DropDownList_Headline_SelectedIndexChanged" Visible="False"></asp:DropDownList>
     <br />
     <%--DataSourceID="SqlDataSource1"--%>
     <asp:DetailsView ID="DetailsView_news" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" DataKeyNames="Id" >
