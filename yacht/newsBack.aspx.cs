@@ -50,12 +50,20 @@ namespace yacht
             //DateTime selectedDate = DateTime.Now;
             //string selNewsDate = TextBox_Date.Text;
 
+            //string selNewsDate = "";
+
+            //// 檢查TextBox中是否有選擇日期
+            //if (DateTime.TryParse(TextBox_Date.Text, out DateTime selectedDate))
+            //{
+            //    selNewsDate = selectedDate.ToString("yyyy-MM-dd");
+            //}
+
+            // 获取 RadioButtonList1 中选定的日期
             string selNewsDate = "";
 
-            // 檢查TextBox中是否有選擇日期
-            if (DateTime.TryParse(TextBox_Date.Text, out DateTime selectedDate))
+            if (RadioButtonList1 != null && RadioButtonList1.SelectedItem != null)
             {
-                selNewsDate = selectedDate.ToString("yyyy-MM-dd");
+                selNewsDate = RadioButtonList1.SelectedItem.Text;
             }
 
             // 從 Session 變量中檢索選擇的日期
@@ -186,7 +194,6 @@ namespace yacht
         //當TextBox選擇日期改變時刷新畫面資料(本次最重要功能)
         protected void TextBox_Date_TextChanged(object sender, EventArgs e)
         {
-            loadDayNewsHeadline();
             shownewsList();
         }
 
@@ -194,6 +201,7 @@ namespace yacht
         protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
         {
             shownewsList();
+            loadDayNewsHeadline();
         }
 
         //編輯模式
