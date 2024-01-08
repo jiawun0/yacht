@@ -149,12 +149,13 @@ namespace yacht
             loadDayNewsHeadline();
         }
 
+        //編輯事件這樣寫
         protected void DetailsView_news_ModeChanging(object sender, DetailsViewModeEventArgs e)
         {
             if (e.NewMode == DetailsViewMode.Edit)
             {
                 DetailsView_news.ChangeMode(DetailsViewMode.Edit);
-                DetailsView_news.AllowPaging = false; // 禁用分页
+                //DetailsView_news.AllowPaging = false; // 禁用分页
 
                 // 可能需要加载编辑数据的代码
                 // loadEditData();
@@ -162,7 +163,7 @@ namespace yacht
             else if (e.NewMode == DetailsViewMode.ReadOnly)
             {
                 DetailsView_news.ChangeMode(DetailsViewMode.ReadOnly);
-                DetailsView_news.AllowPaging = true; // 启用分页
+                //DetailsView_news.AllowPaging = true; // 启用分页
 
                 // 可能需要加载只读数据的代码
                 // loadReadOnlyData();
@@ -287,6 +288,23 @@ namespace yacht
 
                 loadDayNewsHeadline();
             }
+        }
+
+        //取消按鈕這樣做
+        protected void DetailsView_news_ItemCommand(object sender, DetailsViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Edit")
+            {
+                DetailsView_news.ChangeMode(DetailsViewMode.Edit);
+                //ShowDVhistory(ViewState["HistoryNews"].ToString());
+            }
+            else if (e.CommandName == "Cancel")
+            {
+                DetailsView_news.ChangeMode(DetailsViewMode.ReadOnly);
+                //ShowDVhistory(ViewState["HistoryNews"].ToString());
+            }
+
+            loadDayNewsHeadline();
         }
     }
 }

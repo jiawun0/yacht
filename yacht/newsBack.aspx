@@ -28,7 +28,7 @@
     <asp:DropDownList ID="DropDownList_Headline" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="dateTitle" DataValueField="Id" OnSelectedIndexChanged="DropDownList_Headline_SelectedIndexChanged" Visible="False"></asp:DropDownList>
     <br />
     <%--DataSourceID="SqlDataSource1"--%>
-    <asp:DetailsView ID="DetailsView_news" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" DataKeyNames="Id" OnItemDeleting="DetailsView_news_ItemDeleting" OnItemUpdating="DetailsView_news_ItemUpdating" OnModeChanging="DetailsView_news_ModeChanging">
+    <asp:DetailsView ID="DetailsView_news" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" DataKeyNames="Id" OnItemDeleting="DetailsView_news_ItemDeleting" OnItemUpdating="DetailsView_news_ItemUpdating" OnModeChanging="DetailsView_news_ModeChanging" OnItemCommand="DetailsView_news_ItemCommand" >
         <Fields>
             <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
             <asp:TemplateField HeaderText="dateTitle" SortExpression="dateTitle">
