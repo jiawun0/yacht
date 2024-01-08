@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
@@ -44,7 +46,7 @@ namespace yacht
         {
             // 取得日曆選取日期，如果未選擇日期，則預設為今天日期
             //DateTime selectedDate = DateTime.Now;
-            string selNewsDate  = TextBox_Date.Text.ToString();
+            string selNewsDate = TextBox_Date.Text.ToString();
 
             //// 檢查TextBox中是否有選擇日期
             //if (DateTime.TryParse(TextBox_Date.Text, out DateTime _))
@@ -134,16 +136,157 @@ namespace yacht
             TextBox_Headline.Text = "";
         }
 
-        //當DDL選擇日期改變時刷新畫面資料(本次最重要功能)
+        //當DDL選擇日期改變時刷新畫面資料(本次最重要功能)~先隱藏不使用
         protected void DropDownList_Headline_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DetailsView_news.DataBind();
+            //DetailsView_news.DataBind();
             loadDayNewsHeadline();
         }
 
+        //當TextBox選擇日期改變時刷新畫面資料(本次最重要功能)
         protected void TextBox_Date_TextChanged(object sender, EventArgs e)
         {
             loadDayNewsHeadline();
+        }
+
+        protected void DetailsView_news_ModeChanging(object sender, DetailsViewModeEventArgs e)
+        {
+            if (e.NewMode == DetailsViewMode.Edit)
+            {
+                DetailsView_news.ChangeMode(DetailsViewMode.Edit);
+                DetailsView_news.AllowPaging = false; // 禁用分页
+
+                // 可能需要加载编辑数据的代码
+                // loadEditData();
+            }
+            else if (e.NewMode == DetailsViewMode.ReadOnly)
+            {
+                DetailsView_news.ChangeMode(DetailsViewMode.ReadOnly);
+                DetailsView_news.AllowPaging = true; // 启用分页
+
+                // 可能需要加载只读数据的代码
+                // loadReadOnlyData();
+            }
+
+            loadDayNewsHeadline();
+        }
+
+        protected void DetailsView_news_ItemUpdating(object sender, DetailsViewUpdateEventArgs e)
+        {
+            // Get the index of the record being updated
+            int boardId = Convert.ToInt32(e.Keys["Id"]);
+
+            TextBox textBox_dateTitleT = DetailsView_news.FindControl("TextBox_dateTitleT") as TextBox;
+            string changeText_dateTitleT = textBox_dateTitleT.Text;
+
+            TextBox textBox_headlineT = DetailsView_news.FindControl("TextBox_headlineT") as TextBox;
+            string changeText_headlineT = textBox_headlineT.Text;
+
+            CheckBox checkBox_isTopT = DetailsView_news.FindControl("CheckBox_isTopT") as CheckBox;
+            bool isTopT = checkBox_isTopT.Checked;
+
+            TextBox textBox_summaryT = DetailsView_news.FindControl("TextBox_summaryT") as TextBox;
+            string changeText_summaryT = textBox_summaryT.Text;
+
+            // Get the FileUpload control from the DetailsView
+            FileUpload fileUpload_thumbnailPathT = DetailsView_news.FindControl("FileUpload_thumbnailPathT") as FileUpload;
+            string fullFilePath = "";
+            if (fileUpload_thumbnailPathT.HasFile)
+            {
+                string FileName = Path.GetFileName(fileUpload_thumbnailPathT.PostedFile.FileName);
+                string saveDirectory = Server.MapPath("~/Album/");
+                string savePath = Path.Combine(saveDirectory, FileName);
+                fileUpload_thumbnailPathT.SaveAs(savePath);
+
+                fullFilePath = Request.Url.GetLeftPart(UriPartial.Authority) + VirtualPathUtility.ToAbsolute("~/Album/" + FileName);
+            }
+
+            string originalThumbnailPath = "";
+            originalThumbnailPath = GetOriginalThumbnailPathFromDatabase(boardId);
+
+            // Use the original thumbnail path if no new file was uploaded
+            if (string.IsNullOrEmpty(fullFilePath))
+            {
+                fullFilePath = originalThumbnailPath;
+            }
+            string changeFileUpload_ImgT = fullFilePath;
+
+
+            // Perform database update operation
+            using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString))
+            {
+                connection.Open();
+
+                string sql = "UPDATE news SET dateTitle = @dateTitle, headline = @headline, isTop = @isTop, summary = @summary, thumbnailPath = @thumbnailPath WHERE Id = @Id";
+                SqlCommand sqlCommand = new SqlCommand(sql, connection);
+
+                sqlCommand.Parameters.AddWithValue("@Id", boardId);
+                sqlCommand.Parameters.AddWithValue("@dateTitle", changeText_dateTitleT);
+                sqlCommand.Parameters.AddWithValue("@headline", changeText_headlineT);
+                sqlCommand.Parameters.AddWithValue("@isTop", isTopT);
+                sqlCommand.Parameters.AddWithValue("@summary", changeText_summaryT);
+                sqlCommand.Parameters.AddWithValue("@thumbnailPath", changeFileUpload_ImgT);
+
+                sqlCommand.ExecuteNonQuery();
+            }
+
+            Response.Write("<script>alert('更新成功');</script>");
+            DetailsView_news.ChangeMode(DetailsViewMode.ReadOnly);
+            loadDayNewsHeadline();
+        }
+
+        // 示例方法，用于从数据库中检索原始缩略图路径
+        private string GetOriginalThumbnailPathFromDatabase(int boardId)
+        {
+            string originalThumbnailPath = "";
+
+            // 使用与您的数据库配置相匹配的连接字符串，执行查询以检索缩略图路径
+            string connectionString = WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string sql = "SELECT thumbnailPath FROM news WHERE Id = @Id";
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@Id", boardId);
+
+                // 执行查询并检索缩略图路径
+                object result = command.ExecuteScalar();
+                if (result != null)
+                {
+                    originalThumbnailPath = result.ToString();
+                }
+            }
+
+            return originalThumbnailPath;
+        }
+
+        protected void DetailsView_news_ItemDeleting(object sender, DetailsViewDeleteEventArgs e)
+        {
+            // Get the index of the record being deleted
+            int boardId = Convert.ToInt32(e.Keys["Id"]);
+
+            // Check if there's at least one record left in the data source before deletion
+            if (DetailsView_news.DataSource != null && DetailsView_news.DataSource is ICollection collection && collection.Count <= 1)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                // Perform delete operation here
+                using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString))
+                {
+                    connection.Open();
+
+                    string deleteSql = "DELETE FROM news WHERE Id = @boardId";
+                    SqlCommand deleteCommand = new SqlCommand(deleteSql, connection);
+                    deleteCommand.Parameters.AddWithValue("@boardId", boardId);
+                    deleteCommand.ExecuteNonQuery();
+                }
+
+                loadDayNewsHeadline();
+            }
         }
     }
 }
