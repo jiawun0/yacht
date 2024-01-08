@@ -62,7 +62,7 @@
             <div class="left1">
                 <p><span>NEWS</span></p>
                 <ul>
-                    <li><a href="#">News & Events</a></li>
+                    <li><a href="https://localhost:44310/newsFront">News & Events</a></li>
                 </ul>
             </div>
         </div>
@@ -79,93 +79,10 @@
 
                 <div class="box2_list">
                     <ul>
-
-                        <li>
-                            <div class="list01">
-                                <ul>
-                                    <li>
-                                        <div>
-                                            <p>
-                                                <img src="images/pit006.jpg" alt="&quot;&quot;" />
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li><span>2012-01-28</span><br />
-                                        Tayana 58 CE Certificates are availableTayana 58 CE Certificates are availableTayana 58 CE Certificates are availableTayana 58 CE Certificates are availableTayana 58 CE Certificates are available</li>
-                                    <li>availableTayana 58 CE Certificates are availableTayana 58 CE Certificates are availableTayana 58 CE Certificates are available</li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="list01">
-                                <ul>
-                                    <li>
-                                        <div>
-                                            <p>
-                                                <img src="images/pit007.jpg" alt="&quot;&quot;" />
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li><span>2012-01-28</span><br />
-                                        Tayana 58 CE Certificates are available</li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="list01">
-                                <ul>
-                                    <li>
-                                        <div>
-                                            <p>
-                                                <img src="images/pit008.jpg" alt="&quot;&quot;" />
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li><span>2012-01-28</span><br />
-                                        Tayana 58 CE Certificates are available</li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="list01">
-                                <ul>
-                                    <li>
-                                        <div>
-                                            <p>
-                                                <img src="images/pit006.jpg" alt="&quot;&quot;" width="300" />
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li><span>2012-01-28</span><br />
-                                        Tayana 58 CE Certificates are available</li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="list01">
-                                <ul>
-                                    <li>
-                                        <div>
-                                            <p>
-                                                <img src="images/pit006.jpg" alt="&quot;&quot;" width="300" />
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li><span>2012-01-28</span><br />
-                                        Tayana 58 CE Certificates are available</li>
-                                </ul>
-                            </div>
-                        </li>
+                        <asp:Literal ID="newList" runat="server"></asp:Literal>
                     </ul>
-
-                    <div class="pagenumber">| <span>1</span> | <a href="#">2</a> | <a href="#">3</a> | <a href="#">4</a> | <a href="#">5</a> |  <a href="#">Next</a>  <a href="#">LastPage</a></div>
-                    <div class="pagenumber1">Items：<span>89</span>  |  Pages：<span>1/9</span></div>
-
-
+                    <div>
+                    </div>
                 </div>
 
 

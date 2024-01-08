@@ -419,7 +419,7 @@ namespace yacht
             }
         }
 
-        //讀取Ckeditor_aboutus
+        //讀取Ckeditor
         private void loadCkeditorContent()
         {
             string selectedValue = DropDownList_Headline.SelectedValue;
