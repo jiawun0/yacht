@@ -141,13 +141,22 @@ namespace yacht
         protected global::System.Web.UI.WebControls.Label Label_selectedone;
 
         /// <summary>
-        /// RadioButtonList1 控制項。
+        /// Label_selectdate 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RadioButtonList1;
+        protected global::System.Web.UI.WebControls.Label Label_selectdate;
+
+        /// <summary>
+        /// DropDownList_Headline 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_Headline;
 
         /// <summary>
         /// DetailsView_news 控制項。
@@ -175,24 +184,6 @@ namespace yacht
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label_newsContent;
-
-        /// <summary>
-        /// Label_selectdate 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_selectdate;
-
-        /// <summary>
-        /// DropDownList_Headline 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList_Headline;
 
         /// <summary>
         /// CKEditorControl_newsContent 控制項。

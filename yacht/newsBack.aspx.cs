@@ -59,29 +59,23 @@ namespace yacht
             //}
 
             // 获取 RadioButtonList1 中选定的日期
-            string selNewsDate = "";
-
-            if (RadioButtonList1 != null && RadioButtonList1.SelectedItem != null)
-            {
-                selNewsDate = RadioButtonList1.SelectedItem.Text;
-            }
+            //string selNewsDate = "";
 
             // 從 Session 變量中檢索選擇的日期
             //Session["SelectedDate"] = TextBox_Date.Text;
             //selectedDate = Session["SelectedDate"] as string;
 
-
-            //依下拉選單選取國家的值 (id) 取得地區分類
-            //string selHeadline_id = "1";
-            //string selHeadline_id = DropDownList_Headline.SelectedValue;
+            //依下拉選單選取日期的值 (id) 
+            string selHeadline_id = "";
+            selHeadline_id = DropDownList_Headline.SelectedValue;
 
             //依選取日期取得資料庫新聞內容
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
-            string sql = "SELECT * FROM news WHERE dateTitle = @dateTitle ORDER BY Id asc ";
-            //string sql = "SELECT * FROM news WHERE Id = @Id ORDER BY Id asc ";
+            //string sql = "SELECT * FROM news WHERE dateTitle = @dateTitle ORDER BY Id asc ";
+            string sql = "SELECT * FROM news WHERE Id = @Id ";
             SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@dateTitle", selNewsDate);
-            //command.Parameters.AddWithValue("@Id", selHeadline_id);
+            //command.Parameters.AddWithValue("@dateTitle", selHeadline_id);
+            command.Parameters.AddWithValue("@Id", selHeadline_id);
             connection.Open();
 
             SqlDataReader reader = command.ExecuteReader();
@@ -93,7 +87,7 @@ namespace yacht
             }
             else
             {
-                // 如果沒有匹配的記錄，清空 ListView
+                // 如果沒有匹配的記錄，清空
                 DetailsView_news.DataSource = null;
                 DetailsView_news.DataBind();
             }
@@ -107,16 +101,14 @@ namespace yacht
             //ListView_news.DataSource = newsDataTable;
 
             // 重新繫結 DropDownList
-            //DropDownList_Headline.DataBind();
+            DropDownList_Headline.DataBind();
 
             connection.Close();
         }
 
-        //顯示單日新聞篇章RBL(會全部顯示)
+        //顯示單日新聞篇章DDL(會全部顯示)
         private void shownewsList()
         {
-            // 清空RadioButtonList
-            RadioButtonList1.Items.Clear();
 
             //當textbox選擇日期時帶入
             string selNewsDate = "";
@@ -125,29 +117,42 @@ namespace yacht
             if (DateTime.TryParse(TextBox_Date.Text, out DateTime selectedDate))
             {
                 selNewsDate = selectedDate.ToString("yyyy-MM-dd");
+            }
 
+            //依選取日期取得資料庫新聞內容
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
+            string sql = "SELECT * FROM news WHERE dateTitle = @dateTitle ORDER BY Id asc ";
+            //string sql = "SELECT dateTitle FROM news ORDER BY Id ASC "; // Retrieve distinct dateTitles
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@dateTitle", selNewsDate);
+            connection.Open();
 
-                //依選取日期取得資料庫新聞內容
-                SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
-                string sql = "SELECT * FROM news WHERE dateTitle = @dateTitle ORDER BY Id asc ";
-                SqlCommand command = new SqlCommand(sql, connection);
-                command.Parameters.AddWithValue("@dateTitle", selNewsDate);
-                connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
 
-                SqlDataReader reader = command.ExecuteReader();
-
+            if (reader.HasRows)
+            {
                 while (reader.Read())
                 {
-                    string dateTitle = reader["dateTitle"].ToString();
-
-                    // 添加符合選擇日期的 dateTitle 到 RadioButtonList1
-                    ListItem listItem = new ListItem();
-                    listItem.Text = dateTitle;
-                    listItem.Value = dateTitle;
-                    RadioButtonList1.Items.Add(listItem);
+                    string headline = reader["headline"].ToString();
+                    string headline_id = reader["Id"].ToString();
+                    DropDownList_Headline.Items.Add(new ListItem(headline, headline_id));
                 }
-                connection.Close();
             }
+
+            // 重新繫結 DropDownList1
+            //DropDownList_Headline.DataBind();
+
+            //while (reader.Read())
+            //{
+            //    string dateTitle = reader["dateTitle"].ToString();
+
+            //    // 添加符合選擇日期的 dateTitle 到 RadioButtonList1
+            //    ListItem listItem = new ListItem();
+            //    listItem.Text = dateTitle;
+            //    listItem.Value = dateTitle;
+            //    RadioButtonList1.Items.Add(listItem);
+            //}
+            connection.Close();
         }
 
         protected void Button_addHeadline_Click(object sender, EventArgs e)
@@ -181,7 +186,6 @@ namespace yacht
             connection.Close();
 
             //渲染畫面
-            RadioButtonList1.Items.Clear(); // 清除舊資料
             shownewsList(); // 重新讀取資料
             loadDayNewsHeadline();
 
@@ -194,14 +198,54 @@ namespace yacht
         //當TextBox選擇日期改變時刷新畫面資料(本次最重要功能)
         protected void TextBox_Date_TextChanged(object sender, EventArgs e)
         {
+            //先關連到DDL
             shownewsList();
         }
 
-        //選擇日期，出現所有詳情
-        protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
+        ////選擇日期，出現所有詳情
+        //protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    shownewsList();
+        //    loadDayNewsHeadline();
+        //}
+
+        //當DDL選擇日期改變時刷新畫面資料(本次最重要功能)
+        protected void DropDownList_Headline_SelectedIndexChanged1(object sender, EventArgs e)
         {
-            shownewsList();
+            string selectedValue = DropDownList_Headline.SelectedValue;
+
+            string newsContent = GetnewsContent(selectedValue);
+
+            CKEditorControl_newsContent.Text = newsContent;
+
             loadDayNewsHeadline();
+        }
+
+        //ckEditor取得資料
+        private string GetnewsContent(string selectedValue)
+        {
+            string newsContent = "";
+
+            //依選取日期取得資料庫新聞內容
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
+            string sql = "SELECT newsContentHtml FROM news WHERE dateTitle = @selectedValue ";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@selectedValue", selectedValue);
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader != null)
+            {
+                newsContent = reader.ToString();
+            }
+            else
+            {
+                newsContent = "";
+            }
+            connection.Close();
+
+            return newsContent;
         }
 
         //編輯模式
@@ -369,43 +413,6 @@ namespace yacht
             }
         }
 
-        //當DDL選擇日期改變時刷新畫面資料(本次最重要功能)
-        protected void DropDownList_Headline_SelectedIndexChanged1(object sender, EventArgs e)
-        {
-            string selectedValue = DropDownList_Headline.SelectedValue;
-
-            string newsContent = GetnewsContent(selectedValue);
-
-            CKEditorControl_newsContent.Text = newsContent;
-        }
-
-        //ckEditor取得資料
-        private string GetnewsContent(string selectedValue)
-        {
-            string newsContent = "";
-
-            //依選取日期取得資料庫新聞內容
-            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
-            string sql = "SELECT newsContentHtml FROM news WHERE Id = @selectedValue ";
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@selectedValue", selectedValue);
-            connection.Open();
-
-            //SqlDataReader reader = command.ExecuteReader();
-            object result = command.ExecuteScalar();
-
-            if (result != null)
-            {
-                newsContent = result.ToString();
-            }
-            else
-            {
-                newsContent = "";
-            }
-            connection.Close();
-
-            return newsContent;
-        }
 
         protected void UploadnewsContentBtn_Click(object sender, EventArgs e)
         {

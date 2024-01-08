@@ -34,8 +34,12 @@
 <asp:Content ID="Content6" ContentPlaceHolderID="body" runat="server">
     <asp:Label ID="Label_selectedone" runat="server" Text="<單日新聞編輯>"></asp:Label>
     <br />
-    <asp:RadioButtonList ID="RadioButtonList1" runat="server" CssClass="auto-style1" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="headline" DataValueField="Id" OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged"></asp:RadioButtonList>
+    <%--<asp:RadioButtonList ID="RadioButtonList1" runat="server" CssClass="auto-style1" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="headline" DataValueField="Id" OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged"></asp:RadioButtonList>--%>
     <%--DataSourceID="SqlDataSource1"--%>
+    <br />
+    <asp:Label ID="Label_selectdate" runat="server" Text="選擇標題 :"></asp:Label>
+    <asp:DropDownList ID="DropDownList_Headline" runat="server" AutoPostBack="True" DataTextField="headline" DataValueField="Id" OnSelectedIndexChanged="DropDownList_Headline_SelectedIndexChanged1" ></asp:DropDownList>
+    
     <asp:DetailsView ID="DetailsView_news" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" DataKeyNames="Id" OnItemDeleting="DetailsView_news_ItemDeleting" OnItemUpdating="DetailsView_news_ItemUpdating" OnModeChanging="DetailsView_news_ModeChanging" OnItemCommand="DetailsView_news_ItemCommand">
         <Fields>
             <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
@@ -142,9 +146,6 @@
     </asp:SqlDataSource>
     <br />
     <asp:Label ID="Label_newsContent" runat="server" Text="<單篇新聞稿撰寫>"></asp:Label>
-    <br />
-    <asp:Label ID="Label_selectdate" runat="server" Text="選擇日期 :"></asp:Label>
-    <asp:DropDownList ID="DropDownList_Headline" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="dateTitle" DataValueField="Id" OnSelectedIndexChanged="DropDownList_Headline_SelectedIndexChanged1" ></asp:DropDownList>
     <br />
     <ckeditor:ckeditorcontrol id="CKEditorControl_newsContent" runat="server" basepath="/Scripts/ckeditor/"
         toolbar="Bold|Italic|Underline|Strike|Subscript|Superscript|-|RemoveFormat
