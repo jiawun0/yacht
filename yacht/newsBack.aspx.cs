@@ -28,6 +28,7 @@ namespace yacht
                 //DropDownList_Headline.DataBind();
 
                 loadDayNewsHeadline();
+                shownewsList();
             }
         }
         //判斷是否有日期~結果無法成功，先隱藏不使用
@@ -42,6 +43,7 @@ namespace yacht
         //    return DateTime.Now.ToString();
         //}
 
+        //顯示DetailsView
         private void loadDayNewsHeadline()
         {
             // 取得日曆選取日期，如果未選擇日期，則預設為今天日期
@@ -53,7 +55,7 @@ namespace yacht
             // 檢查TextBox中是否有選擇日期
             if (DateTime.TryParse(TextBox_Date.Text, out DateTime selectedDate))
             {
-                selNewsDate = selectedDate.ToString("yyyy-M-dd");
+                selNewsDate = selectedDate.ToString("yyyy-MM-dd");
             }
 
             // 從 Session 變量中檢索選擇的日期
@@ -102,6 +104,44 @@ namespace yacht
             connection.Close();
         }
 
+        //顯示單日新聞篇章RBL(會全部顯示)
+        private void shownewsList()
+        {
+            // 清空RadioButtonList
+            RadioButtonList1.Items.Clear();
+
+            //當textbox選擇日期時帶入
+            string selNewsDate = "";
+
+            // 檢查TextBox中是否有選擇日期
+            if (DateTime.TryParse(TextBox_Date.Text, out DateTime selectedDate))
+            {
+                selNewsDate = selectedDate.ToString("yyyy-MM-dd");
+
+
+                //依選取日期取得資料庫新聞內容
+                SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
+                string sql = "SELECT * FROM news WHERE dateTitle = @dateTitle ORDER BY Id asc ";
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@dateTitle", selNewsDate);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string dateTitle = reader["dateTitle"].ToString();
+
+                    // 添加符合選擇日期的 dateTitle 到 RadioButtonList1
+                    ListItem listItem = new ListItem();
+                    listItem.Text = dateTitle;
+                    listItem.Value = dateTitle;
+                    RadioButtonList1.Items.Add(listItem);
+                }
+                connection.Close();
+            }
+        }
+
         protected void Button_addHeadline_Click(object sender, EventArgs e)
         {
             //產生 GUID 隨機碼 + 時間2位秒數 (加強避免重複)
@@ -133,25 +173,30 @@ namespace yacht
             connection.Close();
 
             //渲染畫面
+            RadioButtonList1.Items.Clear(); // 清除舊資料
+            shownewsList(); // 重新讀取資料
             loadDayNewsHeadline();
 
             //清空輸入欄位
+            TextBox_Date.Text = "";
             TextBox_Headline.Text = "";
-        }
-
-        //當DDL選擇日期改變時刷新畫面資料(本次最重要功能)~先隱藏不使用
-        protected void DropDownList_Headline_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //DetailsView_news.DataBind();
-            loadDayNewsHeadline();
+            TextBox_summary.Text = "";
         }
 
         //當TextBox選擇日期改變時刷新畫面資料(本次最重要功能)
         protected void TextBox_Date_TextChanged(object sender, EventArgs e)
         {
             loadDayNewsHeadline();
+            shownewsList();
         }
 
+        //選擇日期，出現所有詳情
+        protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            shownewsList();
+        }
+
+        //編輯模式
         protected void DetailsView_news_ModeChanging(object sender, DetailsViewModeEventArgs e)
         {
             if (e.NewMode == DetailsViewMode.Edit)
@@ -299,6 +344,7 @@ namespace yacht
             }
         }
 
+        //取消這樣寫
         protected void DetailsView_news_ItemCommand(object sender, DetailsViewCommandEventArgs e)
         {
             if (e.CommandName == "Edit")
@@ -314,5 +360,49 @@ namespace yacht
                 loadDayNewsHeadline();
             }
         }
+
+        //當DDL選擇日期改變時刷新畫面資料(本次最重要功能)
+        protected void DropDownList_Headline_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+            string selectedValue = DropDownList_Headline.SelectedValue;
+
+            string newsContent = GetnewsContent(selectedValue);
+
+            CKEditorControl_newsContent.Text = newsContent;
+        }
+
+        //ckEditor取得資料
+        private string GetnewsContent(string selectedValue)
+        {
+            string newsContent = "";
+
+            //依選取日期取得資料庫新聞內容
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
+            string sql = "SELECT newsContentHtml FROM news WHERE Id = @selectedValue ";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@selectedValue", selectedValue);
+            connection.Open();
+
+            //SqlDataReader reader = command.ExecuteReader();
+            object result = command.ExecuteScalar();
+
+            if (result != null)
+            {
+                newsContent = result.ToString();
+            }
+            else
+            {
+                newsContent = "";
+            }
+            connection.Close();
+
+            return newsContent;
+        }
+
+        protected void UploadnewsContentBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Back.Master" AutoEventWireup="true" CodeBehind="newsBack.aspx.cs" Inherits="yacht.newsBack" %>
 
+<%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="HeaderTitle" runat="server">
@@ -21,14 +23,20 @@
     <br />
     <asp:CheckBox ID="CheckBox_IsTop" runat="server" Text="置頂標籤" Width="100%"></asp:CheckBox>
     <br />
+    <asp:Label ID="Label_summary" runat="server" Text="摘要 :"></asp:Label>
+    <asp:TextBox ID="TextBox_summary" runat="server" type="text" class="form-control" Placeholder="請輸入摘要" MaxLength="75"></asp:TextBox>
+    <br />
+    <asp:Label ID="Label_thumbnailPath" runat="server" Text="縮圖 :"></asp:Label>
+    <asp:FileUpload ID="FileUpload_thumbnailPath" runat="server" />
     <asp:Button ID="Button_addHeadline" runat="server" Text="新增新聞" class="btn btn-outline-primary btn-block mt-3" OnClick="Button_addHeadline_Click" />
     <br />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="body" runat="server">
-    <asp:DropDownList ID="DropDownList_Headline" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="dateTitle" DataValueField="Id" OnSelectedIndexChanged="DropDownList_Headline_SelectedIndexChanged" Visible="False"></asp:DropDownList>
+    <asp:Label ID="Label_selectedone" runat="server" Text="<單日新聞編輯>"></asp:Label>
     <br />
+    <asp:RadioButtonList ID="RadioButtonList1" runat="server" CssClass="auto-style1" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="headline" DataValueField="Id" OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged"></asp:RadioButtonList>
     <%--DataSourceID="SqlDataSource1"--%>
-    <asp:DetailsView ID="DetailsView_news" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" DataKeyNames="Id" OnItemDeleting="DetailsView_news_ItemDeleting" OnItemUpdating="DetailsView_news_ItemUpdating" OnModeChanging="DetailsView_news_ModeChanging" OnItemCommand="DetailsView_news_ItemCommand" >
+    <asp:DetailsView ID="DetailsView_news" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" DataKeyNames="Id" OnItemDeleting="DetailsView_news_ItemDeleting" OnItemUpdating="DetailsView_news_ItemUpdating" OnModeChanging="DetailsView_news_ModeChanging" OnItemCommand="DetailsView_news_ItemCommand">
         <Fields>
             <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
             <asp:TemplateField HeaderText="dateTitle" SortExpression="dateTitle">
@@ -78,16 +86,16 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="thumbnailPath" SortExpression="thumbnailPath">
                 <EditItemTemplate>
-                    <asp:FileUpload ID="FileUpload_thumbnailPathT" runat="server" ></asp:FileUpload>
+                    <asp:FileUpload ID="FileUpload_thumbnailPathT" runat="server"></asp:FileUpload>
                 </EditItemTemplate>
                 <InsertItemTemplate>
                     <asp:TextBox ID="TextBox_thumbnailPathTT" runat="server" Text='<%# Bind("thumbnailPath") %>'></asp:TextBox>
                 </InsertItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label_thumbnailPathT" runat="server" Text='<%# Bind("thumbnailPath") %>' style="max-width: 50px;" ></asp:Label>
+                    <asp:Label ID="Label_thumbnailPathT" runat="server" Text='<%# Bind("thumbnailPath") %>' Style="max-width: 50px;"></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-<%--            <asp:TemplateField HeaderText="newsContentHtml" SortExpression="newsContentHtml">
+            <%--            <asp:TemplateField HeaderText="newsContentHtml" SortExpression="newsContentHtml">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox_newsContentHtmlT" runat="server" Text='<%# Bind("newsContentHtml") %>'></asp:TextBox>
                 </EditItemTemplate>
@@ -98,9 +106,9 @@
                     <asp:Label ID="Label_newsContentHtmlT" runat="server" Text='<%# Bind("newsContentHtml") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>--%>
-<%--            <asp:BoundField DataField="newsContentHtml" HeaderText="newsContentHtml" SortExpression="newsContentHtml" ReadOnly="True" />
+            <%--            <asp:BoundField DataField="newsContentHtml" HeaderText="newsContentHtml" SortExpression="newsContentHtml" ReadOnly="True" />
             <asp:BoundField DataField="newsImageJson" HeaderText="newsImageJson" SortExpression="newsImageJson" ReadOnly="True"/>--%>
-            <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate" ReadOnly="True"/>
+            <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate" ReadOnly="True" />
             <asp:CommandField ButtonType="Button" ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
         </Fields>
     </asp:DetailsView>
@@ -132,4 +140,22 @@
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
+    <br />
+    <asp:Label ID="Label_newsContent" runat="server" Text="<單篇新聞稿撰寫>"></asp:Label>
+    <br />
+    <asp:Label ID="Label_selectdate" runat="server" Text="選擇日期 :"></asp:Label>
+    <asp:DropDownList ID="DropDownList_Headline" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="dateTitle" DataValueField="Id" OnSelectedIndexChanged="DropDownList_Headline_SelectedIndexChanged1" ></asp:DropDownList>
+    <br />
+    <ckeditor:ckeditorcontrol id="CKEditorControl_newsContent" runat="server" basepath="/Scripts/ckeditor/"
+        toolbar="Bold|Italic|Underline|Strike|Subscript|Superscript|-|RemoveFormat
+        NumberedList|BulletedList|-|Outdent|Indent|-|JustifyLeft|JustifyCenter|JustifyRight|JustifyBlock|-|BidiLtr|BidiRtl
+        /
+        Styles|Format|Font|FontSize
+        TextColor|BGColor
+        Link|Image"
+        height="400px">
+    </ckeditor:ckeditorcontrol>
+    <asp:Label ID="UploadnewsContent" runat="server" Visible="False" ForeColor="#009933" class="d-flex justify-content-center"></asp:Label>
+    <asp:Button ID="UploadnewsContentBtn" runat="server" Text="新聞稿上傳" class="btn btn-outline-primary btn-block mt-3" OnClick="UploadnewsContentBtn_Click" />
+    <br />
 </asp:Content>

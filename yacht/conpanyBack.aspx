@@ -26,7 +26,7 @@
         height="400px">
     </ckeditor:ckeditorcontrol>
     <asp:Label ID="UploadAboutUsLab" runat="server" Visible="False" ForeColor="#009933" class="d-flex justify-content-center"></asp:Label>
-    <asp:Button ID="UploadAboutUsBtn" runat="server" Text="確認上傳" class="btn btn-outline-primary btn-block mt-3" OnClick="UploadAboutUsBtn_Click" />
+    <asp:Button ID="UploadAboutUsBtn" runat="server" Text="上傳" class="btn btn-outline-primary btn-block mt-3" OnClick="UploadAboutUsBtn_Click" />
     <br />
     <asp:Label ID="Label_Certificat" runat="server" Text="Certificat 內容 :"></asp:Label>
     <ckeditor:ckeditorcontrol id="CKEditorControl_Certificat" runat="server" basepath="/Scripts/ckeditor/"
