@@ -31,28 +31,30 @@ namespace yacht
             }
         }
         //判斷是否有日期~結果無法成功，先隱藏不使用
-        private string GetSelectedDate()
-        {
-            // 如果TextBox中有選擇日期，則返回選擇的日期
-            if (DateTime.TryParse(TextBox_Date.Text, out DateTime selectedDate))
-            {
-                return selectedDate.ToString();
-            }
-            // 如果TextBox中沒有選擇日期，返回今天的日期
-            return DateTime.Now.ToString();
-        }
+        //private string GetSelectedDate()
+        //{
+        //    // 如果TextBox中有選擇日期，則返回選擇的日期
+        //    if (DateTime.TryParse(TextBox_Date.Text, out DateTime selectedDate))
+        //    {
+        //        return selectedDate.ToString();
+        //    }
+        //    // 如果TextBox中沒有選擇日期，返回今天的日期
+        //    return DateTime.Now.ToString();
+        //}
 
         private void loadDayNewsHeadline()
         {
             // 取得日曆選取日期，如果未選擇日期，則預設為今天日期
             //DateTime selectedDate = DateTime.Now;
-            string selNewsDate = TextBox_Date.Text.ToString();
+            //string selNewsDate = TextBox_Date.Text;
 
-            //// 檢查TextBox中是否有選擇日期
-            //if (DateTime.TryParse(TextBox_Date.Text, out DateTime _))
-            //{
-            //    selNewsDate = selectedDate.ToString("yyyy-M-dd");
-            //}
+            string selNewsDate = "";
+
+            // 檢查TextBox中是否有選擇日期
+            if (DateTime.TryParse(TextBox_Date.Text, out DateTime selectedDate))
+            {
+                selNewsDate = selectedDate.ToString("yyyy-M-dd");
+            }
 
             // 從 Session 變量中檢索選擇的日期
             //Session["SelectedDate"] = TextBox_Date.Text;
@@ -61,7 +63,7 @@ namespace yacht
 
             //依下拉選單選取國家的值 (id) 取得地區分類
             //string selHeadline_id = "1";
-            string selHeadline_id = DropDownList_Headline.SelectedValue;
+            //string selHeadline_id = DropDownList_Headline.SelectedValue;
 
             //依選取日期取得資料庫新聞內容
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
@@ -109,10 +111,11 @@ namespace yacht
 
             //取得日曆選取日期
             // 檢查TextBox中是否有選擇日期
+            //string selNewsDate = TextBox_Date.Text.ToString();
             string selNewsDate = "";
             if (DateTime.TryParse(TextBox_Date.Text, out DateTime selectedDate))
             {
-                selNewsDate = selectedDate.ToString("yyyy-M-dd");
+                selNewsDate = selectedDate.ToString("yyyy-MM-dd");
             }
 
             //取得是否勾選
@@ -149,7 +152,6 @@ namespace yacht
             loadDayNewsHeadline();
         }
 
-        //編輯事件這樣寫
         protected void DetailsView_news_ModeChanging(object sender, DetailsViewModeEventArgs e)
         {
             if (e.NewMode == DetailsViewMode.Edit)
@@ -179,6 +181,13 @@ namespace yacht
 
             TextBox textBox_dateTitleT = DetailsView_news.FindControl("TextBox_dateTitleT") as TextBox;
             string changeText_dateTitleT = textBox_dateTitleT.Text;
+
+            // 檢查TextBox中是否有選擇日期
+            if (DateTime.TryParse(changeText_dateTitleT, out DateTime selectedDate))
+            {
+                changeText_dateTitleT = selectedDate.ToString("yyyy-MM-dd");
+            }
+            string changeText_dateTitleT123 = changeText_dateTitleT;
 
             TextBox textBox_headlineT = DetailsView_news.FindControl("TextBox_headlineT") as TextBox;
             string changeText_headlineT = textBox_headlineT.Text;
@@ -221,12 +230,12 @@ namespace yacht
                 string sql = "UPDATE news SET dateTitle = @dateTitle, headline = @headline, isTop = @isTop, summary = @summary, thumbnailPath = @thumbnailPath WHERE Id = @Id";
                 SqlCommand sqlCommand = new SqlCommand(sql, connection);
 
-                sqlCommand.Parameters.AddWithValue("@Id", boardId);
-                sqlCommand.Parameters.AddWithValue("@dateTitle", changeText_dateTitleT);
+                sqlCommand.Parameters.AddWithValue("@dateTitle", changeText_dateTitleT123);
                 sqlCommand.Parameters.AddWithValue("@headline", changeText_headlineT);
                 sqlCommand.Parameters.AddWithValue("@isTop", isTopT);
                 sqlCommand.Parameters.AddWithValue("@summary", changeText_summaryT);
                 sqlCommand.Parameters.AddWithValue("@thumbnailPath", changeFileUpload_ImgT);
+                sqlCommand.Parameters.AddWithValue("@Id", boardId);
 
                 sqlCommand.ExecuteNonQuery();
             }
@@ -290,21 +299,20 @@ namespace yacht
             }
         }
 
-        //取消按鈕這樣做
         protected void DetailsView_news_ItemCommand(object sender, DetailsViewCommandEventArgs e)
         {
             if (e.CommandName == "Edit")
             {
                 DetailsView_news.ChangeMode(DetailsViewMode.Edit);
                 //ShowDVhistory(ViewState["HistoryNews"].ToString());
+                loadDayNewsHeadline();
             }
             else if (e.CommandName == "Cancel")
             {
                 DetailsView_news.ChangeMode(DetailsViewMode.ReadOnly);
                 //ShowDVhistory(ViewState["HistoryNews"].ToString());
+                loadDayNewsHeadline();
             }
-
-            loadDayNewsHeadline();
         }
     }
 }

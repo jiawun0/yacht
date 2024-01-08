@@ -36,7 +36,7 @@
                     <asp:TextBox ID="TextBox_dateTitleT" runat="server" Text='<%# Bind("dateTitle") %>' TextMode="Date"></asp:TextBox>
                 </EditItemTemplate>
                 <InsertItemTemplate>
-                    <asp:TextBox ID="TextBox_dateTitleT" runat="server" Text='<%# Bind("dateTitle") %>' TextMode="Date"></asp:TextBox>
+                    <asp:TextBox ID="TextBox_dateTitleTT" runat="server" Text='<%# Bind("dateTitle") %>' TextMode="Date"></asp:TextBox>
                 </InsertItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label_dateTitleT" runat="server" Text='<%# Bind("dateTitle") %>'></asp:Label>
@@ -47,7 +47,7 @@
                     <asp:TextBox ID="TextBox_headlineT" runat="server" Text='<%# Bind("headline") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <InsertItemTemplate>
-                    <asp:TextBox ID="TextBox_headlineT" runat="server" Text='<%# Bind("headline") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox_headlineTT" runat="server" Text='<%# Bind("headline") %>'></asp:TextBox>
                 </InsertItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label_headlineT" runat="server" Text='<%# Bind("headline") %>'></asp:Label>
@@ -59,7 +59,7 @@
                     <asp:CheckBox ID="CheckBox_isTopT" runat="server" Checked='<%# Bind("isTop") %>'></asp:CheckBox>
                 </EditItemTemplate>
                 <InsertItemTemplate>
-                    <asp:CheckBox ID="CheckBox_isTopT" runat="server" Checked='<%# Bind("isTop") %>'></asp:CheckBox>
+                    <asp:CheckBox ID="CheckBox_isTopTT" runat="server" Checked='<%# Bind("isTop") %>'></asp:CheckBox>
                 </InsertItemTemplate>
                 <ItemTemplate>
                     <asp:CheckBox ID="CheckBox_isTopT" runat="server" Checked='<%# Bind("isTop") %>' Enabled="false"></asp:CheckBox>
@@ -70,7 +70,7 @@
                     <asp:TextBox ID="TextBox_summaryT" runat="server" Text='<%# Bind("summary") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <InsertItemTemplate>
-                    <asp:TextBox ID="TextBox_summaryT" runat="server" Text='<%# Bind("summary") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox_summaryTT" runat="server" Text='<%# Bind("summary") %>'></asp:TextBox>
                 </InsertItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label_summaryT" runat="server" Text='<%# Bind("summary") %>'></asp:Label>
@@ -81,7 +81,7 @@
                     <asp:FileUpload ID="FileUpload_thumbnailPathT" runat="server" ></asp:FileUpload>
                 </EditItemTemplate>
                 <InsertItemTemplate>
-                    <asp:TextBox ID="TextBox_thumbnailPathT" runat="server" Text='<%# Bind("thumbnailPath") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox_thumbnailPathTT" runat="server" Text='<%# Bind("thumbnailPath") %>'></asp:TextBox>
                 </InsertItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label_thumbnailPathT" runat="server" Text='<%# Bind("thumbnailPath") %>' style="max-width: 50px;" ></asp:Label>
