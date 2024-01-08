@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CKFinder;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -18,30 +19,40 @@ namespace yacht
         {
             if (!IsPostBack)
             {
-                //// 頁面首次加載時執行
-                //string selectedDate = GetSelectedDate();
-                //// 將選擇的日期設置回TextBox_Date
-                //TextBox_Date.Text = selectedDate;
-                //loadDayNewsHeadline(selectedDate);
 
-                //先綁定取得選取預設值:日期
-                //DropDownList_Headline.DataBind();
+                FileBrowser fileBrowser = new FileBrowser();
+                fileBrowser.BasePath = "/ckfinder";
+                fileBrowser.SetupCKEditor(CKEditorControl_newsContent);
 
                 loadDayNewsHeadline();
                 shownewsList();
+
+                //if (Session["LoginId"] != null)
+                //{
+                //    string loginId = Session["LoginId"].ToString();
+                //    bool isManger = (Session["isManger"] != null) ? (bool)Session["isManger"] : false;
+
+                //    if (loginId != null && isManger)
+                //    {
+                //        //顯示登入者
+                //        string name = Showusername(loginId);
+                //        Literal_name.Text = "歡迎, " + name + "!";
+                //        loadCkeditorContent();
+                //        loadCertificatContent();
+                //    }
+                //    else
+                //    {
+                //        //非IsManger，請重新登入
+                //        Response.Redirect("Login.aspx");
+                //    }
+                //}
+                //else
+                //{
+                //    //尚未登入，請登入
+                //    Response.Redirect("Login.aspx");
+                //}
             }
         }
-        //判斷是否有日期~結果無法成功，先隱藏不使用
-        //private string GetSelectedDate()
-        //{
-        //    // 如果TextBox中有選擇日期，則返回選擇的日期
-        //    if (DateTime.TryParse(TextBox_Date.Text, out DateTime selectedDate))
-        //    {
-        //        return selectedDate.ToString();
-        //    }
-        //    // 如果TextBox中沒有選擇日期，返回今天的日期
-        //    return DateTime.Now.ToString();
-        //}
 
         //顯示DetailsView
         private void loadDayNewsHeadline()
@@ -92,15 +103,7 @@ namespace yacht
                 DetailsView_news.DataBind();
             }
 
-            //ListView_news.DataSource = reader;
-            //ListView_news.DataBind();
-
-            //SqlDataAdapter adapter = new SqlDataAdapter(command);
-            //DataTable newsDataTable = new DataTable();
-            //adapter.Fill(newsDataTable);
-            //ListView_news.DataSource = newsDataTable;
-
-            // 重新繫結 DropDownList
+            // 重新繫結 DropDownList，DDL上面也有連
             DropDownList_Headline.DataBind();
 
             connection.Close();
@@ -201,6 +204,20 @@ namespace yacht
             //先關連到DDL
             shownewsList();
         }
+ 
+        //當DDL選擇日期改變時刷新畫面資料(本次最重要功能)
+        protected void DropDownList_Headline_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+            //string selectedValue = DropDownList_Headline.SelectedValue;
+            //string newsContent = GetnewsContent(selectedValue);
+            //CKEditorControl_newsContent.Text = newsContent;
+
+            //選取DDL後連到DetailsView_news
+            loadDayNewsHeadline();
+
+            //選取DDL後連到Ckeditor
+            loadCkeditorContent();
+        }
 
         ////選擇日期，出現所有詳情
         //protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -209,46 +226,35 @@ namespace yacht
         //    loadDayNewsHeadline();
         //}
 
-        //當DDL選擇日期改變時刷新畫面資料(本次最重要功能)
-        protected void DropDownList_Headline_SelectedIndexChanged1(object sender, EventArgs e)
-        {
-            string selectedValue = DropDownList_Headline.SelectedValue;
-
-            string newsContent = GetnewsContent(selectedValue);
-
-            CKEditorControl_newsContent.Text = newsContent;
-
-            loadDayNewsHeadline();
-        }
-
         //ckEditor取得資料
-        private string GetnewsContent(string selectedValue)
-        {
-            string newsContent = "";
+        //private string GetnewsContent(string selectedValue)
+        //{
+        //    string newsContent = "";
 
-            //依選取日期取得資料庫新聞內容
-            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
-            string sql = "SELECT newsContentHtml FROM news WHERE dateTitle = @selectedValue ";
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@selectedValue", selectedValue);
-            connection.Open();
+        //    //依選取日期取得資料庫新聞內容
+        //    SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
+        //    string sql = "SELECT newsContentHtml FROM news WHERE dateTitle = @selectedValue ";
+        //    SqlCommand command = new SqlCommand(sql, connection);
+        //    command.Parameters.AddWithValue("@selectedValue", selectedValue);
+        //    connection.Open();
 
-            SqlDataReader reader = command.ExecuteReader();
+        //    SqlDataReader reader = command.ExecuteReader();
 
-            if (reader != null)
-            {
-                newsContent = reader.ToString();
-            }
-            else
-            {
-                newsContent = "";
-            }
-            connection.Close();
+        //    if (reader != null)
+        //    {
+        //        newsContent = reader.ToString();
+        //        // 直接將數據賦值給 CKEditor 控件
+        //        CKEditorControl_newsContent.Text = HttpUtility.HtmlDecode(reader["newsContentHtml"].ToString());
+        //    }
+        //    else
+        //    {
+        //        newsContent = "";
+        //    }
+        //    connection.Close();
 
-            return newsContent;
-        }
+        //    return newsContent;
+        //}
 
-        //編輯模式
         protected void DetailsView_news_ModeChanging(object sender, DetailsViewModeEventArgs e)
         {
             if (e.NewMode == DetailsViewMode.Edit)
@@ -270,7 +276,7 @@ namespace yacht
 
             loadDayNewsHeadline();
         }
-
+        //上面編輯，下面更新
         protected void DetailsView_news_ItemUpdating(object sender, DetailsViewUpdateEventArgs e)
         {
             // Get the index of the record being updated
@@ -413,11 +419,79 @@ namespace yacht
             }
         }
 
-
-        protected void UploadnewsContentBtn_Click(object sender, EventArgs e)
+        //讀取Ckeditor_aboutus
+        private void loadCkeditorContent()
         {
+            string selectedValue = DropDownList_Headline.SelectedValue;
 
+            //取得頁面 HTML 資料
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
+            string sql = "select newsContentHtml from news where Id = @Id ";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@Id", selectedValue);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                //渲染畫面
+                CKEditorControl_newsContent.Text = HttpUtility.HtmlDecode(reader["newsContentHtml"].ToString());
+            }
+            connection.Close();
         }
 
+        //ckeditor上傳
+        protected void UploadnewsContentBtn_Click(object sender, EventArgs e)
+        {
+            string selectedValue = DropDownList_Headline.SelectedValue;
+
+            //取得 CKEditorControl 的 HTML 內容
+            string newsContentHtmlStr = HttpUtility.HtmlEncode(CKEditorControl_newsContent.Text);
+            //更新 About Us 頁面 HTML 資料
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
+            string sql = "update news set newsContentHtml = @newsContentHtml where Id = @Id ";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@newsContentHtml", newsContentHtmlStr);
+            command.Parameters.AddWithValue("@Id", selectedValue);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+
+            //渲染畫面提示
+            DateTime nowtime = DateTime.Now;
+            UploadnewsContent.Visible = true;
+            UploadnewsContent.Text = "上傳成功" + nowtime.ToString("G");
+        }
+
+
+        //顯示登入者
+        string Showusername(string LoginId)
+        {
+            string name = "";
+
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectcountry"].ConnectionString);
+            if (connection.State != System.Data.ConnectionState.Open)
+            {
+                connection.Open();
+            }
+
+            string sql = "select name from Login where Id = @LoginId";
+
+            SqlCommand sqlCommand = new SqlCommand(sql, connection);
+            sqlCommand.Parameters.AddWithValue("@LoginId", LoginId);
+
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    name = reader["name"].ToString();
+                    break;
+                }
+            }
+
+            connection.Close();
+
+            return name;
+        }
     }
 }

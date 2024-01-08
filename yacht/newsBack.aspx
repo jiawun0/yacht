@@ -38,8 +38,8 @@
     <%--DataSourceID="SqlDataSource1"--%>
     <br />
     <asp:Label ID="Label_selectdate" runat="server" Text="選擇標題 :"></asp:Label>
-    <asp:DropDownList ID="DropDownList_Headline" runat="server" AutoPostBack="True" DataTextField="headline" DataValueField="Id" OnSelectedIndexChanged="DropDownList_Headline_SelectedIndexChanged1" ></asp:DropDownList>
-    
+    <asp:DropDownList ID="DropDownList_Headline" runat="server" AutoPostBack="True" DataTextField="headline" DataValueField="Id" OnSelectedIndexChanged="DropDownList_Headline_SelectedIndexChanged1"></asp:DropDownList>
+
     <asp:DetailsView ID="DetailsView_news" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" DataKeyNames="Id" OnItemDeleting="DetailsView_news_ItemDeleting" OnItemUpdating="DetailsView_news_ItemUpdating" OnModeChanging="DetailsView_news_ModeChanging" OnItemCommand="DetailsView_news_ItemCommand">
         <Fields>
             <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
@@ -110,7 +110,7 @@
                     <asp:Label ID="Label_newsContentHtmlT" runat="server" Text='<%# Bind("newsContentHtml") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>--%>
-            <%--            <asp:BoundField DataField="newsContentHtml" HeaderText="newsContentHtml" SortExpression="newsContentHtml" ReadOnly="True" />
+            <%--<asp:BoundField DataField="newsContentHtml" HeaderText="newsContentHtml" SortExpression="newsContentHtml" ReadOnly="True" />
             <asp:BoundField DataField="newsImageJson" HeaderText="newsImageJson" SortExpression="newsImageJson" ReadOnly="True"/>--%>
             <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate" ReadOnly="True" />
             <asp:CommandField ButtonType="Button" ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
