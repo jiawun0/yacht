@@ -140,22 +140,6 @@
                                 </div>
                             </div>
 
-                            <%--分頁區塊--%>
-                            <div class="rsmenu">合計<asp:Literal ID="li_totalRows" runat="server" />
-                                <span>｜<asp:LinkButton Text="最前頁" ID="lnkFirstPage" runat="server" OnClick="lnkFirstPage_Click" />
-                                      ｜<asp:LinkButton Text="上一頁" ID="lnkPrePage" runat="server" OnClick="lnkPrePage_Click" />
-                                      ｜</span>選擇頁數&nbsp;&nbsp; <b>第<asp:DropDownList runat="server" ID="dl_currentPage"></asp:DropDownList>頁</b> <span>
-                                      ｜<asp:LinkButton Text="下一頁" ID="lnkNextPage" runat="server" OnClick="lnkNextPage_Click" />
-                                      ｜<asp:LinkButton Text="最後頁" runat="server" ID="lnkLastPage" OnClick="lnkLastPage_Click" />
-                                      ｜
-                                </span>每頁
-                                <asp:DropDownList runat="server" ID="dl_pageSize">
-                                <asp:ListItem Value="5" Text="5" />
-                                <asp:ListItem Value="10" Text="10" />
-                                </asp:DropDownList>筆
-                                <asp:Button ID="btnToPage" runat="server" CssClass="pgbtn" Text="跳頁" OnClick="btnToPage_Click" />
-                            </div>
-
                             <!--------------------------------內容結束------------------------------------------------------>
                         </div>
                     </div>
