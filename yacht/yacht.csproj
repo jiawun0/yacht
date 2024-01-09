@@ -857,8 +857,8 @@
     <Content Include="New.Master" />
     <Content Include="CheckAccount.ashx" />
     <Content Include="newsBack.aspx" />
-    <Content Include="newsFront.aspx" />
     <Content Include="newsFront2.aspx" />
+    <Content Include="newsFrontdetail.aspx" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\CHANGES.html" />
     <Content Include="Scripts\ckeditor\ckeditor.asp" />
@@ -1477,19 +1477,19 @@
     <Compile Include="newsBack.aspx.designer.cs">
       <DependentUpon>newsBack.aspx</DependentUpon>
     </Compile>
-    <Compile Include="newsFront.aspx.cs">
-      <DependentUpon>newsFront.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="newsFront.aspx.designer.cs">
-      <DependentUpon>newsFront.aspx</DependentUpon>
-    </Compile>
     <Compile Include="newsFront2.aspx.cs">
       <DependentUpon>newsFront2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="newsFront2.aspx.designer.cs">
       <DependentUpon>newsFront2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="newsFrontdetail.aspx.cs">
+      <DependentUpon>newsFrontdetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="newsFrontdetail.aspx.designer.cs">
+      <DependentUpon>newsFrontdetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register.aspx.cs">

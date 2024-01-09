@@ -22,11 +22,6 @@ namespace yacht
             }
         }
 
-        //參考大抄
-        public int RecordCount { get; set; }//總共幾筆資料totalItems
-        public int PageSize { get; set; }//一頁幾筆資料limit
-        public string targetPage { get; set; } //作用頁面完整網頁名稱
-
         //前台呈現所有新聞格式~目前ok
         private void loadList()
         {
@@ -55,7 +50,7 @@ namespace yacht
 
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
             connection.Open();
-            string sql = "select Id, dateTitle, headline, summary, thumbnailPath from news order by Id asc ";
+            string sql = "select Id, dateTitle, headline, guid, summary, thumbnailPath from news order by Id asc ";
             SqlCommand command = new SqlCommand(sql, connection);
             SqlDataReader reader = command.ExecuteReader();
 
@@ -72,12 +67,13 @@ namespace yacht
                     string dateTitle = reader["dateTitle"].ToString();
                     string headline = reader["headline"].ToString();
                     string summary = reader["summary"].ToString();
+                    string guid = reader["guid"].ToString(); // Assuming guid is a field in your database
 
                     htmlBuilder.Append("<li>");
                     htmlBuilder.Append("<div class='list01'>");
                     htmlBuilder.Append("<ul>");
                     htmlBuilder.Append("<li><div><p><img src='" + thumbnailPath + "' alt='' /></p></div></li>");
-                    htmlBuilder.Append("<li><span>" + dateTitle + "</span><br />" + headline + "</li>");
+                    htmlBuilder.Append("<li><span>" + dateTitle + "</span><br /><a href='newsFrontdetail.aspx?guid=" + guid + "'>" + headline + "</a></li>");
                     htmlBuilder.Append("<li>" + summary + "</li>");
                     htmlBuilder.Append("</ul>");
                     htmlBuilder.Append("</div>");
@@ -92,7 +88,7 @@ namespace yacht
             connection.Close();
         }
 
-        //下方分頁欄位設定~參考2000的dataset程式碼，目前可以看不能點
+        //下方分頁欄位設定~參考2000的dataset程式碼~目前ok
         public void showPageControls()
         {
             // 創建一個 StringBuilder 下方分頁欄位的 HTML 內容

@@ -1,7 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/New.Master" AutoEventWireup="true" CodeBehind="newsFront.aspx.cs" Inherits="yacht.newsFront" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/New.Master" AutoEventWireup="true" CodeBehind="newsFrontdetail.aspx.cs" Inherits="yacht.newsFrontdetail" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link rel="stylesheet" href="path_to_pagination.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!--遮罩-->
@@ -63,7 +62,7 @@
             <div class="left1">
                 <p><span>NEWS</span></p>
                 <ul>
-                    <li><a href="https://localhost:44310/newsFront">News & Events</a></li>
+                    <li><a href="https://localhost:44310/newsFront2">News & Events</a></li>
                 </ul>
             </div>
         </div>
@@ -79,14 +78,8 @@
                 <!--------------------------------內容開始---------------------------------------------------->
 
                 <div class="box2_list">
-                    <ul>
-                        <asp:Literal ID="newList" runat="server"></asp:Literal>
-                    </ul>
-                    <div>
-                        <asp:Literal ID="litPage" runat="server"></asp:Literal>
-                    </div>
+                    <asp:Literal ID="Literal_newsContent" runat="server"></asp:Literal>
                 </div>
-
 
                 <!--------------------------------內容結束------------------------------------------------------>
             </div>
