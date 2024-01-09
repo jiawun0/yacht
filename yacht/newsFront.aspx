@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/New.Master" AutoEventWireup="true" CodeBehind="newsFront.aspx.cs" Inherits="yacht.newsFront" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href="path_to_pagination.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!--遮罩-->
@@ -81,7 +82,7 @@
                     <ul>
                         <asp:Literal ID="newList" runat="server"></asp:Literal>
                     </ul>
-                    <div class ="pagenumber">
+                    <div>
                         <asp:Literal ID="litPage" runat="server"></asp:Literal>
                     </div>
                 </div>

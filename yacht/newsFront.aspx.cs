@@ -22,18 +22,29 @@ namespace yacht
             }
         }
 
-        #region "用正規式判斷是否為數字"
-        /// <summary>
-        /// 用正規式判斷是否為數字
-        /// </summary>
-        /// <param name="inputData">輸入字串</param>
-        /// <returns>bool</returns>
-        bool IsNumber(string inputData)
-        {
-            return System.Text.RegularExpressions.Regex.IsMatch(inputData, "^[0-9]+$");
-        }
-        #endregion
+        public int RecordCount { get; set; }//總共幾筆資料totalItems
+        public int PageSize { get; set; }//一頁幾筆資料limit
+        public string targetPage { get; set; } //作用頁面完整網頁名稱
 
+        public void showPageControls()
+        {
+            litPage.Text = ""; //清空分頁控制項
+            int page = 1; //預設第1頁
+
+            if (RecordCount == 0)
+            {
+                return;
+            }
+            if (PageSize == 0)
+            {
+                return;
+            }
+            //確認當前頁面檔案名稱非 null 在 ?? 左側非 null 則不變，左側是 null 則傳回右側結果 
+            targetPage = targetPage ?? System.IO.Path.GetFileName(Request.PhysicalPath);
+
+            //渲染分頁控制項 //鄰近頁 adjacents 參數不建議設太大，可能導致換行
+            //litPage.Text = getPaginationString(page, RecordCount, PageSize, 2, targetPage);
+        }
         ////前台呈現所有新聞格式
         //private void loadList()
         //{
@@ -119,9 +130,9 @@ namespace yacht
         }
 
         //下方分頁欄位設定~參考2000的dataset程式碼
-        public void showPageControls()
+        public void dataset()
         {
-            // 創建一個 StringBuilder 來儲存動態生成的 HTML 內容
+            // 創建一個 StringBuilder 來儲存下方分頁欄位的 HTML 內容
             StringBuilder sb = new StringBuilder();
 
             //p 目前第幾頁
@@ -158,6 +169,7 @@ namespace yacht
 
             //NowPageCount 目前這頁要從DataSet第幾筆資料開始撈取
             int NowPageCount = 0;
+
             if (p > 0)
             {
                 NowPageCount = (p - 1) * PageSize;
@@ -174,39 +186,41 @@ namespace yacht
             sb.Append("<table border='0' width='95%'>");
             sb.Append("<tr><th>ID</th><th>Title</th><th>Content</th></tr>");
 
-            //頁面呈現內容在這
-            while ((rowNo < PageSize) && (NowPageCount < RecordCount))
-            {
-                DataRow dr = dt.Rows[index]; // Get the current row from the dataset
-                int Id = Convert.ToInt32(dr["Id"]); // Assuming 'Id' is an integer column
-                string headline = dr["headline"].ToString(); // Assuming 'Title' is a string column
-                string summary = dr["summary"].ToString(); // Assuming 'Content' is a string column
+            ////頁面呈現內容在這
+            //while ((rowNo < PageSize) && (NowPageCount < RecordCount))
+            //{
+            //    DataRow dr = dt.Rows[index]; // Get the current row from the dataset
+            //    int Id = Convert.ToInt32(dr["Id"]); // Assuming 'Id' is an integer column
+            //    string headline = dr["headline"].ToString(); // Assuming 'Title' is a string column
+            //    string summary = dr["summary"].ToString(); // Assuming 'Content' is a string column
 
-                // Creating HTML table rows for each record
-                Response.Write("<tr>");
-                Response.Write("<td>" + Id + "</td>");
-                Response.Write("<td>" + headline + "</td>");
-                Response.Write("<td>" + summary + "</td>");
-                Response.Write("</tr>");
+            //    // Creating HTML table rows for each record
+            //    Response.Write("<tr>");
+            //    Response.Write("<td>" + Id + "</td>");
+            //    Response.Write("<td>" + headline + "</td>");
+            //    Response.Write("<td>" + summary + "</td>");
+            //    Response.Write("</tr>");
 
-                rowNo++; // Increment row number for pagination
-                index++; // Move to the next record in the dataset
-            }
+            //    rowNo++; // Increment row number for pagination
+            //    index++; // Move to the next record in the dataset
+            //}
 
-            //Response.Write("</table>");
-            sb.Append("</table>");
+            ////Response.Write("</table>");
+            //sb.Append("</table>");
 
             //顯示上一頁下一頁
             if (Pages > 0)
             {
                 if (p > 1)
                 {
-                    Response.Write("<a href = 'newsFront.aspx?p=" + (p - 1) + "'>[<<<上一頁]</a>");
+                    //Response.Write("<a href = 'newsFront.aspx?p=" + (p - 1) + "'>[<<<上一頁]</a>");
+                    sb.Append("<a href = 'newsFront.aspx?p=" + (p - 1) + "'>[<<<上一頁]</a>");
                 }
                 //Response.Write("首頁");
                 if (p < Pages)
                 {
-                    Response.Write("<a href = 'newsFront.aspx?p=" + (p + 1) + "'>[下一頁>>>]</a>");
+                    //Response.Write("<a href = 'newsFront.aspx?p=" + (p + 1) + "'>[下一頁>>>]</a>");
+                    sb.Append("<a href = 'newsFront.aspx?p=" + (p + 1) + "'>[下一頁>>>]</a>");
                 }
             }
 
@@ -239,7 +253,6 @@ namespace yacht
                 // 將 StringBuilder 中的動態生成 HTML 內容指定給 Literal 控制項的 Text 屬性
                 litPage.Text = sb.ToString();
             }
-
         }
     }
 }
