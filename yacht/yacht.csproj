@@ -833,6 +833,7 @@
     <Content Include="css\homestyle2.css" />
     <Content Include="css\iepngfix.htc" />
     <Content Include="css\js.css" />
+    <Content Include="css\pagination.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\style.css" />
     <Content Include="dealersCountryBack.aspx" />

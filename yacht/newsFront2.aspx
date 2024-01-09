@@ -9,6 +9,34 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/reset.css" rel="stylesheet" type="text/css" />
     <link href="css/homestyle2.css" rel="stylesheet" type="text/css" />
+    <link href="css/pagination.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        /*分頁區塊的CSS*/
+        .rsmenu {
+            color: #4c4c4c;
+            padding: 15px 0;
+            clear: both;
+            text-align: center;
+        }
+
+            .rsmenu span, .rsmenu span a {
+                color: #808e02;
+            }
+
+        .pgbtn {
+            background: #808E02;
+            border: none medium;
+            color: #fff;
+            cursor: pointer;
+            width: 40px;
+            height: 19px;
+        }
+
+            .pgbtn:hover {
+                background: #99a535;
+            }
+    </style>
 
 </head>
 <body>
@@ -112,7 +140,53 @@
                                 </div>
                             </div>
 
+                            <%--表格式ListView--%>
+                            <asp:ListView ID="lv_showData" runat="server">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td>
+                                            <asp:Literal ID="Literal_dateTitle" runat="server" Text='<%# Eval("dateTitle") %>' />
+                                        </td>
+                                        <td>
+                                            <asp:Literal ID="Literal_headline" runat="server" Text='<%# Eval("headline") %>' />
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                                <LayoutTemplate>
+                                    <table id="itemPlaceholderContainer" runat="server" align="center" cellpadding="0"
+                                        cellspacing="0" border="1" style="border-style: solid;">
+                                        <tr>
+                                            <th runat="server">dateTitle
+                                            </th>
+                                            <th runat="server">headline
+                                            </th>
+                                        </tr>
+                                        <tr id="itemPlaceholder" runat="server">
+                                        </tr>
+                                    </table>
+                                </LayoutTemplate>
+                            </asp:ListView>
 
+                            <%--分頁區塊--%>
+                            <div class="rsmenu">
+                                合計<asp:Literal ID="li_totalRows" runat="server" />
+                                <span>｜
+            <asp:LinkButton Text="最前頁" ID="lnkFirstPage" runat="server" OnClick="lnkFirstPage_Click" />
+                                    ｜
+            <asp:LinkButton Text="上一頁" ID="lnkPrePage" runat="server" OnClick="lnkPrePage_Click" />｜
+                                </span>選擇頁數&nbsp;&nbsp; <b>第<asp:DropDownList runat="server" ID="dl_currentPage">
+                                </asp:DropDownList>
+                                    頁</b> <span>｜
+                <asp:LinkButton Text="下一頁" ID="lnkNextPage" runat="server" OnClick="lnkNextPage_Click" />｜
+                <asp:LinkButton Text="最後頁" runat="server" ID="lnkLastPage" OnClick="lnkLastPage_Click" />｜
+                                    </span>每頁
+        <asp:DropDownList runat="server" ID="dl_pageSize">
+            <asp:ListItem Value="5" Text="5" />
+            <asp:ListItem Value="10" Text="10" />
+        </asp:DropDownList>
+                                筆
+        <asp:Button ID="btnToPage" runat="server" CssClass="pgbtn" Text="跳頁" OnClick="btnToPage_Click" />
+                            </div>
                             <!--------------------------------內容結束------------------------------------------------------>
                         </div>
                     </div>
