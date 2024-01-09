@@ -109,6 +109,16 @@ namespace yacht
         //前台呈現所有新聞格式
         private void loadList()
         {
+            //PageSize 每頁顯示5筆
+            int PageSize = 5;
+
+            //p 目前第幾頁，先默認第一頁
+            int p = 1;
+
+            //計算每個分頁的第幾筆到第幾筆(初始到結束)
+            int floor = (p - 1) * PageSize + 1;
+            int ceiling = p * PageSize;
+
             //將news資料呈現
             StringBuilder htmlBuilder = new StringBuilder();
 
@@ -118,22 +128,29 @@ namespace yacht
             SqlCommand command = new SqlCommand(sql, connection);
             SqlDataReader reader = command.ExecuteReader();
 
+            int RecordCount = 0;
+
             while (reader.Read())
             {
-                string thumbnailPath = reader["thumbnailPath"].ToString();
-                string dateTitle = reader["dateTitle"].ToString();
-                string headline = reader["headline"].ToString();
-                string summary = reader["summary"].ToString();
+                RecordCount++;
 
-                htmlBuilder.Append("<li>");
-                htmlBuilder.Append("<div class='list01'>");
-                htmlBuilder.Append("<ul>");
-                htmlBuilder.Append("<li><div><p><img src='" + thumbnailPath + "' alt='' /></p></div></li>");
-                htmlBuilder.Append("<li><span>" + dateTitle + "</span><br />" + headline + "</li>");
-                htmlBuilder.Append("<li>" + summary + "</li>");
-                htmlBuilder.Append("</ul>");
-                htmlBuilder.Append("</div>");
-                htmlBuilder.Append("</li>");
+                if (RecordCount >= floor && RecordCount <= ceiling)
+                {
+                    string thumbnailPath = reader["thumbnailPath"].ToString();
+                    string dateTitle = reader["dateTitle"].ToString();
+                    string headline = reader["headline"].ToString();
+                    string summary = reader["summary"].ToString();
+
+                    htmlBuilder.Append("<li>");
+                    htmlBuilder.Append("<div class='list01'>");
+                    htmlBuilder.Append("<ul>");
+                    htmlBuilder.Append("<li><div><p><img src='" + thumbnailPath + "' alt='' /></p></div></li>");
+                    htmlBuilder.Append("<li><span>" + dateTitle + "</span><br />" + headline + "</li>");
+                    htmlBuilder.Append("<li>" + summary + "</li>");
+                    htmlBuilder.Append("</ul>");
+                    htmlBuilder.Append("</div>");
+                    htmlBuilder.Append("</li>");
+                }
             }
             reader.Close();
             connection.Close();
@@ -141,19 +158,6 @@ namespace yacht
             // 將 HTML 字串設置到 Literal 控制項中
             newList.Text = "<ul>" + htmlBuilder.ToString() + "</ul>";
             connection.Close();
-
-            //for (int i = floor; i <= ceiling; i++)
-            //{
-            //    if (i <= count)
-            //    {
-            //        listHtml.Append($"<a href=''> --------- 第 {i} 筆資料 --------- </a></li><br /><br />");
-            //    }
-            //}
-
-            //if (newList != null)
-            //{
-            //    newList.Text = listHtml.ToString();
-            //}
         }
 
         //下方分頁欄位設定~參考2000的dataset程式碼

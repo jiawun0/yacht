@@ -140,33 +140,6 @@
                                 </div>
                             </div>
 
-                            <%--表格式ListView--%>
-                            <asp:ListView ID="lv_showData" runat="server">
-                                <ItemTemplate>
-                                    <tr>
-                                        <td>
-                                            <asp:Literal ID="Literal_dateTitle" runat="server" Text='<%# Eval("dateTitle") %>' />
-                                        </td>
-                                        <td>
-                                            <asp:Literal ID="Literal_headline" runat="server" Text='<%# Eval("headline") %>' />
-                                        </td>
-                                    </tr>
-                                </ItemTemplate>
-                                <LayoutTemplate>
-                                    <table id="itemPlaceholderContainer" runat="server" align="center" cellpadding="0"
-                                        cellspacing="0" border="1" style="border-style: solid;">
-                                        <tr>
-                                            <th runat="server">dateTitle
-                                            </th>
-                                            <th runat="server">headline
-                                            </th>
-                                        </tr>
-                                        <tr id="itemPlaceholder" runat="server">
-                                        </tr>
-                                    </table>
-                                </LayoutTemplate>
-                            </asp:ListView>
-
                             <%--分頁區塊--%>
                             <div class="rsmenu">
                                 合計<asp:Literal ID="li_totalRows" runat="server" />
