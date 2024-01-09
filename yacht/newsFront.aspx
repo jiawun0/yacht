@@ -81,7 +81,8 @@
                     <ul>
                         <asp:Literal ID="newList" runat="server"></asp:Literal>
                     </ul>
-                    <div>
+                    <div class ="pagenumber">
+                        <asp:Literal ID="litPage" runat="server"></asp:Literal>
                     </div>
                 </div>
 

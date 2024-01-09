@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Web.Configuration;
 using System.Data;
+using System.Text;
 
 namespace yacht
 {
@@ -21,51 +22,108 @@ namespace yacht
             }
         }
 
+        #region "用正規式判斷是否為數字"
+        /// <summary>
+        /// 用正規式判斷是否為數字
+        /// </summary>
+        /// <param name="inputData">輸入字串</param>
+        /// <returns>bool</returns>
+        bool IsNumber(string inputData)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(inputData, "^[0-9]+$");
+        }
+        #endregion
+
+        ////前台呈現所有新聞格式
+        //private void loadList()
+        //{
+        //    //預設為第1頁
+        //    int page = 1;
+        //    //判斷網址後有無參數
+        //    //也可用String.IsNullOrWhiteSpace
+        //    if (!String.IsNullOrEmpty(Request.QueryString["page"]))
+        //    {
+        //        page = Convert.ToInt32(Request.QueryString["page"]);
+        //    }
+
+        //    //設定頁面參數屬性
+        //    //設定控制項參數: 一頁幾筆資料
+        //    WebUserControl_Page.limit = 5;
+        //    //設定控制項參數: 作用頁面完整網頁名稱
+        //    WebUserControl_Page.targetPage = "WebForm1.aspx";
+
+        //    //建立計算分頁資料顯示邏輯 (每一頁是從第幾筆開始到第幾筆結束)
+        //    //計算每個分頁的第幾筆到第幾筆
+        //    var floor = (page - 1) * WebUserControl_Page.limit + 1; //每頁的第一筆
+        //    var ceiling = page * WebUserControl_Page.limit; //每頁的最末筆
+
+        //    //將取得的資料數設定給參數 count
+        //    int count = 36; //總資料數，可修改數字測試分頁功能是否正常
+
+        //    //設定控制項參數: 總共幾筆資料
+        //    WebUserControl_Page.totalItems = count;
+
+        //    //渲染分頁控制項
+        //    WebUserControl_Page.showPageControls();
+
+        //    //設定模擬資料內容
+        //    StringBuilder listHtml = new StringBuilder();
+        //    for (int i = floor; i <= ceiling; i++)
+        //    {
+        //        if (i <= count)
+        //        {
+        //            listHtml.Append($"<a href=''> --------- 第 {i} 筆資料 --------- </a></li><br /><br />");
+        //        }
+        //    }
+        //    LiteralTest.Text = listHtml.ToString();
+        //}
+
+        //前台呈現所有新聞格式
         private void loadList()
         {
-            //預設為第1頁
-            int page = 1;
-            //判斷網址後有無參數
-            //也可用String.IsNullOrWhiteSpace
-            if (!String.IsNullOrEmpty(Request.QueryString["page"]))
-            {
-                page = Convert.ToInt32(Request.QueryString["page"]);
-            }
+            // 確保這裡找到 ASP.NET Literal 控制項
+            //Literal newList = (Literal)FindControl("newList");
 
-            //設定頁面參數屬性
-            //設定控制項參數: 一頁幾筆資料
-            WebUserControl_Page.limit = 5;
-            //設定控制項參數: 作用頁面完整網頁名稱
-            WebUserControl_Page.targetPage = "WebForm1.aspx";
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
+            connection.Open();
+            string sql = "select Id, dateTitle, headline, summary, thumbnailPath from news order by Id asc ";
+            SqlCommand command = new SqlCommand(sql, connection);
+            SqlDataReader reader = command.ExecuteReader();
 
-            //建立計算分頁資料顯示邏輯 (每一頁是從第幾筆開始到第幾筆結束)
-            //計算每個分頁的第幾筆到第幾筆
-            var floor = (page - 1) * WebUserControl_Page.limit + 1; //每頁的第一筆
-            var ceiling = page * WebUserControl_Page.limit; //每頁的最末筆
-
-            //將取得的資料數設定給參數 count
-            int count = 36; //總資料數，可修改數字測試分頁功能是否正常
-
-            //設定控制項參數: 總共幾筆資料
-            WebUserControl_Page.totalItems = count;
-
-            //渲染分頁控制項
-            WebUserControl_Page.showPageControls();
-
-            //設定模擬資料內容
             StringBuilder listHtml = new StringBuilder();
-            for (int i = floor; i <= ceiling; i++)
+            while (reader.Read())
             {
-                if (i <= count)
-                {
-                    listHtml.Append($"<a href=''> --------- 第 {i} 筆資料 --------- </a></li><br /><br />");
-                }
+                listHtml.Append("<tr>");
+                listHtml.Append("<td>" + reader["dateTitle"] + "</td>");
+                listHtml.Append("<td>" + reader["headline"] + "</td>");
+                listHtml.Append("<td>" + reader["summary"] + "</td>");
+                listHtml.Append("</tr>");
             }
-            LiteralTest.Text = listHtml.ToString();
+            reader.Close();
+
+            // 將 HTML 字串設置到 Literal 控制項中
+            newList.Text = "<table border='1'>" + listHtml.ToString() + "</table>";
+            connection.Close();
+            //for (int i = floor; i <= ceiling; i++)
+            //{
+            //    if (i <= count)
+            //    {
+            //        listHtml.Append($"<a href=''> --------- 第 {i} 筆資料 --------- </a></li><br /><br />");
+            //    }
+            //}
+
+            //if (newList != null)
+            //{
+            //    newList.Text = listHtml.ToString();
+            //}
         }
 
+        //下方分頁欄位設定~參考2000的dataset程式碼
         public void showPageControls()
         {
+            // 創建一個 StringBuilder 來儲存動態生成的 HTML 內容
+            StringBuilder sb = new StringBuilder();
+
             //p 目前第幾頁
             int p = Convert.ToInt32(Request["p"]);
 
@@ -104,33 +162,39 @@ namespace yacht
             {
                 NowPageCount = (p - 1) * PageSize;
             }
-            Response.Write("共計" + RecordCount + "筆 / 共需" + Pages + "頁");
+            //Response.Write("共計" + RecordCount + "筆 / 共需" + Pages + "頁");
+            sb.Append("共計" + RecordCount + "筆 / 共需" + Pages + "頁");
 
             //rowNo 目前這頁要撈出幾筆
             int rowNo = 0;
             int index = NowPageCount;
-            Response.Write("<table border = '0' width = '95%'>");
-            Response.Write("<tr><th>ID</th><th>Title</th><th>Content</th></tr>");
 
-            //while ((rowNo < PageSize) && (NowPageCount < RecordCount))
-            //{
-            //    DataRow dr = dt.Rows[index]; // Get the current row from the dataset
-            //    int Id = Convert.ToInt32(dr["Id"]); // Assuming 'Id' is an integer column
-            //    string headline = dr["headline"].ToString(); // Assuming 'Title' is a string column
-            //    string summary = dr["summary"].ToString(); // Assuming 'Content' is a string column
+            //Response.Write("<table border = '0' width = '95%'>");
+            //Response.Write("<tr><th>ID</th><th>Title</th><th>Content</th></tr>");
+            sb.Append("<table border='0' width='95%'>");
+            sb.Append("<tr><th>ID</th><th>Title</th><th>Content</th></tr>");
 
-            //    // Creating HTML table rows for each record
-            //    Response.Write("<tr>");
-            //    Response.Write("<td>" + Id + "</td>");
-            //    Response.Write("<td>" + headline + "</td>");
-            //    Response.Write("<td>" + summary + "</td>");
-            //    Response.Write("</tr>");
+            //頁面呈現內容在這
+            while ((rowNo < PageSize) && (NowPageCount < RecordCount))
+            {
+                DataRow dr = dt.Rows[index]; // Get the current row from the dataset
+                int Id = Convert.ToInt32(dr["Id"]); // Assuming 'Id' is an integer column
+                string headline = dr["headline"].ToString(); // Assuming 'Title' is a string column
+                string summary = dr["summary"].ToString(); // Assuming 'Content' is a string column
 
-            //    rowNo++; // Increment row number for pagination
-            //    index++; // Move to the next record in the dataset
-            //}
+                // Creating HTML table rows for each record
+                Response.Write("<tr>");
+                Response.Write("<td>" + Id + "</td>");
+                Response.Write("<td>" + headline + "</td>");
+                Response.Write("<td>" + summary + "</td>");
+                Response.Write("</tr>");
+
+                rowNo++; // Increment row number for pagination
+                index++; // Move to the next record in the dataset
+            }
 
             //Response.Write("</table>");
+            sb.Append("</table>");
 
             //顯示上一頁下一頁
             if (Pages > 0)
@@ -147,21 +211,35 @@ namespace yacht
             }
 
             //顯示所有頁數
-            Response.Write("<hr width = '97%' size = 1>");
+            //Response.Write("<hr width = '97%' size = 1>");
+            sb.Append("<hr width='97%' size='1'>");
+
             //Pages 總頁數
             for (int i = 1; i <= Pages; i++)
             {
                 if (p == i)
                 {
                     //列出所在頁數
-                    Response.Write("[" + p + "]&nbsp;&nbsp;");
+                    //Response.Write("[" + p + "]&nbsp;&nbsp;");
+                    sb.Append("[" + p + "]&nbsp;&nbsp;");
                 }
                 else
                 {
                     //列出每頁頁數
-                    Response.Write("<a href = 'newsFront.aspx?p=" + i + "'>" + i + "</a> &nbsp; &nbsp;");
+                    //Response.Write("<a href = 'newsFront.aspx?p=" + i + "'>" + i + "</a> &nbsp; &nbsp;");
+                    sb.Append("<a href='newsFront.aspx?p=" + i + "'>" + i + "</a>&nbsp;&nbsp;");
                 }
             }
+            // 取得 ASP.NET Literal 控制項
+            Literal litPage = (Literal)FindControl("litPage");
+
+            // 檢查 Literal 控制項是否存在
+            if (litPage != null)
+            {
+                // 將 StringBuilder 中的動態生成 HTML 內容指定給 Literal 控制項的 Text 屬性
+                litPage.Text = sb.ToString();
+            }
+
         }
     }
 }
