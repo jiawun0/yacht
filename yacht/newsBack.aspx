@@ -32,7 +32,7 @@
     <br />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="body" runat="server">
-    <asp:Label ID="Label_selectedone" runat="server" Text="<單日新聞編輯>"></asp:Label>
+    <asp:Label ID="Label_selectedone" runat="server" Text="<新聞編輯>"></asp:Label>
     <br />
     <%--<asp:RadioButtonList ID="RadioButtonList1" runat="server" CssClass="auto-style1" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="headline" DataValueField="Id" OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged"></asp:RadioButtonList>--%>
     <%--DataSourceID="SqlDataSource1"--%>
@@ -145,7 +145,7 @@
         </UpdateParameters>
     </asp:SqlDataSource>
     <br />
-    <asp:Label ID="Label_newsContent" runat="server" Text="<單篇新聞稿撰寫>"></asp:Label>
+    <asp:Label ID="Label_newsContent" runat="server" Text="<新聞稿撰寫>"></asp:Label>
     <br />
     <ckeditor:ckeditorcontrol id="CKEditorControl_newsContent" runat="server" basepath="/Scripts/ckeditor/"
         toolbar="Bold|Italic|Underline|Strike|Subscript|Superscript|-|RemoveFormat

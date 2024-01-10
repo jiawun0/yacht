@@ -74,23 +74,23 @@
                     <span>後台管理</span>
                     <!-- 子選單開始 -->
                     <ul class="nav flex-column sub-menu">
-                        <!-- Nav Item - 代理商 -->
+                        <!-- Nav Item - 遊艇 -->
                         <li class="nav-item">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="https://localhost:44310/yachtBack">
                                 <i class="fa-sharp fa-light fa-image"></i>
                                 <span class="fw-bold">遊艇</span>
                             </a>
                         </li>
 
-                        <!-- Nav Item - 影片 -->
+                        <!-- Nav Item - 新聞 -->
                         <li class="nav-item">
-                            <a class="nav-link" href="影片頁面的URL">
+                            <a class="nav-link" href="https://localhost:44310/newsBack">
                                 <i class="fa-sharp fa-light fa-film"></i>
                                 <span class="fw-bold">新聞</span>
                             </a>
                         </li>
 
-                        <!-- Nav Item - Q&A -->
+                        <!-- Nav Item - 公司 -->
                         <li class="nav-item">
                             <a class="nav-link" href="https://localhost:44310/conpanyBack">
                                 <i class="fa-sharp fa-light fa-comments"></i>
@@ -118,17 +118,17 @@
                     <span>前台呈現</span>
                 </div>
 
-                <!-- Nav Item - 相簿 -->
+                <!-- Nav Item - 遊艇 -->
                 <li class="nav-item">
-                    <a class="nav-link" href="相簿頁面的URL">
+                    <a class="nav-link" href="">
                         <i class="fa-sharp fa-light fa-image"></i>
                         <span class="fw-bold">遊艇</span>
                     </a>
                 </li>
 
-                <!-- Nav Item - 影片 -->
+                <!-- Nav Item - 新聞 -->
                 <li class="nav-item">
-                    <a class="nav-link" href="影片頁面的URL">
+                    <a class="nav-link" href="https://localhost:44310/newsFront2">
                         <i class="fa-sharp fa-light fa-film"></i>
                         <span class="fw-bold">新聞</span>
                     </a>
