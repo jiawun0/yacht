@@ -92,23 +92,50 @@
     <br />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="body" runat="server">
-    <asp:Label ID="Label_AlbumPhoto" runat="server" Text="<上傳遊艇照片>"></asp:Label>
+    <asp:Label ID="Label_yachtsPhoto" runat="server" Text="<上傳遊艇照片>"></asp:Label>
     <br />
-    <asp:Label ID="Label_YachtsAlbum" runat="server" Text="選擇遊艇型號 :"></asp:Label>
+    <asp:Label ID="Label_selyachtModel" runat="server" Text="選擇遊艇型號 :"></asp:Label>
     <br />
-    <asp:DropDownList ID="DropDownList_YachtsAlbum" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="yachtModel" DataValueField="Id" OnSelectedIndexChanged="DropDownList_YachtsAlbum_SelectedIndexChanged"></asp:DropDownList>
+    <asp:DropDownList ID="DropDownList_yachtModel" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="yachtModel" DataValueField="Id" OnSelectedIndexChanged="DropDownList_yachtModel_SelectedIndexChanged"></asp:DropDownList>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectYachts %>" SelectCommand="SELECT * FROM [Yachts]"></asp:SqlDataSource>
     <br />
-    <asp:Label ID="Label_YachtsPhoto" runat="server" Text="照片上傳 :"></asp:Label>
+    <asp:Label ID="Label_YachtsPhotoup" runat="server" Text="照片上傳 :"></asp:Label>
     <br />
     <asp:FileUpload ID="FileUpload_YachtsPhoto" runat="server" />
     <br />
-    <asp:Button ID="Button_AddPhotoPath" runat="server" Text="新增照片" class="btn btn-outline-primary btn-block mt-3" OnClick="Button_AddPhotoPath_Click" />
+    <asp:Button ID="Button_AddYachtsPhoto" runat="server" Text="新增照片" class="btn btn-outline-primary btn-block mt-3" OnClick="Button_AddYachtsPhoto_Click" />
     <br />
     <asp:Label ID="Label_PhotoList" runat="server" Text="照片列表 :"></asp:Label>
     <br />
-    <asp:RadioButtonList ID="RadioButtonList_PhotoPath" runat="server" AutoPostBack="True" OnSelectedIndexChanged="RadioButtonList_PhotoPath_SelectedIndexChanged" DataSourceID="SqlDataSource3" DataTextField="YachtId" DataValueField="Id"></asp:RadioButtonList>
-    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectYachtAlbum %>" SelectCommand="SELECT * FROM [YachtsAlbum]"></asp:SqlDataSource>
-    <br />
-    <asp:Button ID="Button_DelPhotoPath" runat="server" Text="刪除照片" class="btn btn-outline-primary btn-block mt-3" OnClick="Button_DelPhotoPath_Click" />
-</asp:Content>
+    <asp:GridView ID="GridView_YachtsPhoto" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowDeleting="GridView_YachtsPhoto_RowDeleting">
+        <Columns>
+            <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id"></asp:BoundField>
+            <asp:BoundField DataField="PhotoPath" HeaderText="PhotoPath" SortExpression="PhotoPath"></asp:BoundField>
+            <asp:BoundField DataField="CreatTime" HeaderText="CreatTime" SortExpression="CreatTime"></asp:BoundField>
+            <asp:BoundField DataField="YachtsId" HeaderText="YachtsId" SortExpression="YachtsId"></asp:BoundField>
+            <asp:CommandField ButtonType="Button" ShowDeleteButton="True"></asp:CommandField>
+        </Columns>
+    </asp:GridView>
+    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectYachtsPhoto %>" DeleteCommand="DELETE FROM [YachtsPhoto] WHERE [Id] = @Id" InsertCommand="INSERT INTO [YachtsPhoto] ([PhotoName], [PhotoDescription], [PhotoPath], [IsCover], [CreatTime], [YachtsId]) VALUES (@PhotoName, @PhotoDescription, @PhotoPath, @IsCover, @CreatTime, @YachtsId)" SelectCommand="SELECT * FROM [YachtsPhoto]" UpdateCommand="UPDATE [YachtsPhoto] SET [PhotoName] = @PhotoName, [PhotoDescription] = @PhotoDescription, [PhotoPath] = @PhotoPath, [IsCover] = @IsCover, [CreatTime] = @CreatTime, [YachtsId] = @YachtsId WHERE [Id] = @Id">
+        <DeleteParameters>
+            <asp:Parameter Name="Id" Type="Int32" />
+        </DeleteParameters>
+        <InsertParameters>
+            <asp:Parameter Name="PhotoName" Type="String" />
+            <asp:Parameter Name="PhotoDescription" Type="String" />
+            <asp:Parameter Name="PhotoPath" Type="String" />
+            <asp:Parameter Name="IsCover" Type="Boolean" />
+            <asp:Parameter Name="CreatTime" Type="DateTime" />
+            <asp:Parameter Name="YachtsId" Type="Int32" />
+        </InsertParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="PhotoName" Type="String" />
+            <asp:Parameter Name="PhotoDescription" Type="String" />
+            <asp:Parameter Name="PhotoPath" Type="String" />
+            <asp:Parameter Name="IsCover" Type="Boolean" />
+            <asp:Parameter Name="CreatTime" Type="DateTime" />
+            <asp:Parameter Name="YachtsId" Type="Int32" />
+            <asp:Parameter Name="Id" Type="Int32" />
+        </UpdateParameters>
+    </asp:SqlDataSource>
+    </asp:Content>

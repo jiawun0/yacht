@@ -114,31 +114,31 @@ namespace yacht
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource2;
 
         /// <summary>
-        /// Label_AlbumPhoto 控制項。
+        /// Label_yachtsPhoto 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_AlbumPhoto;
+        protected global::System.Web.UI.WebControls.Label Label_yachtsPhoto;
 
         /// <summary>
-        /// Label_YachtsAlbum 控制項。
+        /// Label_selyachtModel 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_YachtsAlbum;
+        protected global::System.Web.UI.WebControls.Label Label_selyachtModel;
 
         /// <summary>
-        /// DropDownList_YachtsAlbum 控制項。
+        /// DropDownList_yachtModel 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList_YachtsAlbum;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_yachtModel;
 
         /// <summary>
         /// SqlDataSource1 控制項。
@@ -150,13 +150,13 @@ namespace yacht
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
 
         /// <summary>
-        /// Label_YachtsPhoto 控制項。
+        /// Label_YachtsPhotoup 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_YachtsPhoto;
+        protected global::System.Web.UI.WebControls.Label Label_YachtsPhotoup;
 
         /// <summary>
         /// FileUpload_YachtsPhoto 控制項。
@@ -168,13 +168,13 @@ namespace yacht
         protected global::System.Web.UI.WebControls.FileUpload FileUpload_YachtsPhoto;
 
         /// <summary>
-        /// Button_AddPhotoPath 控制項。
+        /// Button_AddYachtsPhoto 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_AddPhotoPath;
+        protected global::System.Web.UI.WebControls.Button Button_AddYachtsPhoto;
 
         /// <summary>
         /// Label_PhotoList 控制項。
@@ -186,13 +186,13 @@ namespace yacht
         protected global::System.Web.UI.WebControls.Label Label_PhotoList;
 
         /// <summary>
-        /// RadioButtonList_PhotoPath 控制項。
+        /// GridView_YachtsPhoto 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RadioButtonList_PhotoPath;
+        protected global::System.Web.UI.WebControls.GridView GridView_YachtsPhoto;
 
         /// <summary>
         /// SqlDataSource3 控制項。
@@ -202,14 +202,5 @@ namespace yacht
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource3;
-
-        /// <summary>
-        /// Button_DelPhotoPath 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_DelPhotoPath;
     }
 }
