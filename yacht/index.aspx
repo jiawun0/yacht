@@ -85,14 +85,16 @@
             <div>
                 <%--<!--遮罩-->
                 <div class="bannermasks">
-                    <img src="images/banner00_masks.png" alt="&quot;&quot;" /></div>
-                <!--遮罩結束-->--%>
+                    <img src="images/banner00_masks.png" alt="&quot;&quot;" /></div>--%>
+                <!--遮罩結束-->
 
                 <!--------------------------------換圖開始---------------------------------------------------->
                 <div id="abgne-block-20110111">
                     <div class="bd">
-                        <div class="banner">
-
+                        <div class="banner" style='border-radius: 5px; height: 424px; width: 978px;'>
+                            <%--<ul>
+                                <asp:Literal ID="Literal_banner" runat="server"></asp:Literal>
+                            </ul>--%>
                             <ul>
                                 <li class="info on"><a href="#">
                                     <img src="images/banner001b.jpg" /></a><!--文字開始--><div class="wordtitle">TAYANA <span>48</span><br />
@@ -138,42 +140,52 @@
 
 
                             <!--小圖開始-->
-                            <div class="bannerimg title">
+                            <div class="bannerimg title" <%--style="display: none"--%>>
+
+                                <%-- <ul>
+                                    <asp:Literal ID="Literal_bannerNum" runat="server"></asp:Literal>
+                                </ul>--%>
                                 <ul>
                                     <li class="on">
                                         <div>
                                             <p class="bannerimg_p">
-                                                <img src="images/i001.jpg" alt="&quot;&quot;" /></p>
+                                                <img src="images/i001.jpg" alt="&quot;&quot;" />
+                                            </p>
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <p class="bannerimg_p">
-                                                <img src="images/i002.jpg" alt="&quot;&quot;" /></p>
+                                                <img src="images/i002.jpg" alt="&quot;&quot;" />
+                                            </p>
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <p class="bannerimg_p">
-                                                <img src="images/i003.jpg" alt="&quot;&quot;" /></p>
+                                                <img src="images/i003.jpg" alt="&quot;&quot;" />
+                                            </p>
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <p class="bannerimg_p">
-                                                <img src="images/i004.jpg" alt="&quot;&quot;" /></p>
+                                                <img src="images/i004.jpg" alt="&quot;&quot;" />
+                                            </p>
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <p class="bannerimg_p">
-                                                <img src="images/i005.jpg" alt="&quot;&quot;" /></p>
+                                                <img src="images/i005.jpg" alt="&quot;&quot;" />
+                                            </p>
                                         </div>
                                     </li>
                                     <li>
                                         <div>
                                             <p class="bannerimg_p">
-                                                <img src="images/i006.jpg" alt="&quot;&quot;" /></p>
+                                                <img src="images/i006.jpg" alt="&quot;&quot;" />
+                                            </p>
                                         </div>
                                     </li>
                                 </ul>
@@ -189,7 +201,8 @@
                 <div class="news">
                     <div class="newstitle">
                         <p class="newstitlep1">
-                            <img src="images/news.gif" alt="news" /></p>
+                            <img src="images/news.gif" alt="news" />
+                        </p>
                         <p class="newstitlep2"><a href="#">More>></a></p>
                     </div>
 
@@ -200,11 +213,13 @@
                             <div class="news01">
                                 <!--TOP標籤-->
                                 <div class="newstop">
-                                    <img src="images/new_top01.png" alt="&quot;&quot;" /></div>
+                                    <img src="images/new_top01.png" alt="&quot;&quot;" />
+                                </div>
                                 <!--TOP標籤結束-->
                                 <div class="news02p1">
                                     <p class="news02p1img">
-                                        <img src="images/pit002.jpg" alt="&quot;&quot;" /></p>
+                                        <img src="images/pit002.jpg" alt="&quot;&quot;" />
+                                    </p>
                                 </div>
                                 <p class="news02p2"><span>Tayana 54 CE Certifica..</span> <a href="#">For Tayana 54 entering the EU, CE Certificates are AVAILABLE to ensure conformity to all applicable European ...</a></p>
                             </div>
@@ -217,11 +232,13 @@
                             <div class="news01">
                                 <!--TOP標籤-->
                                 <div class="newstop">
-                                    <img src="images/new_top01.png" alt="&quot;&quot;" /></div>
+                                    <img src="images/new_top01.png" alt="&quot;&quot;" />
+                                </div>
                                 <!--TOP標籤結束-->
                                 <div class="news02p1">
                                     <p class="news02p1img">
-                                        <img src="images/pit001.jpg" alt="&quot;&quot;" /></p>
+                                        <img src="images/pit001.jpg" alt="&quot;&quot;" />
+                                    </p>
                                 </div>
                                 <p class="news02p2">
                                     <span>Tayana 58 CE Certifica..</span>
@@ -235,11 +252,13 @@
                             <div class="news02">
                                 <!--TOP標籤-->
                                 <div class="newstop">
-                                    <img src="images/new_top01.png" alt="&quot;&quot;" /></div>
+                                    <img src="images/new_top01.png" alt="&quot;&quot;" />
+                                </div>
                                 <!--TOP標籤結束-->
                                 <div class="news02p1">
                                     <p class="news02p1img">
-                                        <img src="images/pit001.jpg" alt="&quot;&quot;" /></p>
+                                        <img src="images/pit001.jpg" alt="&quot;&quot;" />
+                                    </p>
                                 </div>
                                 <p class="news02p2">
                                     <span>Big Cruiser in a Small ..</span>

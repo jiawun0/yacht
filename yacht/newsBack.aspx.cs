@@ -54,58 +54,56 @@ namespace yacht
             }
         }
 
-        //顯示新聞詳情，綁定DetailsView
-        private void loadDayNewsHeadline()
+        //新增新聞
+        protected void Button_addHeadline_Click(object sender, EventArgs e)
         {
-            // 取得日曆選取日期，如果未選擇日期，則預設為今天日期
-            //DateTime selectedDate = DateTime.Now;
-            //string selNewsDate = TextBox_Date.Text;
+            //產生 GUID 隨機碼 + 時間2位秒數 (加強避免重複)
+            DateTime nowTime = DateTime.Now;
+            string nowSec = nowTime.ToString("ff");
+            string guid = Guid.NewGuid().ToString().Trim() + nowSec;
 
-            //string selNewsDate = "";
+            //取得日曆選取日期
+            // 檢查TextBox中是否有選擇日期
+            //string selNewsDate = TextBox_Date.Text.ToString();
+            string selNewsDate = "";
+            if (DateTime.TryParse(TextBox_Date.Text, out DateTime selectedDate))
+            {
+                selNewsDate = selectedDate.ToString("yyyy-MM-dd");
+            }
 
-            //// 檢查TextBox中是否有選擇日期
-            //if (DateTime.TryParse(TextBox_Date.Text, out DateTime selectedDate))
-            //{
-            //    selNewsDate = selectedDate.ToString("yyyy-MM-dd");
-            //}
+            //取得是否勾選
+            string isTop = CheckBox_IsTop.Checked.ToString();
 
-            // 获取 RadioButtonList1 中选定的日期
-            //string selNewsDate = "";
+            //取得照片路徑
+            string FileName = Path.GetFileName(FileUpload_thumbnailPath.FileName);
+            string saveDirectory = Server.MapPath("~/Album/");
+            string savePath = Path.Combine(saveDirectory, FileName);
+            FileUpload_thumbnailPath.SaveAs(savePath);
 
-            // 從 Session 變量中檢索選擇的日期
-            //Session["SelectedDate"] = TextBox_Date.Text;
-            //selectedDate = Session["SelectedDate"] as string;
-
-            //依下拉選單選取日期的值 (id) 
-            //string selHeadline_id = "";
-            string selHeadline_id = DropDownList_Headline.SelectedValue;
-
-            //依選取日期取得資料庫新聞內容
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
-            //string sql = "SELECT * FROM news WHERE dateTitle = @dateTitle ORDER BY Id asc ";
-            string sql = "SELECT * FROM news WHERE Id = @Id ";
+            string sql = "INSERT INTO news (dateTitle, headline, guid, isTop, summary, thumbnailPath) VALUES (@dateTitle, @headline, @guid, @isTop, @summary, @thumbnailPath) ";
             SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@Id", selHeadline_id);
+            command.Parameters.AddWithValue("@dateTitle", selNewsDate);
+            command.Parameters.AddWithValue("@headline", TextBox_Headline.Text);
+            command.Parameters.AddWithValue("@guid", guid);
+            command.Parameters.AddWithValue("@isTop", isTop);
+            command.Parameters.AddWithValue("@summary", TextBox_summary.Text);
+            command.Parameters.AddWithValue("@thumbnailPath", savePath);
+
             connection.Open();
-
-            SqlDataReader reader = command.ExecuteReader();
-
-            if (reader.HasRows)
-            {
-                DetailsView_news.DataSource = reader;
-                DetailsView_news.DataBind();
-            }
-            else
-            {
-                // 如果沒有匹配的記錄，清空
-                DetailsView_news.DataSource = null;
-                DetailsView_news.DataBind();
-            }
-
-            // 重新繫結 DropDownList，DDL上面也有連
-            //DropDownList_Headline.DataBind();
-
+            command.ExecuteNonQuery();
             connection.Close();
+
+            //渲染畫面
+            loadDayNewsHeadline();
+
+            //新增進DDL
+            DropDownList_Headline.DataBind();
+
+            //清空輸入欄位
+            TextBox_Date.Text = "";
+            TextBox_Headline.Text = "";
+            TextBox_summary.Text = "";
         }
 
         //顯示單日新聞篇章DDL(會全部顯示)
@@ -160,56 +158,59 @@ namespace yacht
             connection.Close();
         }
 
-        protected void Button_addHeadline_Click(object sender, EventArgs e)
+        //顯示新聞詳情，綁定DetailsView
+        private void loadDayNewsHeadline()
         {
-            //產生 GUID 隨機碼 + 時間2位秒數 (加強避免重複)
-            DateTime nowTime = DateTime.Now;
-            string nowSec = nowTime.ToString("ff");
-            string guid = Guid.NewGuid().ToString().Trim() + nowSec;
+            // 取得日曆選取日期，如果未選擇日期，則預設為今天日期
+            //DateTime selectedDate = DateTime.Now;
+            //string selNewsDate = TextBox_Date.Text;
 
-            //取得日曆選取日期
-            // 檢查TextBox中是否有選擇日期
-            //string selNewsDate = TextBox_Date.Text.ToString();
-            string selNewsDate = "";
-            if (DateTime.TryParse(TextBox_Date.Text, out DateTime selectedDate))
+            //string selNewsDate = "";
+
+            //// 檢查TextBox中是否有選擇日期
+            //if (DateTime.TryParse(TextBox_Date.Text, out DateTime selectedDate))
+            //{
+            //    selNewsDate = selectedDate.ToString("yyyy-MM-dd");
+            //}
+
+            // 获取 RadioButtonList1 中选定的日期
+            //string selNewsDate = "";
+
+            // 從 Session 變量中檢索選擇的日期
+            //Session["SelectedDate"] = TextBox_Date.Text;
+            //selectedDate = Session["SelectedDate"] as string;
+
+            //依下拉選單選取日期的值 (id) 
+            //string selHeadline_id = "";
+            string selHeadline_id = DropDownList_Headline.SelectedValue;
+
+            //依選取日期取得資料庫新聞內容
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
+            //string sql = "SELECT * FROM news WHERE dateTitle = @dateTitle ORDER BY Id asc ";
+            string sql = "SELECT * FROM news WHERE Id = @Id ";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@Id", selHeadline_id);
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows)
             {
-                selNewsDate = selectedDate.ToString("yyyy-MM-dd");
+                DetailsView_news.DataSource = reader;
+                DetailsView_news.DataBind();
+            }
+            else
+            {
+                // 如果沒有匹配的記錄，清空
+                DetailsView_news.DataSource = null;
+                DetailsView_news.DataBind();
             }
 
-            //取得是否勾選
-            string isTop = CheckBox_IsTop.Checked.ToString();
+            // 重新繫結 DropDownList，DDL上面也有連
+            //DropDownList_Headline.DataBind();
 
-            //取得照片路徑
-            string FileName = Path.GetFileName(FileUpload_thumbnailPath.FileName);
-            string saveDirectory = Server.MapPath("~/Album/");
-            string savePath = Path.Combine(saveDirectory, FileName);
-            FileUpload_thumbnailPath.SaveAs(savePath);
-
-            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString);
-            string sql = "INSERT INTO news (dateTitle, headline, guid, isTop, summary, thumbnailPath) VALUES (@dateTitle, @headline, @guid, @isTop, @summary, @thumbnailPath) ";
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@dateTitle", selNewsDate);
-            command.Parameters.AddWithValue("@headline", TextBox_Headline.Text);
-            command.Parameters.AddWithValue("@guid", guid);
-            command.Parameters.AddWithValue("@isTop", isTop);
-            command.Parameters.AddWithValue("@summary", TextBox_summary.Text);
-            command.Parameters.AddWithValue("@thumbnailPath", savePath);
-
-            connection.Open();
-            command.ExecuteNonQuery();
             connection.Close();
-
-            //渲染畫面
-            loadDayNewsHeadline();
-
-            //新增進DDL
-            DropDownList_Headline.DataBind();
-
-            //清空輸入欄位
-            TextBox_Date.Text = "";
-            TextBox_Headline.Text = "";
-            TextBox_summary.Text = "";
-        }
+        } 
 
         //當TextBox選擇日期改變時刷新畫面資料(本次最重要功能)
         protected void TextBox_Date_TextChanged(object sender, EventArgs e)
