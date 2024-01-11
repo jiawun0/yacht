@@ -54,7 +54,7 @@ namespace yacht
             }
         }
 
-        //顯示DetailsView
+        //顯示新聞DetailsView
         private void loadDayNewsHeadline()
         {
             // 取得日曆選取日期，如果未選擇日期，則預設為今天日期
