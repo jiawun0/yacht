@@ -191,6 +191,7 @@ namespace yacht
         //DDL連動yachtModel，同時連動YachtsPhoto
         protected void DropDownList_yachtModel_SelectedIndexChanged(object sender, EventArgs e)
         { 
+            //選擇後想出現的東西
             loadPhotoList();
         }
 

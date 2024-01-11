@@ -853,6 +853,7 @@
     <Content Include="images\aboutus.jpg" />
     <Content Include="images\Thumbs.db" />
     <Content Include="Back.Master" />
+    <Content Include="index.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="New.Master" />
     <Content Include="CheckAccount.ashx" />
@@ -1456,6 +1457,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
