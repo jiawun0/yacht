@@ -150,7 +150,7 @@ namespace yacht
             SqlCommand sqlCommand = new SqlCommand();
             sqlCommand.Connection = connection;
 
-            string sql = "SELECT TOP 3 dateTitle, headline, isTop, thumbnailPath FROM news ORDER BY Id DESC ";
+            string sql = "SELECT TOP 3 dateTitle, headline, guid, isTop, thumbnailPath FROM news ORDER BY Id DESC ";
             //將準備的SQL指令給操作物件
             sqlCommand.CommandText = sql;
 
@@ -161,6 +161,7 @@ namespace yacht
             {
                 string dateTitle = reader["dateTitle"].ToString();
                 string headline = reader["headline"].ToString();
+                string guid = reader["guid"].ToString();
                 string thumbnailPath = reader["thumbnailPath"].ToString();
 
                 // Assuming your web application is in the root directory
@@ -186,7 +187,7 @@ namespace yacht
 
                 NewsHtml.Append("<p class='news02p2'>");
                 NewsHtml.Append("<span>" + dateTitle + "</span>");
-                NewsHtml.Append("<a href='#'>" + headline + "</a>");
+                NewsHtml.Append("<a href='newsFrontdetail.aspx?guid=" + guid + "'>" + headline + "</a>");
                 NewsHtml.Append("</p>");
 
                 NewsHtml.Append("</div>");

@@ -203,7 +203,7 @@
                         <p class="newstitlep1">
                             <img src="images/news.gif" alt="news" />
                         </p>
-                        <p class="newstitlep2"><a href="#">More>></a></p>
+                        <p class="newstitlep2"><a href="https://localhost:44310/newsFront2">More>></a></p>
                     </div>
                     <ul>
                         <asp:Literal ID="Literal_News" runat="server"></asp:Literal>
