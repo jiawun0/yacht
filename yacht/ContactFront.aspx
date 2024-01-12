@@ -58,14 +58,14 @@
             <div class="left1">
                 <p><span>CONTACT</span></p>
                 <ul>
-                    <li><a href="#">contacts</a></li>
+                    <li><a href="/contactFront">contacts</a></li>
                 </ul>
             </div>
         </div>
         <!--------------------------------左邊選單結束---------------------------------------------------->
 
         <!--------------------------------右邊選單開始---------------------------------------------------->
-        <div id="crumb"><a href="#">Home</a> >> <a href="#"><span class="on1">Contact</span></a></div>
+        <div id="crumb"><a href="/index">Home</a> >> <a href="/contactFront"><span class="on1">Contact</span></a></div>
         <div class="right">
             <div class="right1">
                 <div class="title"><span>Contact</span></div>

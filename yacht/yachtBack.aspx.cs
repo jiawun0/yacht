@@ -16,8 +16,33 @@ namespace yacht
         {
             if (!IsPostBack)
             {
-                loadyachtModel();
-                loadPhotoList();
+                //loadyachtModel();
+                //loadPhotoList();
+
+                if (Session["LoginId"] != null)
+                {
+                    string loginId = Session["LoginId"].ToString();
+                    bool isManger = (Session["isManger"] != null) ? (bool)Session["isManger"] : false;
+
+                    if (loginId != null && isManger)
+                    {
+                        //顯示登入者
+                        string name = Showusername(loginId);
+                        Literal_name.Text = "歡迎, " + name + "!";
+                        loadyachtModel();
+                        loadPhotoList();
+                    }
+                    else
+                    {
+                        //非IsManger，請重新登入
+                        Response.Redirect("Login.aspx");
+                    }
+                }
+                else
+                {
+                    //尚未登入，請登入
+                    Response.Redirect("Login.aspx");
+                }
             }
         }
 
@@ -302,6 +327,37 @@ namespace yacht
             //DropDownList_yachtModel.DataBind();
 
             loadPhotoList();
+        }
+
+        //顯示登入者
+        string Showusername(string LoginId)
+        {
+            string name = "";
+
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectcountry"].ConnectionString);
+            if (connection.State != System.Data.ConnectionState.Open)
+            {
+                connection.Open();
+            }
+
+            string sql = "select name from Login where Id = @LoginId";
+
+            SqlCommand sqlCommand = new SqlCommand(sql, connection);
+            sqlCommand.Parameters.AddWithValue("@LoginId", LoginId);
+
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    name = reader["name"].ToString();
+                    break;
+                }
+            }
+
+            connection.Close();
+
+            return name;
         }
 
         //使用相對路徑顯示photo

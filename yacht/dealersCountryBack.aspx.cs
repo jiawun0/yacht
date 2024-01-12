@@ -19,37 +19,39 @@ namespace yacht
         {
             if (!IsPostBack)
             {
-                //先綁定取得選取預設值:國家
-                DropDownList1.DataBind();
-                showDealerList();
+                ////先綁定取得選取預設值:國家
+                //DropDownList1.DataBind();
+                //showDealerList();
+                //loadCountry();
+                //loadDealers();
 
-                //if (Session["LoginId"] != null)
-                //{
-                //    string loginId = Session["LoginId"].ToString();
-                //    bool isManger = (Session["isManger"] != null) ? (bool)Session["isManger"] : false;
+                if (Session["LoginId"] != null)
+                {
+                    string loginId = Session["LoginId"].ToString();
+                    bool isManger = (Session["isManger"] != null) ? (bool)Session["isManger"] : false;
 
-                //    if (loginId != null && isManger)
-                //    {
-                //        //顯示登入者
-                //        string name = Showusername(loginId);
-                //        Literal_name.Text = "歡迎, " + name + "!";
-                //        ShowDB();
-                //        ShowDB2();
-                //    }
-                //    else
-                //    {
-                //        //非IsManger，請重新登入
-                //        Response.Redirect("Login.aspx");
-                //    }
-                //}
-                //else
-                //{
-                //    //尚未登入，請登入
-                //    Response.Redirect("Login.aspx");
-                //}
-                ShowDB();
-                ShowDB2();
-
+                    if (loginId != null && isManger)
+                    {
+                        //顯示登入者
+                        string name = Showusername(loginId);
+                        Literal_name.Text = "歡迎, " + name + "!";
+                        //先綁定取得選取預設值:國家
+                        DropDownList1.DataBind();
+                        showDealerList();
+                        loadCountry();
+                        loadDealers();
+                    }
+                    else
+                    {
+                        //非IsManger，請重新登入
+                        Response.Redirect("Login.aspx");
+                    }
+                }
+                else
+                {
+                    //尚未登入，請登入
+                    Response.Redirect("Login.aspx");
+                }
             }
         }
 
@@ -82,11 +84,11 @@ namespace yacht
             TextBox_country.Text = "";
 
             //Response.Redirect("dealersCountryBack.aspx");
-            ShowDB();
+            loadCountry();
         }
 
         //顯示目前國家
-        void ShowDB()
+        void loadCountry()
         {
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectcountry"].ConnectionString);
 
@@ -148,7 +150,7 @@ namespace yacht
         protected void GridView_country_RowEditing(object sender, GridViewEditEventArgs e)
         {
             GridView_country.EditIndex = e.NewEditIndex;
-            ShowDB();
+            loadCountry();
         }
 
         protected void GridView_country_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -182,7 +184,7 @@ namespace yacht
 
             Response.Write("<script>alert('更新成功');</script>");
             GridView_country.EditIndex = -1;
-            ShowDB();
+            loadCountry();
         }
 
         protected void GridView_country_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -208,13 +210,13 @@ namespace yacht
             // 重新繫結 DropDownList1
             DropDownList1.DataBind();
 
-            ShowDB();
+            loadCountry();
         }
 
         protected void GridView_country_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             GridView_country.EditIndex = -1;
-            ShowDB();
+            loadCountry();
         }
 
         //如果gridview國家刪除時可以同步刷新DDL
@@ -296,7 +298,7 @@ namespace yacht
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridView_area.DataBind();
-            ShowDB2();
+            loadDealers();
         }
 
         //增加區域
@@ -363,7 +365,7 @@ namespace yacht
                         // 新增成功
                         RadioButtonList1.Items.Clear(); // 清除舊資料
                         showDealerList(); // 重新讀取資料
-                        ShowDB2();
+                        loadDealers();
 
                         // 清空輸入欄位
                         TextBox_area.Text = "";
@@ -390,7 +392,7 @@ namespace yacht
         }
 
         //顯示目前區域
-        void ShowDB2()
+        void loadDealers()
         {
             //依下拉選單選取國家的值 (id) 取得地區分類
             //string selCountry_id = "1";
@@ -420,7 +422,7 @@ namespace yacht
         protected void GridView_arealist_RowEditing(object sender, GridViewEditEventArgs e)
         {
             GridView_arealist.EditIndex = e.NewEditIndex;
-            ShowDB2();
+            loadDealers();
 
             //GridViewRow row = GridView_arealist.Rows[e.NewEditIndex];
             //if (GridView_arealist.EditIndex == e.NewEditIndex)
@@ -510,7 +512,7 @@ namespace yacht
 
             Response.Write("<script>alert('更新成功');</script>");
             GridView_arealist.EditIndex = -1;
-            ShowDB2();
+            loadDealers();
         }
 
         protected void GridView_arealist_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -533,13 +535,13 @@ namespace yacht
 
             Response.Write("<script>alert('刪除成功');</script>");
 
-            ShowDB2();
+            loadDealers();
         }
 
         protected void GridView_arealist_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             GridView_arealist.EditIndex = -1;
-            ShowDB2();
+            loadDealers();
         }
     }
 }

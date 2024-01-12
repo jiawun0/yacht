@@ -32,8 +32,6 @@
         <Columns>
             <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
             <asp:BoundField DataField="account" HeaderText="account" SortExpression="account" />
-            <asp:BoundField DataField="password" HeaderText="password" SortExpression="password" />
-            <asp:BoundField DataField="salt" HeaderText="salt" SortExpression="salt" />
             <asp:BoundField DataField="email" HeaderText="email" SortExpression="email" />
             <asp:BoundField DataField="name" HeaderText="name" SortExpression="name" />
             <asp:CheckBoxField DataField="isManger" HeaderText="isManger" SortExpression="isManger" />

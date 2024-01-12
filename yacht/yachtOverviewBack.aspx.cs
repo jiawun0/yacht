@@ -20,32 +20,31 @@ namespace yacht
                 fileBrowser.BasePath = "/ckfinder";
                 fileBrowser.SetupCKEditor(CKEditorControl_overviewContent);
 
-                loadDimension();
+                //loadDimension();
 
-                //if (Session["LoginId"] != null)
-                //{
-                //    string loginId = Session["LoginId"].ToString();
-                //    bool isManger = (Session["isManger"] != null) ? (bool)Session["isManger"] : false;
+                if (Session["LoginId"] != null)
+                {
+                    string loginId = Session["LoginId"].ToString();
+                    bool isManger = (Session["isManger"] != null) ? (bool)Session["isManger"] : false;
 
-                //    if (loginId != null && isManger)
-                //    {
-                //        //顯示登入者
-                //        string name = Showusername(loginId);
-                //        Literal_name.Text = "歡迎, " + name + "!";
-                //        loadCkeditorContent();
-                //        loadCertificatContent();
-                //    }
-                //    else
-                //    {
-                //        //非IsManger，請重新登入
-                //        Response.Redirect("Login.aspx");
-                //    }
-                //}
-                //else
-                //{
-                //    //尚未登入，請登入
-                //    Response.Redirect("Login.aspx");
-                //}
+                    if (loginId != null && isManger)
+                    {
+                        //顯示登入者
+                        string name = Showusername(loginId);
+                        Literal_name.Text = "歡迎, " + name + "!";
+                        loadDimension();
+                    }
+                    else
+                    {
+                        //非IsManger，請重新登入
+                        Response.Redirect("Login.aspx");
+                    }
+                }
+                else
+                {
+                    //尚未登入，請登入
+                    Response.Redirect("Login.aspx");
+                }
             }
         }
 
@@ -58,11 +57,14 @@ namespace yacht
             //選取DDL後連到Ckeditor
             loadCkeditorContent();
         }
+
+        //新增圖片
         protected void Button_upDimensionsImgPath_Click(object sender, EventArgs e)
         {
 
         }
 
+        //新增附件
         protected void Button_download_Click(object sender, EventArgs e)
         {
 
@@ -97,6 +99,7 @@ namespace yacht
             connection.Close();
         }
 
+        //新增Dimension
         protected void Button_addDimension_Click(object sender, EventArgs e)
         {
 

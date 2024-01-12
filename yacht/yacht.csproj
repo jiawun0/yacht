@@ -857,6 +857,7 @@
     <Content Include="Back.Master" />
     <Content Include="index.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="Logout.aspx" />
     <Content Include="New.Master" />
     <Content Include="CheckAccount.ashx" />
     <Content Include="newsBack.aspx" />
@@ -1475,6 +1476,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="New.Master.cs">
       <DependentUpon>New.Master</DependentUpon>

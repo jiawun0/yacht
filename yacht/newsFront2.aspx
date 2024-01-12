@@ -43,16 +43,21 @@
     <form id="form1" runat="server">
         <div class="contain">
             <div class="sub">
-                <p><a href="index.htm">Home</a></p>
+                <p><a href="/index">Home</a></p>
             </div>
             <!--------------------------------選單開始---------------------------------------------------->
             <div class="menu">
                 <ul>
-                    <li class="menuli01"><a href="#">Yachts</a></li>
-                    <li class="menuli02"><a href="#">NEWS</a></li>
-                    <li class="menuli03"><a href="https://localhost:44310/conpanyFront">COMPANY</a></li>
-                    <li class="menuli04"><a href="https://localhost:44310/dealersFront">DEALERS</a></li>
-                    <li class="menuli05"><a href="/contactFront" class="button-link">CONTACT</a></li>
+                    <li class="menuli01"><a href="/yachtOverviewFront">
+                        <img src="images/mmmmeeeee.gif" alt="&quot;&quot;" />Yachts</a></li>
+                    <li class="menuli02"><a href="/newsFront2">
+                        <img src="images/mmmmeeeee.gif" alt="&quot;&quot;" />NEWS</a></li>
+                    <li class="menuli03"><a href="/conpanyFront">
+                        <img src="images/mmmmeeeee.gif" alt="&quot;&quot;" />COMPANY</a></li>
+                    <li class="menuli04"><a href="/dealersFront">
+                        <img src="images/mmmmeeeee.gif" alt="&quot;&quot;" />DEALERS</a></li>
+                    <li class="menuli05"><a href="/contactFront">
+                        <img src="images/mmmmeeeee.gif" alt="&quot;&quot;" />CONTACT</a></li>
                 </ul>
             </div>
             <!--------------------------------選單開始結束---------------------------------------------------->

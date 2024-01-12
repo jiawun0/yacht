@@ -70,7 +70,7 @@
         <!--------------------------------左邊選單結束---------------------------------------------------->
 
         <!--------------------------------右邊選單開始---------------------------------------------------->
-        <div id="crumb"><a href="#">Home</a> >> <a href="#">Dealers </a>>> <a href="#"><span class="on1" id ="LabLink" runat="server" >USA</span></a></div>
+        <div id="crumb"><a href="/index">Home</a> >> <a href="/dealersFront">Dealers </a>>> <a href="#"><span class="on1" id ="LabLink" runat="server" >USA</span></a></div>
         <div class="right">
             <div class="right1">
                 <div class="title"><span id ="LitTitle" runat="server" >USA</span></div>

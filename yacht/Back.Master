@@ -47,9 +47,9 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ms-auto">
-                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="https://localhost:44310/index">首頁</a></li>
-                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="https://localhost:44310/Login">登入</a></li>
-                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="Logout.aspx">登出</a></li>
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/index">首頁</a></li>
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/Login">登入</a></li>
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/Logout">登出</a></li>
                         </ul>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
             <!-- Sidebar -->
             <ul class="navbar-nav bg-black sidebar sidebar-dark" id="accordionSidebar">
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/index">
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fa-sharp fa-light fa-circle-user"></i>
                     </div>
@@ -80,7 +80,7 @@
                     <ul class="nav flex-column sub-menu">
                         <!-- Nav Item - 遊艇 -->
                         <li class="nav-item">
-                            <a class="nav-link" href="https://localhost:44310/yachtBack">
+                            <a class="nav-link" href="/yachtBack">
                                 <i class="fa-sharp fa-light fa-image"></i>
                                 <span class="fw-bold">遊艇</span>
                             </a>
@@ -88,7 +88,7 @@
 
                         <!-- Nav Item - 新聞 -->
                         <li class="nav-item">
-                            <a class="nav-link" href="https://localhost:44310/newsBack">
+                            <a class="nav-link" href="/newsBack">
                                 <i class="fa-sharp fa-light fa-film"></i>
                                 <span class="fw-bold">新聞</span>
                             </a>
@@ -96,7 +96,7 @@
 
                         <!-- Nav Item - 公司 -->
                         <li class="nav-item">
-                            <a class="nav-link" href="https://localhost:44310/conpanyBack">
+                            <a class="nav-link" href="/conpanyBack">
                                 <i class="fa-sharp fa-light fa-comments"></i>
                                 <span class="fw-bold">公司</span>
                             </a>
@@ -104,7 +104,7 @@
 
                         <!-- Nav Item - 連結 -->
                         <li class="nav-item">
-                            <a class="nav-link" href="https://localhost:44310/dealersCountryBack">
+                            <a class="nav-link" href="/dealersCountryBack">
                                 <i class="fa-sharp fa-light fa-list"></i>
                                 <span class="fw-bold">代理商</span>
                             </a>
@@ -124,7 +124,7 @@
 
                 <!-- Nav Item - 遊艇 -->
                 <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="/yachtOverviewFront">
                         <i class="fa-sharp fa-light fa-image"></i>
                         <span class="fw-bold">遊艇</span>
                     </a>
@@ -132,7 +132,7 @@
 
                 <!-- Nav Item - 新聞 -->
                 <li class="nav-item">
-                    <a class="nav-link" href="https://localhost:44310/newsFront2">
+                    <a class="nav-link" href="/newsFront2">
                         <i class="fa-sharp fa-light fa-film"></i>
                         <span class="fw-bold">新聞</span>
                     </a>
@@ -140,7 +140,7 @@
 
                 <!-- Nav Item - Q&A -->
                 <li class="nav-item">
-                    <a class="nav-link" href="https://localhost:44310/conpanyFront">
+                    <a class="nav-link" href="/conpanyFront">
                         <i class="fa-sharp fa-light fa-comments"></i>
                         <span class="fw-bold">公司</span>
                     </a>
@@ -148,7 +148,7 @@
 
                 <!-- Nav Item - 連結 -->
                 <li class="nav-item">
-                    <a class="nav-link" href="https://localhost:44310/dealersFront">
+                    <a class="nav-link" href="/dealersFront">
                         <i class="fa-sharp fa-light fa-list"></i>
                         <span class="fw-bold">代理商</span>
                     </a>
@@ -156,7 +156,7 @@
 
                 <!-- Nav Item - 連結 -->
                 <li class="nav-item">
-                    <a class="nav-link" href="https://localhost:44310/contactFront">
+                    <a class="nav-link" href="/contactFront">
                         <i class="fa-sharp fa-light fa-list"></i>
                         <span class="fw-bold">連結</span>
                     </a>
