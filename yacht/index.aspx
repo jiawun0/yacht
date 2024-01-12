@@ -92,10 +92,10 @@
                 <div id="abgne-block-20110111">
                     <div class="bd">
                         <div class="banner" style='border-radius: 5px; height: 424px; width: 978px;'>
-                            <%--<ul>
-                                <asp:Literal ID="Literal_banner" runat="server"></asp:Literal>
-                            </ul>--%>
                             <ul>
+                                <asp:Literal ID="Literal_banner" runat="server"></asp:Literal>
+                            </ul>
+                            <%--<ul>
                                 <li class="info on"><a href="#">
                                     <img src="images/banner001b.jpg" /></a><!--文字開始--><div class="wordtitle">TAYANA <span>48</span><br />
                                         <p>SPECIFICATION SHEET</p>
@@ -136,16 +136,16 @@
                                     </div>
                                     <!--文字結束-->
                                 </li>
-                            </ul>
+                            </ul>--%>
 
 
                             <!--小圖開始-->
                             <div class="bannerimg title" <%--style="display: none"--%>>
 
-                                <%-- <ul>
+                                 <ul>
                                     <asp:Literal ID="Literal_bannerNum" runat="server"></asp:Literal>
-                                </ul>--%>
-                                <ul>
+                                </ul>
+                                <%--<ul>
                                     <li class="on">
                                         <div>
                                             <p class="bannerimg_p">
@@ -188,7 +188,7 @@
                                             </p>
                                         </div>
                                     </li>
-                                </ul>
+                                </ul>--%>
                             </div>
                             <!--小圖結束-->
                         </div>

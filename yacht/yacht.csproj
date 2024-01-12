@@ -832,6 +832,7 @@
     <Content Include="css\homestyle.css" />
     <Content Include="css\homestyle2.css" />
     <Content Include="css\iepngfix.htc" />
+    <Content Include="css\jquery.ad-gallery.css" />
     <Content Include="css\js.css" />
     <Content Include="css\pagination.css" />
     <Content Include="css\reset.css" />
@@ -871,6 +872,7 @@
     <Content Include="ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="ckfinder\userfiles\.htaccess" />
+    <Content Include="Scripts\jquery.ad-gallery.js" />
     <Content Include="yachtBack.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="images\back.gif" />
