@@ -150,7 +150,7 @@ namespace yacht
             SqlCommand sqlCommand = new SqlCommand();
             sqlCommand.Connection = connection;
 
-            string sql = "SELECT TOP 3 dateTitle, headline, isTop, thumbnailPath FROM news WHERE isTop = 1 ORDER BY Id DESC ";
+            string sql = "SELECT TOP 3 dateTitle, headline, isTop, thumbnailPath FROM news ORDER BY Id DESC ";
             //將準備的SQL指令給操作物件
             sqlCommand.CommandText = sql;
 
@@ -173,7 +173,7 @@ namespace yacht
                 bool isTop = Convert.ToBoolean(reader["isTop"]);
                 if (isTop)
                 {
-                    NewsHtml.Append("<div class='newstop'>");
+                    NewsHtml.Append("<div>");
                     NewsHtml.Append("<img src='images/new_top01.png' alt='' />");
                     NewsHtml.Append("</div>");
                 }
