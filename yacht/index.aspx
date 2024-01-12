@@ -142,7 +142,7 @@
                             <!--小圖開始-->
                             <div class="bannerimg title" <%--style="display: none"--%>>
 
-                                 <ul>
+                                <ul>
                                     <asp:Literal ID="Literal_bannerNum" runat="server"></asp:Literal>
                                 </ul>
                                 <%--<ul>
@@ -205,67 +205,8 @@
                         </p>
                         <p class="newstitlep2"><a href="#">More>></a></p>
                     </div>
-
                     <ul>
-                        <!--TOP第一則最新消息-->
-                        <li>
-
-                            <div class="news01">
-                                <!--TOP標籤-->
-                                <div class="newstop">
-                                    <img src="images/new_top01.png" alt="&quot;&quot;" />
-                                </div>
-                                <!--TOP標籤結束-->
-                                <div class="news02p1">
-                                    <p class="news02p1img">
-                                        <img src="images/pit002.jpg" alt="&quot;&quot;" />
-                                    </p>
-                                </div>
-                                <p class="news02p2"><span>Tayana 54 CE Certifica..</span> <a href="#">For Tayana 54 entering the EU, CE Certificates are AVAILABLE to ensure conformity to all applicable European ...</a></p>
-                            </div>
-                        </li>
-                        <!--TOP第一則最新消息結束-->
-
-                        <!--第二則-->
-                        <li>
-
-                            <div class="news01">
-                                <!--TOP標籤-->
-                                <div class="newstop">
-                                    <img src="images/new_top01.png" alt="&quot;&quot;" />
-                                </div>
-                                <!--TOP標籤結束-->
-                                <div class="news02p1">
-                                    <p class="news02p1img">
-                                        <img src="images/pit001.jpg" alt="&quot;&quot;" />
-                                    </p>
-                                </div>
-                                <p class="news02p2">
-                                    <span>Tayana 58 CE Certifica..</span>
-                                    <a href="#">For Tayana 58 entering the EU, CE Certificates are AVAILABLE to ensure conformity to all applicable European ...</a>
-                                </p>
-                            </div>
-                        </li>
-                        <!--第二則結束-->
-
-                        <li>
-                            <div class="news02">
-                                <!--TOP標籤-->
-                                <div class="newstop">
-                                    <img src="images/new_top01.png" alt="&quot;&quot;" />
-                                </div>
-                                <!--TOP標籤結束-->
-                                <div class="news02p1">
-                                    <p class="news02p1img">
-                                        <img src="images/pit001.jpg" alt="&quot;&quot;" />
-                                    </p>
-                                </div>
-                                <p class="news02p2">
-                                    <span>Big Cruiser in a Small ..</span>
-                                    <a href="#">Tayana 37 is our classical product and full of skilful craftsmanship. We only plan to build TWO units in a year.</a>
-                                </p>
-                            </div>
-                        </li>
+                        <asp:Literal ID="Literal_News" runat="server"></asp:Literal>
                     </ul>
                 </div>
                 <!--------------------------------最新消息結束---------------------------------------------------->

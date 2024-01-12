@@ -18,6 +18,7 @@ namespace yacht
             {
                 loadBanner();
                 loadBannerNum();
+                loadNews();
             }
         }
 
@@ -133,6 +134,70 @@ namespace yacht
                 return relativePath;
             }
             return string.Empty;
+        }
+
+        //抓取新聞
+        private void loadNews()
+        {
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectYachtsPhoto"].ConnectionString);
+
+            if (connection.State != System.Data.ConnectionState.Open)
+            {
+                connection.Open();
+            }
+
+            //發送SQL語法，取得結果
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.Connection = connection;
+
+            string sql = "SELECT TOP 3 dateTitle, headline, isTop, thumbnailPath FROM news WHERE isTop = 1 ORDER BY Id DESC ";
+            //將準備的SQL指令給操作物件
+            sqlCommand.CommandText = sql;
+
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            StringBuilder NewsHtml = new StringBuilder();
+
+            while (reader.Read())
+            {
+                string dateTitle = reader["dateTitle"].ToString();
+                string headline = reader["headline"].ToString();
+                string thumbnailPath = reader["thumbnailPath"].ToString();
+
+                // Assuming your web application is in the root directory
+                string relativePath = GetRelativeImagePath(thumbnailPath);
+
+                NewsHtml.Append("<li>");
+                NewsHtml.Append("<div class='news01'>");
+
+                // Check if the news has TOP label
+                bool isTop = Convert.ToBoolean(reader["isTop"]);
+                if (isTop)
+                {
+                    NewsHtml.Append("<div class='newstop'>");
+                    NewsHtml.Append("<img src='images/new_top01.png' alt='' />");
+                    NewsHtml.Append("</div>");
+                }
+
+                NewsHtml.Append("<div class='news02p1'>");
+                NewsHtml.Append("<p class='news02p1img'>");
+                NewsHtml.Append("<img src='" + relativePath + "' alt='' />");
+                NewsHtml.Append("</p>");
+                NewsHtml.Append("</div>");
+
+                NewsHtml.Append("<p class='news02p2'>");
+                NewsHtml.Append("<span>" + dateTitle + "</span>");
+                NewsHtml.Append("<a href='#'>" + headline + "</a>");
+                NewsHtml.Append("</p>");
+
+                NewsHtml.Append("</div>");
+                NewsHtml.Append("</li>");
+            }
+
+
+            reader.Close();
+            connection.Close();
+
+            Literal_News.Text = NewsHtml.ToString();
         }
     }
 }
