@@ -83,7 +83,8 @@ namespace yacht
             SqlCommand sqlCommand = new SqlCommand();
             sqlCommand.Connection = connection;
 
-            string sql = "select * from YachtsDimension ";
+            string sql = "select * from YachtsDimension where YachtsId = @YachtsId ";
+            sqlCommand.Parameters.AddWithValue("@YachtsId", selectedValue);
 
             sqlCommand.CommandText = sql;
 
@@ -92,8 +93,6 @@ namespace yacht
             GridView_Dimension.DataSource = reader;
 
             GridView_Dimension.DataBind();
-
-            DropDownList_yachtModel.DataBind();
 
             connection.Close();
         }
@@ -145,7 +144,7 @@ namespace yacht
                 }
                 else
                 {
-                    // 處理沒有內容的情況，例如給予預設值或執行其他邏輯
+                    //沒有內容走這步
                     CKEditorControl_overviewContent.Text = "";
                 }
             }
