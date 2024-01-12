@@ -49,9 +49,15 @@ namespace yacht
                 string PhotoPath = reader["PhotoPath"].ToString();
                 string yachtModel = reader["yachtModel"].ToString();
 
+                // Assuming your web application is in the root directory
+                string relativePath = GetRelativeImagePath(PhotoPath);
+
+                // Map the virtual path to a physical path
+                string physicalPath = Server.MapPath("~/" + relativePath);
+
                 bannerHtml.Append("<li class='info'>");
                 bannerHtml.Append("<a href='#'>");
-                bannerHtml.Append("<img src='" + PhotoPath + "' alt='' /></a><div class='wordtitle'>");
+                bannerHtml.Append("<img src='" + relativePath + "' alt='' /></a><div class='wordtitle'>");
                 bannerHtml.Append("<span>" + yachtModel + "</span><br/>");
                 bannerHtml.Append("<p>SPECIFICATION SHEET</p>");
                 bannerHtml.Append("</div>");
@@ -94,10 +100,16 @@ namespace yacht
             {
                 string PhotoPath = reader["PhotoPath"].ToString();
 
+                // Assuming your web application is in the root directory
+                string relativePath = GetRelativeImagePath(PhotoPath);
+
+                // Map the virtual path to a physical path
+                string physicalPath = Server.MapPath("~/" + relativePath);
+
                 bannerNumHtml.Append("<li>");
                 bannerNumHtml.Append("<div>");
                 bannerNumHtml.Append("<p class='bannerimg_p'>");
-                bannerNumHtml.Append("<img src='" + PhotoPath + "' alt='' />");
+                bannerNumHtml.Append("<img width='100px' src='" + relativePath + "' alt='' />");
                 bannerNumHtml.Append("</p>");
                 bannerNumHtml.Append("</div>");
                 bannerNumHtml.Append("</li>");
@@ -110,6 +122,17 @@ namespace yacht
             //不顯示但影響輪播圖片數量計算
             Literal_bannerNum.Text = bannerNumHtml.ToString();
 
+        }
+
+        //相對路徑
+        protected string GetRelativeImagePath(string Path) //相對路徑
+        {
+            if (!string.IsNullOrEmpty(Path))
+            {
+                string relativePath = Path.Replace(Server.MapPath("~"), "").Replace(Server.MapPath("\\"), "/");
+                return relativePath;
+            }
+            return string.Empty;
         }
     }
 }
