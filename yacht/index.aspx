@@ -60,7 +60,7 @@
 
     </script>
 
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/style01.css" rel="stylesheet" type="text/css" />
     <link href="css/reset.css" rel="stylesheet" type="text/css" />
     <link href="css/homestyle2.css" rel="stylesheet" type="text/css" />
 

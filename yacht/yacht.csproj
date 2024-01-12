@@ -837,6 +837,7 @@
     <Content Include="css\pagination.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\style.css" />
+    <Content Include="css\style01.css" />
     <Content Include="dealersCountryBack.aspx" />
     <Content Include="dealersFront.aspx" />
     <Content Include="Default.aspx" />
@@ -874,6 +875,7 @@
     <Content Include="ckfinder\userfiles\.htaccess" />
     <Content Include="Scripts\jquery.ad-gallery.js" />
     <Content Include="yachtBack.aspx" />
+    <Content Include="yachtOverviewBack.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="images\back.gif" />
     <Content Include="images\banner001.jpg" />
@@ -1551,6 +1553,13 @@
     </Compile>
     <Compile Include="yachtBack.aspx.designer.cs">
       <DependentUpon>yachtBack.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="yachtOverviewBack.aspx.cs">
+      <DependentUpon>yachtOverviewBack.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="yachtOverviewBack.aspx.designer.cs">
+      <DependentUpon>yachtOverviewBack.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -174,7 +174,7 @@ namespace yacht
                 bool isTop = Convert.ToBoolean(reader["isTop"]);
                 if (isTop)
                 {
-                    NewsHtml.Append("<div>");
+                    NewsHtml.Append("<div class='newstop'>");
                     NewsHtml.Append("<img src='images/new_top01.png' alt='' />");
                     NewsHtml.Append("</div>");
                 }
