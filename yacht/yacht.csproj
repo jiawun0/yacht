@@ -879,7 +879,6 @@
     <Content Include="yachtOverviewBack.aspx" />
     <Content Include="Newoverview.Master" />
     <Content Include="yachtOverviewFront.aspx" />
-    <Content Include="yachtOverviewFront2.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="images\back.gif" />
     <Content Include="images\banner001.jpg" />
@@ -1585,13 +1584,6 @@
     </Compile>
     <Compile Include="yachtOverviewFront.aspx.designer.cs">
       <DependentUpon>yachtOverviewFront.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="yachtOverviewFront2.aspx.cs">
-      <DependentUpon>yachtOverviewFront2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="yachtOverviewFront2.aspx.designer.cs">
-      <DependentUpon>yachtOverviewFront2.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

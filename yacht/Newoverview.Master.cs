@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
@@ -19,8 +20,8 @@ namespace yacht
             if (!IsPostBack)
             {
                 loadGallery(guidStr); //讀取並渲染上方相簿輪播
-                //loadLeftMenu(); //讀取並渲染左側型號邊欄
-                //loadTopMenu(); //讀取並渲染型號內容上方標題及分頁列
+                loadLeftMenu(); //讀取並渲染左側型號邊欄
+                loadTopMenu(); //讀取並渲染型號內容上方標題及分頁列
             }
         }
 
@@ -33,6 +34,7 @@ namespace yacht
             }
         }
 
+        //從資料庫先撈guid
         private void getGuid()
         {
             //取得網址傳值的型號對應 GUID
@@ -55,6 +57,7 @@ namespace yacht
             Session["guid"] = guidStr;
         }
 
+        //輪播
         private void loadGallery(string guidStr)
         {
             
@@ -89,6 +92,7 @@ namespace yacht
             connection.Close();
         }
 
+        //相對路徑
         protected string GetRelativeImagePath(string albumPath)
         {
             if (!string.IsNullOrEmpty(albumPath))
@@ -97,6 +101,84 @@ namespace yacht
                 return relativePath;
             }
             return string.Empty;
+        }
+
+        //左側欄位
+        private void loadLeftMenu()
+        {
+            string urlPathStr = System.IO.Path.GetFileName(Request.PhysicalPath);
+            
+            //取得遊艇型號資料
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectYachtall"].ConnectionString);
+            string sql = "SELECT * FROM Yachts";
+            SqlCommand command = new SqlCommand(sql, connection);
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+            StringBuilder leftMenuHtml = new StringBuilder();
+
+            while (reader.Read())
+            {
+                string yachtModelStr = reader["yachtModel"].ToString();
+                string isNewDesignStr = reader["isNewDesign"].ToString();
+                string isNewBuildingStr = reader["isNewBuilding"].ToString();
+                string guidStr = reader["guid"].ToString();
+                string isNewStr = "";
+                //依是否為新建或新設計加入標註
+                if (isNewDesignStr.Equals("True"))
+                {
+                    isNewStr = "新設計";
+                }
+                else if (isNewBuildingStr.Equals("True"))
+                {
+                    isNewStr = "新建製";
+                }
+                leftMenuHtml.Append($"<li><a href='{urlPathStr}?id={guidStr}'>{yachtModelStr} {isNewStr}</a></li>");
+            }
+            connection.Close();
+
+            //渲染左側遊艇型號選單
+            LeftMenuHtml.Text = leftMenuHtml.ToString();
+        }
+
+        //上方欄位
+        private void loadTopMenu()
+        {
+            //取得 Session 共用 GUID，Session 物件需轉回字串
+            string guidStr = Session["guid"].ToString();
+            //依 GUID 取得遊艇資料
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectYachtall"].ConnectionString);
+            string sql = "SELECT * FROM Yachts WHERE guid = @guid";
+
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@guid", guidStr);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            StringBuilder topMenuHtmlStr = new StringBuilder();
+            //StringBuilder dimensionsTableHtmlStr = new StringBuilder();
+
+            if (reader.Read())
+            {
+                string yachtModelStr = reader["yachtModel"].ToString();
+                //string contentHtmlStr = HttpUtility.HtmlDecode(reader["overviewContentHtml"].ToString());
+                //string loadJson = HttpUtility.HtmlDecode(reader["overviewDimensionsJSON"].ToString());
+                //string dimensionsImgPathStr = reader["overviewDimensionsImgPath"].ToString();
+                //string downloadsFilePathStr = reader["overviewDownloadsFilePath"].ToString();
+
+                //加入渲染型號內容上方分類連結列表
+                topMenuHtmlStr.Append($"<li><a class='menu_yli01' href='yachtOverviewFront.aspx?id={guidStr}' >OverView</a></li>");
+                topMenuHtmlStr.Append($"<li><a class='menu_yli02' href='yachtLayoutFront.aspx?id={guidStr}' >Layout & deck plan</a></li>");
+                topMenuHtmlStr.Append($"<li><a class='menu_yli03' href='yachtSpecificationFront.aspx?id={guidStr}' >Specification</a></li>");
+
+                //渲染畫面
+                //渲染上方小連結
+                LabLink.InnerText = yachtModelStr;
+                //渲染標題
+                LabTitle.InnerText = yachtModelStr;
+                //渲染型號內容上方分類連結列表
+                TopMenuHtml.Text = topMenuHtmlStr.ToString();
+            }
+            connection.Close();
         }
     }
 }
