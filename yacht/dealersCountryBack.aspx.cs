@@ -19,39 +19,39 @@ namespace yacht
         {
             if (!IsPostBack)
             {
-                ////先綁定取得選取預設值:國家
-                //DropDownList1.DataBind();
-                //showDealerList();
-                //loadCountry();
-                //loadDealers();
+                //先綁定取得選取預設值:國家
+                DropDownList1.DataBind();
+                showDealerList();
+                loadCountry();
+                loadDealers();
 
-                if (Session["LoginId"] != null)
-                {
-                    string loginId = Session["LoginId"].ToString();
-                    bool isManger = (Session["isManger"] != null) ? (bool)Session["isManger"] : false;
+                //if (Session["LoginId"] != null)
+                //{
+                //    string loginId = Session["LoginId"].ToString();
+                //    bool isManger = (Session["isManger"] != null) ? (bool)Session["isManger"] : false;
 
-                    if (loginId != null && isManger)
-                    {
-                        //顯示登入者
-                        string name = Showusername(loginId);
-                        Literal_name.Text = "歡迎, " + name + "!";
-                        //先綁定取得選取預設值:國家
-                        DropDownList1.DataBind();
-                        showDealerList();
-                        loadCountry();
-                        loadDealers();
-                    }
-                    else
-                    {
-                        //非IsManger，請重新登入
-                        Response.Redirect("Login.aspx");
-                    }
-                }
-                else
-                {
-                    //尚未登入，請登入
-                    Response.Redirect("Login.aspx");
-                }
+                //    if (loginId != null && isManger)
+                //    {
+                //        //顯示登入者
+                //        string name = Showusername(loginId);
+                //        Literal_name.Text = "歡迎, " + name + "!";
+                //        //先綁定取得選取預設值:國家
+                //        DropDownList1.DataBind();
+                //        showDealerList();
+                //        loadCountry();
+                //        loadDealers();
+                //    }
+                //    else
+                //    {
+                //        //非IsManger，請重新登入
+                //        Response.Redirect("Login.aspx");
+                //    }
+                //}
+                //else
+                //{
+                //    //尚未登入，請登入
+                //    Response.Redirect("Login.aspx");
+                //}
             }
         }
 

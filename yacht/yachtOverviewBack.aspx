@@ -85,18 +85,18 @@
             <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id"></asp:BoundField>
             <asp:TemplateField HeaderText="Specification" SortExpression="Specification">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Specification") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox_SpecificationT" runat="server" Text='<%# Bind("Specification") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Specification") %>'></asp:Label>
+                    <asp:Label ID="Label_SpecificationT" runat="server" Text='<%# Bind("Specification") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="size" SortExpression="size">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("size") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox_sizeT" runat="server" Text='<%# Bind("size") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("size") %>'></asp:Label>
+                    <asp:Label ID="Label_sizeT" runat="server" Text='<%# Bind("size") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate"></asp:BoundField>

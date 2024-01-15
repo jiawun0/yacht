@@ -23,36 +23,36 @@ namespace yacht
                 FileBrowser fileBrowser = new FileBrowser();
                 fileBrowser.BasePath = "/ckfinder";
                 fileBrowser.SetupCKEditor(CKEditorControl_newsContent);
-                
-                //loadCkeditorContent();
-                //loadDayNewsHeadline();
-                //shownewsList();
 
-                if (Session["LoginId"] != null)
-                {
-                    string loginId = Session["LoginId"].ToString();
-                    bool isManger = (Session["isManger"] != null) ? (bool)Session["isManger"] : false;
+                loadCkeditorContent();
+                loadDayNewsHeadline();
+                shownewsList();
 
-                    if (loginId != null && isManger)
-                    {
-                        //顯示登入者
-                        string name = Showusername(loginId);
-                        Literal_name.Text = "歡迎, " + name + "!";
-                        loadCkeditorContent();
-                        loadDayNewsHeadline();
-                        shownewsList();
-                    }
-                    else
-                    {
-                        //非IsManger，請重新登入
-                        Response.Redirect("Login.aspx");
-                    }
-                }
-                else
-                {
-                    //尚未登入，請登入
-                    Response.Redirect("Login.aspx");
-                }
+                //if (Session["LoginId"] != null)
+                //{
+                //    string loginId = Session["LoginId"].ToString();
+                //    bool isManger = (Session["isManger"] != null) ? (bool)Session["isManger"] : false;
+
+                //    if (loginId != null && isManger)
+                //    {
+                //        //顯示登入者
+                //        string name = Showusername(loginId);
+                //        Literal_name.Text = "歡迎, " + name + "!";
+                //        loadCkeditorContent();
+                //        loadDayNewsHeadline();
+                //        shownewsList();
+                //    }
+                //    else
+                //    {
+                //        //非IsManger，請重新登入
+                //        Response.Redirect("Login.aspx");
+                //    }
+                //}
+                //else
+                //{
+                //    //尚未登入，請登入
+                //    Response.Redirect("Login.aspx");
+                //}
             }
         }
 

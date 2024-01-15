@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
@@ -20,31 +21,31 @@ namespace yacht
                 fileBrowser.BasePath = "/ckfinder";
                 fileBrowser.SetupCKEditor(CKEditorControl_overviewContent);
 
-                //loadDimension();
+                loadDimension();
 
-                if (Session["LoginId"] != null)
-                {
-                    string loginId = Session["LoginId"].ToString();
-                    bool isManger = (Session["isManger"] != null) ? (bool)Session["isManger"] : false;
+                //if (Session["LoginId"] != null)
+                //{
+                //    string loginId = Session["LoginId"].ToString();
+                //    bool isManger = (Session["isManger"] != null) ? (bool)Session["isManger"] : false;
 
-                    if (loginId != null && isManger)
-                    {
-                        //顯示登入者
-                        string name = Showusername(loginId);
-                        Literal_name.Text = "歡迎, " + name + "!";
-                        loadDimension();
-                    }
-                    else
-                    {
-                        //非IsManger，請重新登入
-                        Response.Redirect("Login.aspx");
-                    }
-                }
-                else
-                {
-                    //尚未登入，請登入
-                    Response.Redirect("Login.aspx");
-                }
+                //    if (loginId != null && isManger)
+                //    {
+                //        //顯示登入者
+                //        string name = Showusername(loginId);
+                //        Literal_name.Text = "歡迎, " + name + "!";
+                //        loadDimension();
+                //    }
+                //    else
+                //    {
+                //        //非IsManger，請重新登入
+                //        Response.Redirect("Login.aspx");
+                //    }
+                //}
+                //else
+                //{
+                //    //尚未登入，請登入
+                //    Response.Redirect("Login.aspx");
+                //}
             }
         }
 
@@ -61,13 +62,89 @@ namespace yacht
         //新增圖片
         protected void Button_upDimensionsImgPath_Click(object sender, EventArgs e)
         {
+            string selectedValue = DropDownList_yachtModel.SelectedValue;
 
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectwithOverview"].ConnectionString);
+            //有檔案才能上傳
+            if (FileUpload_DimensionsImgPath.HasFile) //FileUpload1.PostedFile != null
+            {
+                try
+                {
+                    string FileName = Path.GetFileName(FileUpload_DimensionsImgPath.FileName);
+                    string saveDirectory = Server.MapPath("~/Album/");
+                    string savePath = Path.Combine(saveDirectory, FileName);
+                    FileUpload_DimensionsImgPath.SaveAs(savePath);
+
+                    connection.Open();
+
+                    //新增
+                    //string sql = "Insert into Yachts (overviewDimensionsImgPath, Id) values(@overviewDimensionsImgPath, @Id)";
+                    string sql = "UPDATE Yachts SET overviewDimensionsImgPath = @overviewDimensionsImgPath WHERE Id = @Id ";
+                    SqlCommand sqlCommand = new SqlCommand(sql, connection);
+                    sqlCommand.Parameters.AddWithValue("@overviewDimensionsImgPath", savePath);
+                    sqlCommand.Parameters.AddWithValue("@Id", selectedValue);
+
+                    //將準備的SQL指令給操作物件
+                    sqlCommand.CommandText = sql;
+
+                    sqlCommand.ExecuteNonQuery();
+
+                    Response.Write("<script>alert('相片新增成功');</script>");
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    Response.Write("<script>alert('相片新增失敗');</script>");
+                }
+            }
+            else
+            {
+                Response.Write("<script>alert('沒有相片可新增');</script>");
+            }
         }
 
         //新增附件
         protected void Button_download_Click(object sender, EventArgs e)
         {
+            string selectedValue = DropDownList_yachtModel.SelectedValue;
 
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectwithOverview"].ConnectionString);
+            //有檔案才能上傳
+            if (FileUpload_downloadPDF.HasFile) //FileUpload1.PostedFile != null
+            {
+                try
+                {
+                    string FileName = Path.GetFileName(FileUpload_downloadPDF.FileName);
+                    string saveDirectory = Server.MapPath("~/Album/");
+                    string savePath = Path.Combine(saveDirectory, FileName);
+                    FileUpload_downloadPDF.SaveAs(savePath);
+
+                    connection.Open();
+
+                    //新增
+                    //string sql = "Insert into Yachts (overviewDimensionsImgPath, Id) values(@overviewDimensionsImgPath, @Id)";
+                    string sql = "UPDATE Yachts SET overviewDownloadsFilePath = @overviewDownloadsFilePath WHERE Id = @Id ";
+                    SqlCommand sqlCommand = new SqlCommand(sql, connection);
+                    sqlCommand.Parameters.AddWithValue("@overviewDownloadsFilePath", savePath);
+                    sqlCommand.Parameters.AddWithValue("@Id", selectedValue);
+
+                    //將準備的SQL指令給操作物件
+                    sqlCommand.CommandText = sql;
+
+                    sqlCommand.ExecuteNonQuery();
+
+                    Response.Write("<script>alert('檔案新增成功');</script>");
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    Response.Write("<script>alert('檔案新增失敗');</script>");
+                }
+            }
+            else
+            {
+                Response.Write("<script>alert('沒有檔案可新增');</script>");
+            }
         }
 
         //顯示Dimension詳情，綁定gridview
@@ -102,27 +179,110 @@ namespace yacht
         //新增Dimension
         protected void Button_addDimension_Click(object sender, EventArgs e)
         {
+            string selectedValue = DropDownList_yachtModel.SelectedValue;
 
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectDimension"].ConnectionString);
+
+            if (connection.State != System.Data.ConnectionState.Open)
+            {
+                connection.Open();
+            }
+
+            //發送SQL語法
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.Connection = connection;
+
+            //查詢跟參數的部分很難寫成方法，需自行研究
+            string sql = $"insert into YachtsDimension (Specification, size, YachtsId) values (@Specification, @size, @YachtsId)";
+
+            sqlCommand.Parameters.AddWithValue("@Specification", TextBox_Specification.Text.Trim());
+            sqlCommand.Parameters.AddWithValue("@size", TextBox_size.Text.Trim());
+            sqlCommand.Parameters.AddWithValue("@YachtsId", selectedValue);
+
+            sqlCommand.CommandText = sql;
+
+            sqlCommand.ExecuteNonQuery();
+
+            connection.Close();
+
+            //清空輸入欄位
+            TextBox_Specification.Text = "";
+            TextBox_size.Text = "";
+
+            Response.Write("<script>alert('新增成功');</script>");
+            loadDimension();
         }
 
         protected void GridView_Dimension_RowEditing(object sender, GridViewEditEventArgs e)
         {
-
+            GridView_Dimension.EditIndex = e.NewEditIndex;
+            loadDimension();
         }
 
         protected void GridView_Dimension_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
+            GridViewRow row = GridView_Dimension.Rows[e.RowIndex];
 
+            int boardId = Convert.ToInt32(GridView_Dimension.DataKeys[e.RowIndex].Value);
+
+            TextBox textBox_SpecificationT = row.FindControl("TextBox_SpecificationT") as TextBox;
+            string changeText_SpecificationT = textBox_SpecificationT.Text;
+
+            TextBox textBox_sizeT = row.FindControl("TextBox_sizeT") as TextBox;
+            string changeText_sizeT = textBox_sizeT.Text;
+
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectDimension"].ConnectionString);
+
+            if (connection.State != System.Data.ConnectionState.Open)
+            {
+                connection.Open();
+            }
+
+            SqlCommand sqlCommand = new SqlCommand();
+            sqlCommand.Connection = connection;
+
+            string sql = $"update YachtsDimension set Specification = @Specification, size = @size where Id = @BoardId ";
+
+            sqlCommand.Parameters.AddWithValue("@Specification", changeText_SpecificationT);
+            sqlCommand.Parameters.AddWithValue("@size", changeText_sizeT);
+            sqlCommand.CommandText = sql;
+
+            sqlCommand.ExecuteNonQuery();
+
+            connection.Close();
+
+            Response.Write("<script>alert('更新成功');</script>");
+            GridView_Dimension.EditIndex = -1;
+            loadDimension();
         }
 
         protected void GridView_Dimension_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            int boardId = Convert.ToInt32(GridView_Dimension.DataKeys[e.RowIndex].Value);
 
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectDimension"].ConnectionString);
+
+            if (connection.State != System.Data.ConnectionState.Open)
+            {
+                connection.Open();
+            }
+
+            string deleteSql = $"delete from YachtsDimension where Id = @boardId ";
+            SqlCommand deleteCommand = new SqlCommand(deleteSql, connection);
+            deleteCommand.Parameters.AddWithValue("@boardId", boardId);
+            deleteCommand.ExecuteNonQuery();
+
+            connection.Close();
+
+            Response.Write("<script>alert('刪除成功');</script>");
+
+            loadDimension();
         }
 
         protected void GridView_Dimension_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
-
+            GridView_Dimension.EditIndex = -1;
+            loadDimension();
         }
 
         //讀取Ckeditor

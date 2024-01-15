@@ -39,15 +39,6 @@
                     <asp:Label ID="Label_accountT" runat="server" Text='<%# Bind("account") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="password" SortExpression="password">
-                <EditItemTemplate>
-                    <asp:TextBox ID="TextBox_passwordT" runat="server" Text='<%# Bind("password") %>'></asp:TextBox>
-                </EditItemTemplate>
-                <ItemTemplate>
-                    <asp:Label ID="Label_passwordT" runat="server" Text='<%# Bind("password") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:BoundField DataField="salt" HeaderText="salt" SortExpression="salt" />
             <asp:BoundField DataField="email" HeaderText="email" SortExpression="email" />
             <asp:TemplateField HeaderText="name" SortExpression="name">
                 <EditItemTemplate>
