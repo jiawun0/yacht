@@ -44,10 +44,12 @@ namespace yacht
             {
                 string yachtModelStr = reader["yachtModel"].ToString();
                 string dimensionsImgPathStr = reader["overviewDimensionsImgPath"].ToString();
-                // Assuming your web application is in the root directory
+                //相對路徑
                 string relativePath = GetRelativeImagePath(dimensionsImgPathStr);
 
                 string downloadsFilePathStr = reader["overviewDownloadsFilePath"].ToString();
+                //相對路徑
+                string relativePathFile = GetRelativeImagePath(downloadsFilePathStr);
 
                 string Specification = reader["Specification"].ToString();
                 string size = reader["size"].ToString();
@@ -55,7 +57,7 @@ namespace yacht
                 dimensions.Append("<table class='table02'>");
                 dimensions.Append("<tbody>");
 
-                // Assuming Specification and Size are variables with content
+                //注意長度
                 dimensions.Append("<tr><td style='width:300px;'>" + Specification + "</td>");
                 dimensions.Append("<td style='width:300px;'>" + size + "</td></tr>");
 
@@ -66,15 +68,14 @@ namespace yacht
                 Literal_overviewContentHtml.Text = HttpUtility.HtmlDecode(reader["overviewContentHtml"].ToString());
                 //遊艇名稱
                 Literal_dimensionTitle.Text = yachtModelStr + " DIMENSIONS";
-                //尺寸表格圖片
+                //尺寸表格圖片(會重複??)
                 dimensionsImgPathHTML.Append("<img src = '" + relativePath + "' alt = '' />");
-                //Literal_overviewDimensionsImgPath.Text = dimensionsImgPathHTML.ToString();
-                //下載檔案
-                Literal_overviewDownloadsFilePath.Text = downloadsFilePathStr.ToString();
-
+                Literal_overviewDimensionsImgPath.Text = dimensionsImgPathHTML.ToString();
                 //渲染尺寸表格文字內容
                 Literal_Dimension.Text = dimensions.ToString();
-                
+                //下載檔案
+                Literal_overviewDownloadsFilePath.Text = $"<a href='/{relativePathFile}' target='blank' >{yachtModelStr}</a>";
+
             }
             
             connection.Close();
