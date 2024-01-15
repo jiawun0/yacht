@@ -23,15 +23,15 @@
             <div class="menu">
                 <ul>
                     <li class="menuli01"><a href="/yachtOverviewFront">
-                        <img src="images/mmmmeeeee.gif" alt="&quot;&quot;" />Yachts</a></li>
+                        <img src="images/mmmmeeeee.gif" alt="" />Yachts</a></li>
                     <li class="menuli02"><a href="/newsFront2">
-                        <img src="images/mmmmeeeee.gif" alt="&quot;&quot;" />NEWS</a></li>
+                        <img src="images/mmmmeeeee.gif" alt="" />NEWS</a></li>
                     <li class="menuli03"><a href="/conpanyFront">
-                        <img src="images/mmmmeeeee.gif" alt="&quot;&quot;" />COMPANY</a></li>
+                        <img src="images/mmmmeeeee.gif" alt="" />COMPANY</a></li>
                     <li class="menuli04"><a href="/dealersFront">
-                        <img src="images/mmmmeeeee.gif" alt="&quot;&quot;" />DEALERS</a></li>
+                        <img src="images/mmmmeeeee.gif" alt="" />DEALERS</a></li>
                     <li class="menuli05"><a href="/contactFront">
-                        <img src="images/mmmmeeeee.gif" alt="&quot;&quot;" />CONTACT</a></li>
+                        <img src="images/mmmmeeeee.gif" alt="" />CONTACT</a></li>
                 </ul>
             </div>
             <!--------------------------------選單開始結束---------------------------------------------------->

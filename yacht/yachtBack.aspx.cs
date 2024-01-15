@@ -89,7 +89,7 @@ namespace yacht
             CheckBox_isNewBuilding.Checked = false;
 
             //新增進DDL
-            DropDownList_yachtModel.SelectedValue = TextBox_yachtModel.Text.Trim();
+            //DropDownList_yachtModel.SelectedValue = TextBox_yachtModel.Text.Trim();
 
         }
 

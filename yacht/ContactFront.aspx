@@ -124,9 +124,9 @@
                                 <%@ Register Assembly="Recaptcha.Web" Namespace="Recaptcha.Web.UI.Controls" TagPrefix="cc1" %>
 
                                 <!-- Render recaptcha API script (非必要，同頁使用兩個以上時才需要)-->
-                                <cc1:RecaptchaApiScript ID="RecaptchaApiScript1" runat="server" />
+                                <cc1:recaptchaapiscript ID="RecaptchaApiScript1" runat="server" />
                                 <!-- Render recaptcha widget -->
-                                <cc1:RecaptchaWidget ID="Recaptcha1" runat="server" RenderApiScript="False" />
+                                <cc1:recaptchawidget ID="Recaptcha1" runat="server" RenderApiScript="False" />
 
                                 <asp:Label ID="lblMessage" runat="server" Visible="False" ForeColor="Red"></asp:Label>
                             </td>
