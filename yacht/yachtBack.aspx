@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="HeaderTitle" runat="server">
-    <asp:Label ID="Label_HeaderTitle" runat="server" Text="遊艇後台頁面"></asp:Label>
+    <asp:Label ID="Label_HeaderTitle" runat="server" Text="遊艇 Model & Photo 後台頁面"></asp:Label>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Sidebar" runat="server">
     <!-- 抓取目前登入者的username -->

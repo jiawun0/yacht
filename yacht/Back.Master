@@ -82,10 +82,23 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/yachtBack">
                                 <i class="fa-sharp fa-light fa-image"></i>
-                                <span class="fw-bold">遊艇</span>
+                                <span class="fw-bold">遊艇 Model & Photo</span>
                             </a>
                         </li>
-
+                        <!-- Nav Item - 遊艇 -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/yachtOverviewBack">
+                                <i class="fa-sharp fa-light fa-image"></i>
+                                <span class="fw-bold">遊艇 Overview</span>
+                            </a>
+                        </li>
+                        <!-- Nav Item - 遊艇 -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/yachtLayoutDeckBack">
+                                <i class="fa-sharp fa-light fa-image"></i>
+                                <span class="fw-bold">遊艇 LayoutDeck</span>
+                            </a>
+                        </li>
                         <!-- Nav Item - 新聞 -->
                         <li class="nav-item">
                             <a class="nav-link" href="/newsBack">

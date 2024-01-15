@@ -876,6 +876,7 @@
     <Content Include="ckfinder\userfiles\.htaccess" />
     <Content Include="Scripts\jquery.ad-gallery.js" />
     <Content Include="yachtBack.aspx" />
+    <Content Include="yachtLayoutDeckBack.aspx" />
     <Content Include="yachtOverviewBack.aspx" />
     <Content Include="Newoverview.Master" />
     <Content Include="yachtOverviewFront.aspx" />
@@ -1570,6 +1571,13 @@
     </Compile>
     <Compile Include="yachtBack.aspx.designer.cs">
       <DependentUpon>yachtBack.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="yachtLayoutDeckBack.aspx.cs">
+      <DependentUpon>yachtLayoutDeckBack.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="yachtLayoutDeckBack.aspx.designer.cs">
+      <DependentUpon>yachtLayoutDeckBack.aspx</DependentUpon>
     </Compile>
     <Compile Include="yachtOverviewBack.aspx.cs">
       <DependentUpon>yachtOverviewBack.aspx</DependentUpon>
