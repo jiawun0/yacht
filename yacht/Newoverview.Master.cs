@@ -38,7 +38,7 @@ namespace yacht
         private void getGuid()
         {
             //取得網址傳值的型號對應 GUID
-            string guidStr = Request.QueryString["guidStr"];
+            string guidStr = Request.QueryString["id"];
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectYachtall"].ConnectionString);
             string sql = "SELECT TOP 1 guid FROM Yachts";
             SqlCommand command = new SqlCommand(sql, connection);

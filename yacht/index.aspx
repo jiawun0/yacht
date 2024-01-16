@@ -101,8 +101,8 @@
             <div>
                 <%--<!--遮罩-->
                 <div class="bannermasks">
-                    <img src="images/banner00_masks.png" alt="&quot;&quot;" /></div>--%>
-                <!--遮罩結束-->
+                    <img src="images/banner00_masks.png" alt="&quot;&quot;" /></div>
+                <!--遮罩結束-->--%>
 
                 <!--------------------------------換圖開始---------------------------------------------------->
                 <div id="abgne-block-20110111">
