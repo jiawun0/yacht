@@ -52,7 +52,7 @@
                     <asp:CheckBox ID="CheckBox_isNewBuildingT" runat="server" Checked='<%# Bind("isNewBuilding") %>' Enabled="false" />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate"></asp:BoundField>
+            <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate" ReadOnly="True"></asp:BoundField>
             <asp:CommandField ButtonType="Button" ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
         </Columns>
     </asp:GridView>

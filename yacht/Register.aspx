@@ -12,22 +12,23 @@
     <asp:Label ID="Label_title" runat="server" Text="管理使用者"></asp:Label>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="content" runat="server">
-    <asp:Label ID="Label_name" runat="server" Text="姓名: "></asp:Label>
+    <asp:Label ID="Label_name" runat="server" Text="* 姓名: "></asp:Label>
     <asp:TextBox ID="TextBox_name" runat="server" Placeholder="請輸入真實姓名"></asp:TextBox>
     <br />
-    <asp:Label ID="Label_account" runat="server" Text="帳號: "></asp:Label>
+    <asp:Label ID="Label_account" runat="server" Text="* 帳號: "></asp:Label>
     <asp:TextBox ID="TextBox_account" runat="server" Placeholder="請輸入帳號"></asp:TextBox><asp:Label ID="LabelAdd" runat="server" ></asp:Label>
     <br />
-    <asp:Label ID="Label_password" runat="server" Text="密碼: "></asp:Label>
+    <asp:Label ID="Label_password" runat="server" Text="* 密碼: "></asp:Label>
     <asp:TextBox ID="TextBox_password" runat="server" Placeholder="請輸入6位以上字元" TextMode="Password"></asp:TextBox>
     <br />
-    <asp:Label ID="Label_pwCheck" runat="server" Text="確認密碼: "></asp:Label>
+    <asp:Label ID="Label_pwCheck" runat="server" Text="* 確認密碼: "></asp:Label>
     <asp:TextBox ID="TextBox_pwCheck" runat="server" Placeholder="請再次輸入密碼" TextMode="Password"></asp:TextBox>
     <br />
     <br />
-    <asp:Button ID="Button_Register" runat="server" Text="確認新增" OnClick="Button_Register_Click"  />
+    <asp:Button ID="Button_Register" runat="server" Text="確認新增" OnClick="Button_Register_Click" class="btn btn-outline-primary btn-block mt-3" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="body" runat="server">
+    <asp:Label ID="Label_user" runat="server" Text="<使用者列表編輯>"></asp:Label>
     <asp:GridView ID="GridView_Register" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowCancelingEdit="GridView_Register_RowCancelingEdit" OnRowDeleting="GridView_Register_RowDeleting" OnRowEditing="GridView_Register_RowEditing" OnRowUpdating="GridView_Register_RowUpdating" >
         <Columns>
             <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
@@ -56,7 +57,7 @@
                     <asp:CheckBox ID="CheckBox_isManger" runat="server" Checked='<%# Eval("isManger") != DBNull.Value && Convert.ToBoolean(Eval("isManger")) %>' Enabled="false" />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate" />
+            <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate" ReadOnly="True"/>
             <asp:CommandField ButtonType="Button" ShowDeleteButton="True" ShowEditButton="True" />
         </Columns>
     </asp:GridView>

@@ -72,11 +72,11 @@
     <br />
     <asp:Label ID="Label_Dimension" runat="server" Text="<新增/編輯 Dimension 表格欄位>"></asp:Label>
     <br />
-    <asp:Label ID="Label_Specification" runat="server" Text="規格 :"></asp:Label>
+    <asp:Label ID="Label_Specification" runat="server" Text="* 規格 :"></asp:Label>
     <br />
     <asp:TextBox ID="TextBox_Specification" runat="server" type="text" class="form-control" Placeholder="請輸入規格" MaxLength="75"></asp:TextBox>
     <br />
-    <asp:Label ID="Label_size" runat="server" Text="尺寸 :"></asp:Label>
+    <asp:Label ID="Label_size" runat="server" Text="* 尺寸 :"></asp:Label>
     <br />
     <asp:TextBox ID="TextBox_size" runat="server" type="text" class="form-control" Placeholder="請輸入尺寸" MaxLength="75"></asp:TextBox>
     <br />

@@ -46,6 +46,19 @@ namespace yacht
 
         protected void Button_Register_Click(object sender, EventArgs e)
         {
+            //檢查欄位不可為空
+            string nameValue = TextBox_name.Text;
+            string accountValue = TextBox_account.Text;
+            string passwordValue = TextBox_password.Text;
+            string pwCheckValue = TextBox_pwCheck.Text;
+
+            if (string.IsNullOrEmpty(nameValue) || string.IsNullOrEmpty(accountValue) ||
+                string.IsNullOrEmpty(passwordValue) || string.IsNullOrEmpty(pwCheckValue))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('欄位不可為空，請檢查確認');", true);
+                return;
+            }
+
             bool haveSameAccount = false;
 
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectYachtLogin2"].ConnectionString);
@@ -222,7 +235,20 @@ namespace yacht
             string changeText_nameT = textBox_nameT.Text;
 
             CheckBox checkBox_isManger = row.FindControl("CheckBox_isManger") as CheckBox;
-            bool isManger = Convert.ToBoolean(checkBox_isManger.Checked);
+            //bool isManger = Convert.ToBoolean(checkBox_isManger.Checked);
+
+            // Ensure isManager remains true for boardId = 3
+            bool isManger = boardId == 3 ? true : Convert.ToBoolean(checkBox_isManger.Checked);
+
+            //檢查欄位不可為空
+            string nameValue = changeText_nameT;
+            string accountValue = changeText_accountT;
+
+            if (string.IsNullOrEmpty(nameValue) || string.IsNullOrEmpty(accountValue))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('欄位不可為空，請檢查確認');", true);
+                return;
+            }
 
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectYachtLogin2"].ConnectionString);
 
@@ -255,6 +281,13 @@ namespace yacht
         protected void GridView_Register_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             int boardId = Convert.ToInt32(GridView_Register.DataKeys[e.RowIndex].Value);
+
+            // Check if the boardId is 3, and if so, prevent deletion
+            if (boardId == 3)
+            {
+                Response.Write("<script>alert('無法刪除總管理者資料');</script>");
+                return;
+            }
 
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectYachtLogin2"].ConnectionString);
 
