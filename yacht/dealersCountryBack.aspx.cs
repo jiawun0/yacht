@@ -412,6 +412,12 @@ namespace yacht
                     Response.Write(ex.Message);
                 }
             }
+            else
+            {
+                //沒有檔案
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('請選擇檔案');", true);
+                return;
+            }
             connection.Close();
         }
 

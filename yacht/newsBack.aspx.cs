@@ -59,6 +59,16 @@ namespace yacht
         //新增新聞
         protected void Button_addHeadline_Click(object sender, EventArgs e)
         {
+            //檢查欄位不可為空
+            string dateValue = TextBox_Date.Text;
+            string headlineValue = TextBox_Headline.Text;
+
+            if (string.IsNullOrEmpty(dateValue) || string.IsNullOrEmpty(headlineValue))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('日期、標題不可為空，請檢查確認');", true);
+                return;
+            }
+
             //產生 GUID 隨機碼 + 時間2位秒數 (加強避免重複)
             DateTime nowTime = DateTime.Now;
             string nowSec = nowTime.ToString("ff");
@@ -322,6 +332,7 @@ namespace yacht
             // Get the FileUpload control from the DetailsView
             FileUpload fileUpload_thumbnailPathT = DetailsView_news.FindControl("FileUpload_thumbnailPathT") as FileUpload;
             string fullFilePath = "";
+            //如果有檔案
             if (fileUpload_thumbnailPathT.HasFile)
             {
                 string FileName = Path.GetFileName(fileUpload_thumbnailPathT.PostedFile.FileName);
@@ -331,7 +342,7 @@ namespace yacht
 
                 fullFilePath = Request.Url.GetLeftPart(UriPartial.Authority) + VirtualPathUtility.ToAbsolute("~/Album/" + FileName);
             }
-
+            //當沒有新增檔案，去抓取舊的
             string originalThumbnailPath = "";
             originalThumbnailPath = GetOriginalThumbnailPathFromDatabase(boardId);
 
@@ -342,6 +353,15 @@ namespace yacht
             }
             string changeFileUpload_ImgT = fullFilePath;
 
+            //檢查欄位不可為空
+            string dateTitleTValue = changeText_dateTitleT123;
+            string headlineTValue = changeText_headlineT;
+
+            if (string.IsNullOrEmpty(dateTitleTValue) || string.IsNullOrEmpty(headlineTValue))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('日期、標題不可為空，請檢查確認');", true);
+                return;
+            }
 
             // Perform database update operation
             using (SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectnews2"].ConnectionString))
@@ -366,7 +386,7 @@ namespace yacht
             loadDayNewsHeadline();
         }
 
-        // 示例方法，用于从数据库中检索原始缩略图路径
+        //上傳需要~用於從資料庫中檢索原始縮圖路徑
         private string GetOriginalThumbnailPathFromDatabase(int boardId)
         {
             string originalThumbnailPath = "";

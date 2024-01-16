@@ -15,10 +15,10 @@
     <asp:Label ID="Label_title" runat="server" Text="新聞"></asp:Label>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="content" runat="server">
-    <asp:Label ID="Label_Date" runat="server" Text="選擇日期 :"></asp:Label>
+    <asp:Label ID="Label_Date" runat="server" Text="* 選擇日期 :"></asp:Label>
     <asp:TextBox ID="TextBox_Date" runat="server" TextMode="Date" AutoPostBack="True" OnTextChanged="TextBox_Date_TextChanged"></asp:TextBox>
     <br />
-    <asp:Label ID="Label_Headline" runat="server" Text="標題 :"></asp:Label>
+    <asp:Label ID="Label_Headline" runat="server" Text="* 標題 :"></asp:Label>
     <asp:TextBox ID="TextBox_Headline" runat="server" type="text" class="form-control" Placeholder="請輸入標題" MaxLength="75"></asp:TextBox>
     <br />
     <asp:CheckBox ID="CheckBox_IsTop" runat="server" Text="置頂標籤" Width="100%"></asp:CheckBox>
@@ -36,7 +36,6 @@
     <br />
     <%--<asp:RadioButtonList ID="RadioButtonList1" runat="server" CssClass="auto-style1" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="headline" DataValueField="Id" OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged"></asp:RadioButtonList>--%>
     <%--DataSourceID="SqlDataSource1"--%>
-    <br />
     <asp:Label ID="Label_selectdate" runat="server" Text="選擇標題 :"></asp:Label>
     <asp:DropDownList ID="DropDownList_Headline" runat="server" AutoPostBack="True" DataTextField="headline" DataValueField="Id" OnSelectedIndexChanged="DropDownList_Headline_SelectedIndexChanged1"></asp:DropDownList>
 

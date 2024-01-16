@@ -123,7 +123,7 @@
     <asp:Label ID="Label_area" runat="server" Text="* 區域: "></asp:Label>
     <asp:TextBox ID="TextBox_area" runat="server" Placeholder="請輸入區域"></asp:TextBox>
     <br />
-    <asp:Label ID="Label_dealerImgPath" runat="server" Text="相片: "></asp:Label>
+    <asp:Label ID="Label_dealerImgPath" runat="server" Text="* 相片: "></asp:Label>
     <asp:FileUpload ID="FileUpload_Img" runat="server" Placeholder="請選取代理商相片" />
     <br />
     <asp:Label ID="Label_name" runat="server" Text="* 公司: "></asp:Label>
