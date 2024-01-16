@@ -17,9 +17,9 @@
     <asp:Label ID="Label_yachtModel" runat="server" Text="* 型號 :"></asp:Label>
     <asp:TextBox ID="TextBox_yachtModel" runat="server" type="text" class="form-control" Placeholder="請輸入型號" MaxLength="75"></asp:TextBox>
     <br />
-    <asp:CheckBox ID="CheckBox_isNewDesign" runat="server" Text="新設計" Width="100%"></asp:CheckBox>
+    <asp:CheckBox ID="CheckBox_isNewDesign" runat="server" Text="NewDesign" Width="100%"></asp:CheckBox>
     <br />
-    <asp:CheckBox ID="CheckBox_isNewBuilding" runat="server" Text="新建製" Width="100%"></asp:CheckBox>
+    <asp:CheckBox ID="CheckBox_isNewBuilding" runat="server" Text="NewBuilding" Width="100%"></asp:CheckBox>
     <br />
     <asp:Button ID="Button_addyachtModel" runat="server" Text="新增遊艇" class="btn btn-outline-primary btn-block mt-3" OnClick="Button_addyachtModel_Click" />
     <br />

@@ -27,7 +27,7 @@
     <br />
     <asp:FileUpload ID="FileUpload_LayoutDeck" runat="server" />
     <br />
-    <asp:Button ID="Button_upLayoutDeckImgPath" runat="server" Text="上傳圖檔" class="btn btn-outline-primary btn-block mt-3" OnClick="Button_upLayoutDeckImgPath_Click" />
+    <asp:Button ID="Button_upLayoutDeckImgPath" runat="server" Text="上傳圖片" class="btn btn-outline-primary btn-block mt-3" OnClick="Button_upLayoutDeckImgPath_Click" />
     <br />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="body" runat="server">

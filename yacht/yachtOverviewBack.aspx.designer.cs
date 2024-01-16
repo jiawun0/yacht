@@ -33,15 +33,6 @@ namespace yacht
         protected global::System.Web.UI.WebControls.Literal Literal_name;
 
         /// <summary>
-        /// Label_title 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_title;
-
-        /// <summary>
         /// Label_selyachtModel 控制項。
         /// </summary>
         /// <remarks>
@@ -67,6 +58,24 @@ namespace yacht
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+
+        /// <summary>
+        /// Label_img 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label_img;
+
+        /// <summary>
+        /// Literal_img 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal Literal_img;
 
         /// <summary>
         /// Label_DimensionsImgPath 控制項。

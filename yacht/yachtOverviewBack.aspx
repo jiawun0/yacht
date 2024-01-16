@@ -12,11 +12,9 @@
     <asp:Literal ID="Literal_name" runat="server"></asp:Literal>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="title" runat="server">
-    <asp:Label ID="Label_title" runat="server" Text="上傳遊艇 Overview"></asp:Label>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="content" runat="server">
     <asp:Label ID="Label_selyachtModel" runat="server" Text="選擇遊艇型號 :"></asp:Label>
-    <br />
     <asp:DropDownList ID="DropDownList_yachtModel" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="yachtModel" DataValueField="Id" OnSelectedIndexChanged="DropDownList_yachtModel_SelectedIndexChanged"></asp:DropDownList>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectwithOverview %>" DeleteCommand="DELETE FROM [Yachts] WHERE [Id] = @Id" InsertCommand="INSERT INTO [Yachts] ([yachtModel], [isNewDesign], [isNewBuilding], [guid], [bannerImgPathJSON], [overviewContentHtml], [overviewDimensionsImgPath], [overviewDownloadsFilePath], [overviewDimensionsJSON], [layoutDeckPlanImgPathJSON], [CreatDate]) VALUES (@yachtModel, @isNewDesign, @isNewBuilding, @guid, @bannerImgPathJSON, @overviewContentHtml, @overviewDimensionsImgPath, @overviewDownloadsFilePath, @overviewDimensionsJSON, @layoutDeckPlanImgPathJSON, @CreatDate)" SelectCommand="SELECT * FROM [Yachts]" UpdateCommand="UPDATE [Yachts] SET [yachtModel] = @yachtModel, [isNewDesign] = @isNewDesign, [isNewBuilding] = @isNewBuilding, [guid] = @guid, [bannerImgPathJSON] = @bannerImgPathJSON, [overviewContentHtml] = @overviewContentHtml, [overviewDimensionsImgPath] = @overviewDimensionsImgPath, [overviewDownloadsFilePath] = @overviewDownloadsFilePath, [overviewDimensionsJSON] = @overviewDimensionsJSON, [layoutDeckPlanImgPathJSON] = @layoutDeckPlanImgPathJSON, [CreatDate] = @CreatDate WHERE [Id] = @Id">
         <DeleteParameters>
@@ -51,16 +49,20 @@
         </UpdateParameters>
     </asp:SqlDataSource>
     <br />
-    <asp:Label ID="Label_DimensionsImgPath" runat="server" Text="<選擇 Overview 圖檔>"></asp:Label>
     <br />
+    <asp:Label ID="Label_img" runat="server" Text="<遊艇 Dimension 圖片>"></asp:Label>
+    <br />
+    <asp:Literal ID="Literal_img" runat="server"></asp:Literal>
+    <br />
+    <br />
+    <asp:Label ID="Label_DimensionsImgPath" runat="server" Text="<上傳遊艇 Dimension 圖片>"></asp:Label>
     <asp:Literal ID="Literal_DimensionsImgPath" runat="server"></asp:Literal>
     <br />
     <asp:FileUpload ID="FileUpload_DimensionsImgPath" runat="server" />
     <br />
-    <asp:Button ID="Button_upDimensionsImgPath" runat="server" Text="上傳圖檔" class="btn btn-outline-primary btn-block mt-3" OnClick="Button_upDimensionsImgPath_Click" />
+    <asp:Button ID="Button_upDimensionsImgPath" runat="server" Text="上傳圖片" class="btn btn-outline-primary btn-block mt-3" OnClick="Button_upDimensionsImgPath_Click" />
     <br />
     <asp:Label ID="Label_downloadPDF" runat="server" Text="<選擇上傳附件>"></asp:Label>
-    <br />
     <asp:Literal ID="Literal_downloadPDF" runat="server"></asp:Literal>
     <br />
     <asp:FileUpload ID="FileUpload_downloadPDF" runat="server" />
@@ -99,7 +101,7 @@
                     <asp:Label ID="Label_sizeT" runat="server" Text='<%# Bind("size") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate"></asp:BoundField>
+            <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate" ReadOnly="True"></asp:BoundField>
             <asp:BoundField DataField="YachtsId" HeaderText="YachtsId" SortExpression="YachtsId"></asp:BoundField>
             <asp:CommandField ButtonType="Button" ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
         </Columns>
@@ -128,7 +130,7 @@
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="body" runat="server">
     <br />
-    <asp:Label ID="Label_overviewContent" runat="server" Text="<遊艇 Overview 內文撰寫>"></asp:Label>
+    <asp:Label ID="Label_overviewContent" runat="server" Text="<遊艇 Overview 撰寫>"></asp:Label>
     <br />
     <ckeditor:ckeditorcontrol id="CKEditorControl_overviewContent" runat="server" basepath="/Scripts/ckeditor/"
         toolbar="Bold|Italic|Underline|Strike|Subscript|Superscript|-|RemoveFormat
@@ -139,6 +141,6 @@
         Link|Image"
         height="400px"></ckeditor:ckeditorcontrol>
     <asp:Label ID="UploadnewsoverviewContent" runat="server" Visible="False" ForeColor="#009933" class="d-flex justify-content-center"></asp:Label>
-    <asp:Button ID="UploadnewsoverviewContentBtn" runat="server" Text="內文上傳" class="btn btn-outline-primary btn-block mt-3" OnClick="UploadnewsoverviewContentBtn_Click" />
+    <asp:Button ID="UploadnewsoverviewContentBtn" runat="server" Text="確認上傳" class="btn btn-outline-primary btn-block mt-3" OnClick="UploadnewsoverviewContentBtn_Click" />
     <br />
 </asp:Content>

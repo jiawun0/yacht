@@ -22,7 +22,7 @@ namespace yacht
                 fileBrowser.SetupCKEditor(CKEditorControl_overviewContent);
 
                 loadDimension();
-
+                loaddimensionsImg();
                 //if (Session["LoginId"] != null)
                 //{
                 //    string loginId = Session["LoginId"].ToString();
@@ -34,6 +34,7 @@ namespace yacht
                 //        string name = Showusername(loginId);
                 //        Literal_name.Text = "歡迎, " + name + "!";
                 //        loadDimension();
+                //        loaddimensionsImg();
                 //    }
                 //    else
                 //    {
@@ -57,6 +58,33 @@ namespace yacht
 
             //選取DDL後連到Ckeditor
             loadCkeditorContent();
+            loaddimensionsImg();
+        }
+
+        //讀取DimensionImg
+        private void loaddimensionsImg()
+        {
+            string selectedValue = DropDownList_yachtModel.SelectedValue;
+
+            //從資料庫取資料
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectwithOverview"].ConnectionString);
+            string sql = "select overviewDimensionsImgPath from Yachts where Id = @Id ";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@Id", selectedValue);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                string dimensionsImgPathStr = reader["overviewDimensionsImgPath"].ToString();
+                //相對路徑
+                string relativePath = GetRelativeImagePath(dimensionsImgPathStr);
+
+                //尺寸表格圖片
+                Literal_img.Text = "<img src = '" + relativePath + "' alt = '' />";
+            }
+
+            connection.Close();
         }
 
         //新增圖片
@@ -99,7 +127,9 @@ namespace yacht
             }
             else
             {
-                Response.Write("<script>alert('沒有相片可新增');</script>");
+                //沒有檔案
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('請選擇檔案');", true);
+                return;
             }
         }
 
@@ -143,7 +173,9 @@ namespace yacht
             }
             else
             {
-                Response.Write("<script>alert('沒有檔案可新增');</script>");
+                //沒有檔案
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('請選擇檔案');", true);
+                return;
             }
         }
 
@@ -176,10 +208,20 @@ namespace yacht
             connection.Close();
         }
 
-        //新增Dimension
+        //新增Dimension欄位
         protected void Button_addDimension_Click(object sender, EventArgs e)
         {
             string selectedValue = DropDownList_yachtModel.SelectedValue;
+
+            //檢查欄位不可為空
+            string SpecificationValue = TextBox_Specification.Text;
+            string sizeValue = TextBox_size.Text;
+
+            if (string.IsNullOrEmpty(SpecificationValue) || string.IsNullOrEmpty(sizeValue))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('規格、尺寸不可為空，請檢查確認');", true);
+                return;
+            }
 
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectDimension"].ConnectionString);
 
@@ -230,6 +272,16 @@ namespace yacht
 
             TextBox textBox_sizeT = row.FindControl("TextBox_sizeT") as TextBox;
             string changeText_sizeT = textBox_sizeT.Text;
+
+            //檢查欄位不可為空
+            string SpecificationTValue = changeText_SpecificationT;
+            string sizeTValue = changeText_sizeT;
+
+            if (string.IsNullOrEmpty(SpecificationTValue) || string.IsNullOrEmpty(sizeTValue))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('規格、尺寸不可為空，請檢查確認');", true);
+                return;
+            }
 
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectDimension"].ConnectionString);
 
@@ -366,6 +418,17 @@ namespace yacht
             connection.Close();
 
             return name;
+        }
+
+        //使用相對路徑顯示photo
+        protected string GetRelativeImagePath(string albumPath) //相對路徑
+        {
+            if (!string.IsNullOrEmpty(albumPath))
+            {
+                string relativePath = albumPath.Replace(Server.MapPath("~"), "").Replace(Server.MapPath("\\"), "/");
+                return relativePath;
+            }
+            return string.Empty;
         }
     }
 }
