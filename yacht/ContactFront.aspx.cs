@@ -67,7 +67,7 @@ namespace yacht
             if (String.IsNullOrEmpty(Recaptcha1.Response))
             {
                 lblMessage.Visible = true;
-                lblMessage.Text = "Captcha cannot be empty.";
+                lblMessage.Text = "請點選我不是機器人";
             }
             else
             {
@@ -76,11 +76,11 @@ namespace yacht
                 {
                     //此處可加入"我不是機器人驗證"成功後要做的事，導向送出文件並儲存
                     sendGmail();
-                    Response.Write("<script>alert('Thank you for contacting us!');location.href='contactFront.aspx';</script>");
+                    Response.Write("<script>alert('感謝聯繫~');location.href='contactFront.aspx';</script>");
                 }
                 else
                 {
-                    lblMessage.Text = "Error(s): ";
+                    lblMessage.Text = "錯誤: ";
 
                     foreach (var err in result.ErrorCodes)
                     {
@@ -91,6 +91,14 @@ namespace yacht
         }
         public void sendGmail()
         {
+            //string textboxValue = myTextbox.Text;
+
+            //if (string.IsNullOrEmpty(textboxValue))
+            //{
+            //    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('欄位不可為空!');", true);
+            //    return;
+            //}
+
             //宣告使用 MimeMessage
             var message = new MimeMessage();
             //設定發信地址 ("發信人", "發信 email")
@@ -132,6 +140,5 @@ namespace yacht
                 client.Disconnect(true);
             }
         }
-
     }
 }

@@ -19,12 +19,14 @@
 <asp:Content ID="Content5" ContentPlaceHolderID="content" runat="server">
     <asp:Label ID="Label_title" runat="server" Text="<代理商國家>"></asp:Label>
     <br />
-    <asp:Label ID="Label_country" runat="server" Text="國家: "></asp:Label>
+    <asp:Label ID="Label_country" runat="server" Text="* 國家: "></asp:Label>
     <asp:TextBox ID="TextBox_country" runat="server" Placeholder="請輸入國家"></asp:TextBox>
     <br />
-    <asp:Button ID="Button_add" runat="server" Text="新增國家" OnClick="Button_add_Click" />
+    <asp:Button ID="Button_add" runat="server" Text="新增國家" OnClick="Button_add_Click" class="btn btn-outline-primary btn-block mt-3"/>
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="body" runat="server">
+    <br />
+    <asp:Label ID="Label_GridView" runat="server" Text="<國家列表編輯>"></asp:Label>
     <asp:GridView ID="GridView_country" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowCancelingEdit="GridView_country_RowCancelingEdit" OnRowDeleting="GridView_country_RowDeleting" OnRowEditing="GridView_country_RowEditing" OnRowUpdating="GridView_country_RowUpdating" OnRowDeleted="DeltedCountry">
         <columns>
             <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
@@ -54,6 +56,8 @@
             <asp:Parameter Name="Id" Type="Int32" />
         </updateparameters>
     </asp:SqlDataSource>
+    <br />
+    <br />
     <br />
     <asp:Label ID="Label_titlearea" runat="server" Text="<代理商區域>"></asp:Label>
     <br />
@@ -116,36 +120,37 @@
     <!-- 以上未使用 -->
     <br />
     <br />
-    <asp:Label ID="Label_area" runat="server" Text="區域: "></asp:Label>
+    <asp:Label ID="Label_area" runat="server" Text="* 區域: "></asp:Label>
     <asp:TextBox ID="TextBox_area" runat="server" Placeholder="請輸入區域"></asp:TextBox>
     <br />
     <asp:Label ID="Label_dealerImgPath" runat="server" Text="相片: "></asp:Label>
     <asp:FileUpload ID="FileUpload_Img" runat="server" Placeholder="請選取代理商相片" />
     <br />
-    <asp:Label ID="Label_name" runat="server" Text="公司: "></asp:Label>
+    <asp:Label ID="Label_name" runat="server" Text="* 公司: "></asp:Label>
     <asp:TextBox ID="TextBox_name" runat="server" Placeholder="請輸入公司名稱"></asp:TextBox>
     <br />
-    <asp:Label ID="Label_contact" runat="server" Text="聯絡: "></asp:Label>
+    <asp:Label ID="Label_contact" runat="server" Text="* 聯絡: "></asp:Label>
     <asp:TextBox ID="TextBox_contact" runat="server" Placeholder="請輸入聯絡人"></asp:TextBox>
     <br />
-    <asp:Label ID="Label_address" runat="server" Text="地址: "></asp:Label>
+    <asp:Label ID="Label_address" runat="server" Text="* 地址: "></asp:Label>
     <asp:TextBox ID="TextBox_address" runat="server" Placeholder="請輸入地址"></asp:TextBox>
     <br />
-    <asp:Label ID="Label_tel" runat="server" Text="電話: "></asp:Label>
+    <asp:Label ID="Label_tel" runat="server" Text="* 電話: "></asp:Label>
     <asp:TextBox ID="TextBox_tel" runat="server" Placeholder="請輸入電話"></asp:TextBox>
     <br />
     <asp:Label ID="Label_fax" runat="server" Text="傳真: "></asp:Label>
     <asp:TextBox ID="TextBox_fax" runat="server" Placeholder="請輸入傳真"></asp:TextBox>
     <br />
-    <asp:Label ID="Label_email" runat="server" Text="信箱: "></asp:Label>
+    <asp:Label ID="Label_email" runat="server" Text="* 信箱: "></asp:Label>
     <asp:TextBox ID="TextBox_email" runat="server" Placeholder="請輸入信箱" TextMode="Email"></asp:TextBox>
     <br />
     <asp:Label ID="Label_link" runat="server" Text="網址: "></asp:Label>
     <asp:TextBox ID="TextBox_link" runat="server" Placeholder="請輸入網址"></asp:TextBox>
     <br />
-    <asp:Button ID="BtnAddArea" runat="server" Text="新增區域" OnClick="BtnAddArea_Click" />
+    <asp:Button ID="BtnAddArea" runat="server" Text="新增區域" OnClick="BtnAddArea_Click" class="btn btn-outline-primary btn-block mt-3"/>
     <br />
     <br />
+    <asp:Label ID="Label_GridView2" runat="server" Text="<區域列表編輯>"></asp:Label>
     <asp:GridView ID="GridView_arealist" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowCancelingEdit="GridView_arealist_RowCancelingEdit" OnRowDeleting="GridView_arealist_RowDeleting" OnRowEditing="GridView_arealist_RowEditing" OnRowUpdating="GridView_arealist_RowUpdating">
         <columns>
             <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id"></asp:BoundField>

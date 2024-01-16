@@ -58,6 +58,14 @@ namespace yacht
         //增加國家
         protected void Button_add_Click(object sender, EventArgs e)
         {
+            string textboxValue = TextBox_country.Text;
+
+            if (string.IsNullOrEmpty(textboxValue))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('欄位不可為空');", true);
+                return;
+            }
+
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectcountry"].ConnectionString);
 
             if (connection.State != System.Data.ConnectionState.Open)
@@ -334,6 +342,22 @@ namespace yacht
             //readerCountry.Close();
             //connection.Close();
 
+            //檢查欄位不可為空
+            string areaValue = TextBox_area.Text;
+            string nameValue = TextBox_name.Text;
+            string contactValue = TextBox_contact.Text;
+            string addressValue = TextBox_address.Text;
+            string telValue = TextBox_tel.Text;
+            string emailValue = TextBox_email.Text;
+
+            if (string.IsNullOrEmpty(areaValue) || string.IsNullOrEmpty(nameValue) ||
+                string.IsNullOrEmpty(contactValue) || string.IsNullOrEmpty(addressValue) || string.IsNullOrEmpty(telValue) ||
+                 string.IsNullOrEmpty(emailValue) )
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('欄位不可為空，請檢查確認');", true);
+                return;
+            }
+
             //有檔案才能上傳
             //FileUpload1.PostedFile != null
             if (FileUpload_Img.HasFile)
@@ -447,6 +471,8 @@ namespace yacht
             // 取得編輯模板中的控制項
             FileUpload fileUpload_ImgT = row.FindControl("FileUpload_ImgT") as FileUpload;
             string fullFilePath = "";
+
+            //如果有重新上傳
             if (fileUpload_ImgT.HasFile)
             {
                 string FileName = Path.GetFileName(fileUpload_ImgT.PostedFile.FileName); // 取得上傳檔案的路徑
@@ -457,7 +483,17 @@ namespace yacht
                 // 用完整的網址表示已上傳的檔案路徑
                 fullFilePath = Request.Url.GetLeftPart(UriPartial.Authority) + VirtualPathUtility.ToAbsolute("~/Album/" + FileName);
             }
-            string changeFileUpload_ImgT = Server.MapPath(new Uri(fullFilePath).PathAndQuery);
+            //沒有重新上傳就找舊的
+            string originalThumbnailPath = "";
+            originalThumbnailPath = GetOriginalThumbnailPathFromDatabase(boardId);
+
+            // Use the original thumbnail path if no new file was uploaded
+            if (string.IsNullOrEmpty(fullFilePath))
+            {
+                fullFilePath = originalThumbnailPath;
+            }
+
+            string changeFileUpload_ImgT = fullFilePath;
 
             //TextBox textBox_FileUpload_ImgT = row.FindControl("TextBox_FileUpload_ImgT") as TextBox;
             //string changeText_FileUpload_ImgT = textBox_FileUpload_ImgT.Text;
@@ -482,6 +518,22 @@ namespace yacht
 
             TextBox textBox_linkT = row.FindControl("TextBox_linkT") as TextBox;
             string changeText_linkT = textBox_linkT.Text;
+
+            //檢查欄位不可為空
+            string areaValue = changeText_areaT;
+            string nameValue = changeText_nameT;
+            string contactValue = changeText_contactT;
+            string addressValue = changeText_addressT;
+            string telValue = changeText_telT;
+            string emailValue = changeText_emailT;
+
+            if (string.IsNullOrEmpty(areaValue) || string.IsNullOrEmpty(nameValue) ||
+                string.IsNullOrEmpty(contactValue) || string.IsNullOrEmpty(addressValue) || string.IsNullOrEmpty(telValue) ||
+                string.IsNullOrEmpty(emailValue) )
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('欄位不可為空，請檢查確認');", true);
+                return;
+            }
 
             if (connection.State != System.Data.ConnectionState.Open)
             {
@@ -542,6 +594,33 @@ namespace yacht
         {
             GridView_arealist.EditIndex = -1;
             loadDealers();
+        }
+
+        //上傳會使用~用來檢所原本就有的縮圖路徑，記得更改資料表抓取
+        private string GetOriginalThumbnailPathFromDatabase(int boardId)
+        {
+            string originalThumbnailPath = "";
+
+            // 使用与您的数据库配置相匹配的连接字符串，执行查询以检索缩略图路径
+            string connectionString = WebConfigurationManager.ConnectionStrings["Connectarealist"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string sql = "SELECT dealerImgPath FROM dealers WHERE Id = @Id";
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@Id", boardId);
+
+                // 执行查询并检索缩略图路径
+                object result = command.ExecuteScalar();
+                if (result != null)
+                {
+                    originalThumbnailPath = result.ToString();
+                }
+            }
+
+            return originalThumbnailPath;
         }
     }
 }
