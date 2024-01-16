@@ -877,9 +877,11 @@
     <Content Include="Scripts\jquery.ad-gallery.js" />
     <Content Include="yachtBack.aspx" />
     <Content Include="yachtLayoutDeckBack.aspx" />
+    <Content Include="yachtLayoutFront.aspx" />
     <Content Include="yachtOverviewBack.aspx" />
     <Content Include="Newoverview.Master" />
     <Content Include="yachtOverviewFront.aspx" />
+    <Content Include="yachtSpecificationFront.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="images\back.gif" />
     <Content Include="images\banner001.jpg" />
@@ -1579,6 +1581,13 @@
     <Compile Include="yachtLayoutDeckBack.aspx.designer.cs">
       <DependentUpon>yachtLayoutDeckBack.aspx</DependentUpon>
     </Compile>
+    <Compile Include="yachtLayoutFront.aspx.cs">
+      <DependentUpon>yachtLayoutFront.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="yachtLayoutFront.aspx.designer.cs">
+      <DependentUpon>yachtLayoutFront.aspx</DependentUpon>
+    </Compile>
     <Compile Include="yachtOverviewBack.aspx.cs">
       <DependentUpon>yachtOverviewBack.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1592,6 +1601,13 @@
     </Compile>
     <Compile Include="yachtOverviewFront.aspx.designer.cs">
       <DependentUpon>yachtOverviewFront.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="yachtSpecificationFront.aspx.cs">
+      <DependentUpon>yachtSpecificationFront.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="yachtSpecificationFront.aspx.designer.cs">
+      <DependentUpon>yachtSpecificationFront.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -108,14 +108,14 @@ namespace yacht
                 Literal_overviewContentHtml.Text = HttpUtility.HtmlDecode(reader["overviewContentHtml"].ToString());
                 //遊艇名稱
                 Literal_dimensionTitle.Text = yachtModelStr + " DIMENSIONS";
+
                 //尺寸表格圖片
                 //dimensionsImgPathHTML.Append("<img src = '" + relativePath + "' alt = '' />");
-                Literal_overviewDimensionsImgPath.Text = dimensionsImgPathHTML.ToString();
                 //Literal_overviewDimensionsImgPath.Text = "<img src = '" + relativePath + "' alt = '' />";
+                Literal_overviewDimensionsImgPath.Text = dimensionsImgPathHTML.ToString();
 
                 //下載檔案
                 Literal_overviewDownloadsFilePath.Text = $"<a href='/{relativePathFile}' target='blank' >{yachtModelStr}</a>";
-
             }
 
             connection.Close();
