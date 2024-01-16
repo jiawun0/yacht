@@ -78,31 +78,39 @@
                     <span>後台管理</span>
                     <!-- 子選單開始 -->
                     <ul class="nav flex-column sub-menu">
+                        <!-- Nav Item - 登入 -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Register">
+                                <i class="fa-sharp fa-light fa-user"></i>
+                                <span class="fw-bold">管理</span>
+                            </a>
+                        </li>
+
                         <!-- Nav Item - 遊艇 -->
                         <li class="nav-item">
                             <a class="nav-link" href="/yachtBack">
-                                <i class="fa-sharp fa-light fa-image"></i>
+                                <i class="fa-sharp fa-light fa-ship"></i>
                                 <span class="fw-bold">遊艇 Model & Photo</span>
                             </a>
                         </li>
                         <!-- Nav Item - 遊艇 -->
                         <li class="nav-item">
                             <a class="nav-link" href="/yachtOverviewBack">
-                                <i class="fa-sharp fa-light fa-image"></i>
+                                <i class="fa-sharp fa-light fa-ship"></i>
                                 <span class="fw-bold">遊艇 Overview</span>
                             </a>
                         </li>
                         <!-- Nav Item - 遊艇 -->
                         <li class="nav-item">
                             <a class="nav-link" href="/yachtLayoutDeckBack">
-                                <i class="fa-sharp fa-light fa-image"></i>
+                                <i class="fa-sharp fa-light fa-ship"></i>
                                 <span class="fw-bold">遊艇 LayoutDeck & Specification</span>
                             </a>
                         </li>
                         <!-- Nav Item - 新聞 -->
                         <li class="nav-item">
                             <a class="nav-link" href="/newsBack">
-                                <i class="fa-sharp fa-light fa-film"></i>
+                                <i class="fa-sharp fa-light fa-newspaper"></i>
                                 <span class="fw-bold">新聞</span>
                             </a>
                         </li>
@@ -110,7 +118,7 @@
                         <!-- Nav Item - 公司 -->
                         <li class="nav-item">
                             <a class="nav-link" href="/conpanyBack">
-                                <i class="fa-sharp fa-light fa-comments"></i>
+                                <i class="fa-sharp fa-light fa-tree-city"></i>
                                 <span class="fw-bold">公司</span>
                             </a>
                         </li>
@@ -118,7 +126,7 @@
                         <!-- Nav Item - 代理商 -->
                         <li class="nav-item">
                             <a class="nav-link" href="/dealersCountryBack">
-                                <i class="fa-sharp fa-light fa-list"></i>
+                                <i class="fa-sharp fa-light fa-people-arrows"></i>
                                 <span class="fw-bold">代理商</span>
                             </a>
                         </li>
@@ -135,34 +143,74 @@
                     <span>前台呈現</span>
                 </div>
 
+                <!-- Nav Item - 首頁 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/index">
+                        <i class="fa-sharp fa-light fa-user"></i>
+                        <span class="fw-bold">首頁</span>
+                    </a>
+                </li>
+
                 <!-- Nav Item - 遊艇 -->
                 <li class="nav-item">
                     <a class="nav-link" href="/yachtOverviewFront">
-                        <i class="fa-sharp fa-light fa-image"></i>
-                        <span class="fw-bold">遊艇</span>
+                        <i class="fa-sharp fa-light fa-ship"></i>
+                        <span class="fw-bold">遊艇 Overview</span>
+                    </a>
+                </li>
+
+                <!-- Nav Item - 遊艇 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/yachtLayoutFront">
+                        <i class="fa-sharp fa-light fa-ship"></i>
+                        <span class="fw-bold">遊艇 LayoutDeck</span>
+                    </a>
+                </li>
+
+                <!-- Nav Item - 遊艇 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/yachtSpecificationFront">
+                        <i class="fa-sharp fa-light fa-ship"></i>
+                        <span class="fw-bold">遊艇 Specification</span>
                     </a>
                 </li>
 
                 <!-- Nav Item - 新聞 -->
                 <li class="nav-item">
                     <a class="nav-link" href="/newsFront2">
-                        <i class="fa-sharp fa-light fa-film"></i>
+                        <i class="fa-sharp fa-light fa-newspaper"></i>
                         <span class="fw-bold">新聞</span>
                     </a>
                 </li>
 
-                <!-- Nav Item - Q&A -->
+                <!-- Nav Item - 新聞 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/newsFrontdetail">
+                        <i class="fa-sharp fa-light fa-newspaper"></i>
+                        <span class="fw-bold">新聞 detail</span>
+                    </a>
+                </li>
+
+                <!-- Nav Item - 公司 -->
                 <li class="nav-item">
                     <a class="nav-link" href="/conpanyFront">
-                        <i class="fa-sharp fa-light fa-comments"></i>
+                        <i class="fa-sharp fa-light fa-tree-city"></i>
                         <span class="fw-bold">公司</span>
                     </a>
                 </li>
 
-                <!-- Nav Item - 連結 -->
+                <!-- Nav Item - 公司 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/conpanyCertificatFront">
+                        <i class="fa-sharp fa-light fa-tree-city"></i>
+                        <span class="fw-bold">公司 Certificat</span>
+                    </a>
+                </li>
+
+                <!-- Nav Item - 代理商 -->
                 <li class="nav-item">
                     <a class="nav-link" href="/dealersFront">
-                        <i class="fa-sharp fa-light fa-list"></i>
+                        <i class="fa-sharp fa-light fa-people-arrows"></i>
                         <span class="fw-bold">代理商</span>
                     </a>
                 </li>
@@ -170,7 +218,7 @@
                 <!-- Nav Item - 連結 -->
                 <li class="nav-item">
                     <a class="nav-link" href="/contactFront">
-                        <i class="fa-sharp fa-light fa-list"></i>
+                        <i class="fa-sharp fa-light fa-file-contract"></i>
                         <span class="fw-bold">連結</span>
                     </a>
                 </li>
