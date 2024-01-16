@@ -12,9 +12,9 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="title" runat="server">
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="content" runat="server">
-    <asp:Label ID="Label_title" runat="server" Text="<上傳遊艇>"></asp:Label>
+    <asp:Label ID="Label_title" runat="server" Text="<遊艇>"></asp:Label>
     <br />
-    <asp:Label ID="Label_yachtModel" runat="server" Text="遊艇型號 :"></asp:Label>
+    <asp:Label ID="Label_yachtModel" runat="server" Text="* 型號 :"></asp:Label>
     <asp:TextBox ID="TextBox_yachtModel" runat="server" type="text" class="form-control" Placeholder="請輸入型號" MaxLength="75"></asp:TextBox>
     <br />
     <asp:CheckBox ID="CheckBox_isNewDesign" runat="server" Text="新設計" Width="100%"></asp:CheckBox>
@@ -24,8 +24,7 @@
     <asp:Button ID="Button_addyachtModel" runat="server" Text="新增遊艇" class="btn btn-outline-primary btn-block mt-3" OnClick="Button_addyachtModel_Click" />
     <br />
     <br />
-    <asp:Label ID="Label_edit" runat="server" Text="<編輯遊艇>"></asp:Label>
-    <br />
+    <asp:Label ID="Label_edit" runat="server" Text="<遊艇列表編輯>"></asp:Label>
     <asp:GridView ID="GridView_Yachts" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowCancelingEdit="GridView_Yachts_RowCancelingEdit" OnRowDeleting="GridView_Yachts_RowDeleting" OnRowEditing="GridView_Yachts_RowEditing" OnRowUpdating="GridView_Yachts_RowUpdating">
         <Columns>
             <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id"></asp:BoundField>
@@ -92,7 +91,7 @@
     <br />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="body" runat="server">
-    <asp:Label ID="Label_yachtsPhoto" runat="server" Text="<上傳遊艇照片>"></asp:Label>
+    <asp:Label ID="Label_yachtsPhoto" runat="server" Text="<遊艇照片>"></asp:Label>
     <br />
     <asp:Label ID="Label_selyachtModel" runat="server" Text="選擇遊艇型號 :"></asp:Label>
     <br />
@@ -105,12 +104,19 @@
     <br />
     <asp:Button ID="Button_AddYachtsPhoto" runat="server" Text="新增照片" class="btn btn-outline-primary btn-block mt-3" OnClick="Button_AddYachtsPhoto_Click" />
     <br />
-    <asp:Label ID="Label_PhotoList" runat="server" Text="照片列表 :"></asp:Label>
+    <asp:Label ID="Label_PhotoList" runat="server" Text="<遊艇照片列表編輯>"></asp:Label>
     <br />
     <asp:GridView ID="GridView_YachtsPhoto" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowDeleting="GridView_YachtsPhoto_RowDeleting">
         <Columns>
             <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id"></asp:BoundField>
-            <asp:BoundField DataField="PhotoPath" HeaderText="PhotoPath" SortExpression="PhotoPath"></asp:BoundField>
+            <asp:TemplateField>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Image ID="Image1" runat="server" Width="100" Height="100" ImageUrl='<%# GetRelativeImagePath(Eval("PhotoPath").ToString()) %>' AlternateText="image lost" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
             <asp:BoundField DataField="CreatTime" HeaderText="CreatTime" SortExpression="CreatTime"></asp:BoundField>
             <asp:BoundField DataField="YachtsId" HeaderText="YachtsId" SortExpression="YachtsId"></asp:BoundField>
             <asp:CommandField ButtonType="Button" ShowDeleteButton="True"></asp:CommandField>

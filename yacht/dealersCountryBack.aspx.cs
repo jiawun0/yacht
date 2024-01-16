@@ -58,11 +58,12 @@ namespace yacht
         //增加國家
         protected void Button_add_Click(object sender, EventArgs e)
         {
+            //檢查欄位不可為空
             string textboxValue = TextBox_country.Text;
 
             if (string.IsNullOrEmpty(textboxValue))
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('欄位不可為空');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('國家不可為空');", true);
                 return;
             }
 
@@ -169,6 +170,15 @@ namespace yacht
 
             TextBox textBox_countrySortT = row.FindControl("TextBox_countrySortT") as TextBox;
             string changeText_countrySortT = textBox_countrySortT.Text;
+
+            //檢查欄位不可為空
+            string textboxValue = changeText_countrySortT;
+
+            if (string.IsNullOrEmpty(textboxValue))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('國家不可為空');", true);
+                return;
+            }
 
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["Connectcountry"].ConnectionString);
 

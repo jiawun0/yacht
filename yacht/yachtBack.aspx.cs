@@ -49,6 +49,15 @@ namespace yacht
         //新增yacht
         protected void Button_addyachtModel_Click(object sender, EventArgs e)
         {
+            //檢查欄位不可為空
+            string textboxValue = TextBox_yachtModel.Text;
+
+            if (string.IsNullOrEmpty(textboxValue))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('型號不可為空');", true);
+                return;
+            }
+
             //產生 GUID 隨機碼 + 時間2位秒數 (加強避免重複)
             DateTime nowTime = DateTime.Now;
             string nowSec = nowTime.ToString("ff");
@@ -154,6 +163,15 @@ namespace yacht
             CheckBox checkBox_isNewBuildingT = row.FindControl("CheckBox_isNewBuildingT") as CheckBox;
             bool isNewBuildingT = checkBox_isNewBuildingT.Checked;
 
+            //檢查欄位不可為空
+            string textboxValue = changeText_yachtModelT;
+
+            if (string.IsNullOrEmpty(textboxValue))
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('型號不可為空');", true);
+                return;
+            }
+
             SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectYachtall"].ConnectionString);
 
             if (connection.State != System.Data.ConnectionState.Open)
@@ -256,13 +274,15 @@ namespace yacht
                 sqlCommand.ExecuteNonQuery();
 
                 Response.Write("<script>alert('相片新增成功');</script>");
-                connection.Close();
             }
             else
             {
-                Response.Write("<script>alert('沒有檔案可新增');</script>");
+                //沒有檔案
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('請選擇檔案');", true);
+                return;
+                //Response.Write("<script>alert('請選擇檔案');</script>");
             }
-
+            connection.Close();
         }
 
         //顯示PhotoList，綁定gridview
@@ -361,15 +381,15 @@ namespace yacht
         }
 
         //使用相對路徑顯示photo
-        //protected string GetRelativeImagePath(string albumPath) //相對路徑
-        //{
-        //    if (!string.IsNullOrEmpty(albumPath))
-        //    {
-        //        string relativePath = albumPath.Replace(Server.MapPath("~"), "").Replace(Server.MapPath("\\"), "/");
-        //        return relativePath;
-        //    }
-        //    return string.Empty;
-        //}
+        protected string GetRelativeImagePath(string albumPath) //相對路徑
+        {
+            if (!string.IsNullOrEmpty(albumPath))
+            {
+                string relativePath = albumPath.Replace(Server.MapPath("~"), "").Replace(Server.MapPath("\\"), "/");
+                return relativePath;
+            }
+            return string.Empty;
+        }
 
     }
 }
