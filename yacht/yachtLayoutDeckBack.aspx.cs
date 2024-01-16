@@ -21,6 +21,7 @@ namespace yacht
                 fileBrowser.BasePath = "/ckfinder";
                 fileBrowser.SetupCKEditor(CKEditorControl_specificationContent);
                 loadCkeditorContent();
+                loaddimensionsImg();
 
                 //if (Session["LoginId"] != null)
                 //{
@@ -33,6 +34,7 @@ namespace yacht
                 //        string name = Showusername(loginId);
                 //        Literal_name.Text = "歡迎, " + name + "!";
                 //        loadCkeditorContent();
+                //        loaddimensionsImg();
                 //    }
                 //    else
                 //    {
@@ -53,6 +55,33 @@ namespace yacht
             //選擇後想出現的東西
             //選取DDL後連到Ckeditor
             loadCkeditorContent();
+            loaddimensionsImg();
+        }
+
+        //讀取dimensionsImg
+        private void loaddimensionsImg()
+        {
+            string selectedValue = DropDownList_yachtModel.SelectedValue;
+
+            //從資料庫取資料
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectLayoutDeck"].ConnectionString);
+            string sql = "select overviewDimensionsImgPath from Yachts where Id = @Id ";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@Id", selectedValue);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                string dimensionsImgPathStr = reader["overviewDimensionsImgPath"].ToString();
+                //相對路徑
+                string relativePath = GetRelativeImagePath(dimensionsImgPathStr);
+
+                //尺寸表格圖片
+                Literal_img.Text = "<img src = '" + relativePath + "' alt = '' />";
+            }
+
+            connection.Close();
         }
         //新增圖片
         protected void Button_upLayoutDeckImgPath_Click(object sender, EventArgs e)
@@ -94,7 +123,9 @@ namespace yacht
             }
             else
             {
-                Response.Write("<script>alert('沒有相片可新增');</script>");
+                //沒有檔案
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('請選擇檔案');", true);
+                return;
             }
         }
 
@@ -180,6 +211,15 @@ namespace yacht
             return name;
         }
 
-       
+        //使用相對路徑顯示photo
+        protected string GetRelativeImagePath(string albumPath) //相對路徑
+        {
+            if (!string.IsNullOrEmpty(albumPath))
+            {
+                string relativePath = albumPath.Replace(Server.MapPath("~"), "").Replace(Server.MapPath("\\"), "/");
+                return relativePath;
+            }
+            return string.Empty;
+        }
     }
 }

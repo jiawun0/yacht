@@ -15,7 +15,7 @@
 </asp:Content>
 
 <asp:Content ID="Content5" ContentPlaceHolderID="content" runat="server">
-    <asp:Label ID="Label_AboutUs" runat="server" Text="About Us 內容編輯 :"></asp:Label>
+    <asp:Label ID="Label_AboutUs" runat="server" Text="<公司 About Us 內容編輯>"></asp:Label>
     <ckeditor:ckeditorcontrol id="CKEditorControl_aboutUs" runat="server" basepath="/Scripts/ckeditor/"
         toolbar="Bold|Italic|Underline|Strike|Subscript|Superscript|-|RemoveFormat
         NumberedList|BulletedList|-|Outdent|Indent|-|JustifyLeft|JustifyCenter|JustifyRight|JustifyBlock|-|BidiLtr|BidiRtl
@@ -28,7 +28,7 @@
     <asp:Label ID="UploadAboutUsLab" runat="server" Visible="False" ForeColor="#009933" class="d-flex justify-content-center"></asp:Label>
     <asp:Button ID="UploadAboutUsBtn" runat="server" Text="上傳" class="btn btn-outline-primary btn-block mt-3" OnClick="UploadAboutUsBtn_Click" />
     <br />
-    <asp:Label ID="Label_Certificat" runat="server" Text="Certificat 內容編輯 :"></asp:Label>
+    <asp:Label ID="Label_Certificat" runat="server" Text="<公司 Certificat 內容編輯>"></asp:Label>
     <ckeditor:ckeditorcontrol id="CKEditorControl_Certificat" runat="server" basepath="/Scripts/ckeditor/"
         toolbar="Bold|Italic|Underline|Strike|Subscript|Superscript|-|RemoveFormat
         NumberedList|BulletedList|-|Outdent|Indent|-|JustifyLeft|JustifyCenter|JustifyRight|JustifyBlock|-|BidiLtr|BidiRtl

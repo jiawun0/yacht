@@ -11,13 +11,18 @@
     <asp:Literal ID="Literal_name" runat="server"></asp:Literal>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="title" runat="server">
-    <asp:Label ID="Label_selyachtModel" runat="server" Text="選擇遊艇型號 :"></asp:Label>
-    <br />
-    <asp:DropDownList ID="DropDownList_yachtModel" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="yachtModel" DataValueField="Id" OnSelectedIndexChanged="DropDownList_yachtModel_SelectedIndexChanged" ></asp:DropDownList>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectLayoutDeck %>" SelectCommand="SELECT * FROM [Yachts]"></asp:SqlDataSource>
-    <br />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="content" runat="server">
+    <asp:Label ID="Label_selyachtModel" runat="server" Text="選擇遊艇型號 :"></asp:Label>
+    <asp:DropDownList ID="DropDownList_yachtModel" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="yachtModel" DataValueField="Id" OnSelectedIndexChanged="DropDownList_yachtModel_SelectedIndexChanged" ></asp:DropDownList>
+    <br />
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectLayoutDeck %>" SelectCommand="SELECT * FROM [Yachts]"></asp:SqlDataSource>
+    <br />
+    <asp:Label ID="Label_img" runat="server" Text="<遊艇 LayoutDeck 圖片>"></asp:Label>
+    <br />
+    <asp:Literal ID="Literal_img" runat="server"></asp:Literal>
+    <br />
+    <br />
     <asp:Label ID="Label_LayoutDeck" runat="server" Text="<上傳遊艇 LayoutDeck 圖片>"></asp:Label>
     <br />
     <asp:FileUpload ID="FileUpload_LayoutDeck" runat="server" />
@@ -38,6 +43,6 @@
         Link|Image"
         height="400px"></CKEditor:CKEditorControl>
     <asp:Label ID="UploadspecificationContent" runat="server" Visible="False" ForeColor="#009933" class="d-flex justify-content-center"></asp:Label>
-    <asp:Button ID="UploadspecificationContentBtn" runat="server" Text="內文上傳" class="btn btn-outline-primary btn-block mt-3" OnClick="UploadspecificationContentBtn_Click" />
+    <asp:Button ID="UploadspecificationContentBtn" runat="server" Text="確認上傳" class="btn btn-outline-primary btn-block mt-3" OnClick="UploadspecificationContentBtn_Click" />
     <br />
 </asp:Content>

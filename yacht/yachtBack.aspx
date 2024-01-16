@@ -110,13 +110,13 @@
         <Columns>
             <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id"></asp:BoundField>
             <asp:TemplateField>
-                        <EditItemTemplate>
-                            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                        </EditItemTemplate>
-                        <ItemTemplate>
-                            <asp:Image ID="Image1" runat="server" Width="100" Height="100" ImageUrl='<%# GetRelativeImagePath(Eval("PhotoPath").ToString()) %>' AlternateText="image lost" />
-                        </ItemTemplate>
-                    </asp:TemplateField>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Image ID="Image1" runat="server" Width="100" Height="100" ImageUrl='<%# GetRelativeImagePath(Eval("PhotoPath").ToString()) %>' AlternateText="image lost" />
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField DataField="CreatTime" HeaderText="CreatTime" SortExpression="CreatTime"></asp:BoundField>
             <asp:BoundField DataField="YachtsId" HeaderText="YachtsId" SortExpression="YachtsId"></asp:BoundField>
             <asp:CommandField ButtonType="Button" ShowDeleteButton="True"></asp:CommandField>
@@ -144,4 +144,4 @@
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
-    </asp:Content>
+</asp:Content>

@@ -638,5 +638,16 @@ namespace yacht
 
             return originalThumbnailPath;
         }
+
+        //使用相對路徑顯示photo
+        protected string GetRelativeImagePath(string albumPath) //相對路徑
+        {
+            if (!string.IsNullOrEmpty(albumPath))
+            {
+                string relativePath = albumPath.Replace(Server.MapPath("~"), "").Replace(Server.MapPath("\\"), "/");
+                return relativePath;
+            }
+            return string.Empty;
+        }
     }
 }

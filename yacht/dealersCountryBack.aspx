@@ -173,6 +173,15 @@
                 </itemtemplate>
             </asp:TemplateField>
 
+            <asp:TemplateField>
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Image ID="Image1" runat="server" Width="100" Height="100" ImageUrl='<%# GetRelativeImagePath(Eval("dealerImgPath").ToString()) %>' AlternateText="image lost" />
+                </ItemTemplate>
+            </asp:TemplateField>
+
             <asp:TemplateField HeaderText="name" SortExpression="name">
                 <edititemtemplate>
                     <asp:TextBox ID="TextBox_nameT" runat="server" Text='<%# Bind("name") %>'></asp:TextBox>
