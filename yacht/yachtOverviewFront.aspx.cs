@@ -17,11 +17,12 @@ namespace yacht
             //會先跑 Content 頁的 Page_Load 才跑 Master 頁的 Page_Load
             if (!IsPostBack)
             {
-                loadOverviewContent();
+                loadOverviewDimensions();
+                loadOverview();
             }
         }
 
-        private void loadOverviewContent()
+        private void loadOverviewDimensions()
         {
             //取得網址傳值的 id 內容
             string guidStr = Session["guid"].ToString();
@@ -40,7 +41,51 @@ namespace yacht
             StringBuilder dimensions = new StringBuilder();
             StringBuilder dimensionsImgPathHTML = new StringBuilder();
 
+            dimensions.Append("<table class='table02'>");
+            dimensions.Append("<tr>");
+            dimensions.Append("<td class='table02td01'>");
+            dimensions.Append("<table>");
+
             while (reader.Read())
+            {
+                string Specification = reader["Specification"].ToString();
+                string size = reader["size"].ToString();
+
+                dimensions.Append("<tr>");
+                dimensions.Append("<th>" + Specification + "</th>");
+                dimensions.Append("<td>" + size + "</td>");
+                dimensions.Append("</tr>");
+            }
+
+            dimensions.Append("</table>");
+            dimensions.Append("</td>");
+
+            //渲染尺寸表格文字內容
+            Literal_Dimension.Text = dimensions.ToString();
+            connection.Close();
+        }
+
+        private void loadOverview()
+        {
+            //取得網址傳值的 id 內容
+            string guidStr = Session["guid"].ToString();
+
+            //從資料庫取資料
+            SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["ConnectYachtall"].ConnectionString);
+            //string sql = "select overviewContentHtml from Yachts where guid = @guid ";
+            string sql = "select Y.Id, Y.yachtModel, Y.guid, Y.overviewContentHtml, Y.overviewDimensionsImgPath, Y.overviewDownloadsFilePath, YD.Specification, YD.size, YD.YachtsId from Yachts Y" +
+               " left join YachtsDimension YD on Y.Id = YD.YachtsId " +
+               " where guid = @guid ";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@guid", guidStr);
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            StringBuilder dimensionsImgPathHTML = new StringBuilder();
+
+
+            if (reader.Read())
             {
                 string yachtModelStr = reader["yachtModel"].ToString();
                 string dimensionsImgPathStr = reader["overviewDimensionsImgPath"].ToString();
@@ -51,33 +96,28 @@ namespace yacht
                 //相對路徑
                 string relativePathFile = GetRelativeImagePath(downloadsFilePathStr);
 
-                string Specification = reader["Specification"].ToString();
-                string size = reader["size"].ToString();
 
-                dimensions.Append("<table class='table02'>");
-                dimensions.Append("<tbody>");
+                dimensionsImgPathHTML.Append("<td>");
+                dimensionsImgPathHTML.Append("<img src = '" + relativePath + "' alt = '' width='278' height='345' />");
+                dimensionsImgPathHTML.Append("</td>");
 
-                //注意長度
-                dimensions.Append("<tr><td style='width:300px;'>" + Specification + "</td>");
-                dimensions.Append("<td style='width:300px;'>" + size + "</td></tr>");
-
-                dimensions.Append("</tbody>");
-                dimensions.Append("</table>");
+                dimensionsImgPathHTML.Append("</tr>");
+                dimensionsImgPathHTML.Append("</table>");
 
                 //渲染CKeditor
                 Literal_overviewContentHtml.Text = HttpUtility.HtmlDecode(reader["overviewContentHtml"].ToString());
                 //遊艇名稱
                 Literal_dimensionTitle.Text = yachtModelStr + " DIMENSIONS";
-                //尺寸表格圖片(會重複??)
-                dimensionsImgPathHTML.Append("<img src = '" + relativePath + "' alt = '' />");
+                //尺寸表格圖片
+                //dimensionsImgPathHTML.Append("<img src = '" + relativePath + "' alt = '' />");
                 Literal_overviewDimensionsImgPath.Text = dimensionsImgPathHTML.ToString();
-                //渲染尺寸表格文字內容
-                Literal_Dimension.Text = dimensions.ToString();
+                //Literal_overviewDimensionsImgPath.Text = "<img src = '" + relativePath + "' alt = '' />";
+
                 //下載檔案
                 Literal_overviewDownloadsFilePath.Text = $"<a href='/{relativePathFile}' target='blank' >{yachtModelStr}</a>";
 
             }
-            
+
             connection.Close();
         }
 
