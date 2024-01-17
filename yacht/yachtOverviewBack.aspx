@@ -82,26 +82,27 @@
     <br />
     <asp:Button ID="Button_addDimension" runat="server" Text="新增規格欄位" class="btn btn-outline-primary btn-block mt-3" OnClick="Button_addDimension_Click" />
     <br />
-    <asp:GridView ID="GridView_Dimension" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowCancelingEdit="GridView_Dimension_RowCancelingEdit" OnRowDeleting="GridView_Dimension_RowDeleting" OnRowEditing="GridView_Dimension_RowEditing" OnRowUpdating="GridView_Dimension_RowUpdating">
+    <asp:GridView ID="GridView_Dimension" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" BorderWidth="1" BorderStyle="Solid" OnRowCancelingEdit="GridView_Dimension_RowCancelingEdit" OnRowDeleting="GridView_Dimension_RowDeleting" OnRowEditing="GridView_Dimension_RowEditing" OnRowUpdating="GridView_Dimension_RowUpdating">
+        <RowStyle BorderStyle="Solid" BorderWidth="1px" />
         <Columns>
-            <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id"></asp:BoundField>
+            <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" ItemStyle-Width="50px"></asp:BoundField>
             <asp:TemplateField HeaderText="Specification" SortExpression="Specification">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox_SpecificationT" runat="server" Text='<%# Bind("Specification") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox_SpecificationT" runat="server" Text='<%# Bind("Specification") %>' Width="150px"></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label_SpecificationT" runat="server" Text='<%# Bind("Specification") %>'></asp:Label>
+                    <asp:Label ID="Label_SpecificationT" runat="server" Text='<%# Bind("Specification") %>' Width="150px"></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="size" SortExpression="size">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox_sizeT" runat="server" Text='<%# Bind("size") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox_sizeT" runat="server" Text='<%# Bind("size") %>' Width="150px"></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label_sizeT" runat="server" Text='<%# Bind("size") %>'></asp:Label>
+                    <asp:Label ID="Label_sizeT" runat="server" Text='<%# Bind("size") %>' Width="150px"></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate" ReadOnly="True"></asp:BoundField>
+            <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate" ReadOnly="True" ItemStyle-Width="200px"></asp:BoundField>
             <asp:BoundField DataField="YachtsId" HeaderText="YachtsId" SortExpression="YachtsId"></asp:BoundField>
             <asp:CommandField ButtonType="Button" ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
         </Columns>

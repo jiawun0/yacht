@@ -39,7 +39,7 @@
     <asp:Label ID="Label_selectdate" runat="server" Text="選擇標題 :"></asp:Label>
     <asp:DropDownList ID="DropDownList_Headline" runat="server" AutoPostBack="True" DataTextField="headline" DataValueField="Id" OnSelectedIndexChanged="DropDownList_Headline_SelectedIndexChanged1"></asp:DropDownList>
 
-    <asp:DetailsView ID="DetailsView_news" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" DataKeyNames="Id" OnItemDeleting="DetailsView_news_ItemDeleting" OnItemUpdating="DetailsView_news_ItemUpdating" OnModeChanging="DetailsView_news_ModeChanging" OnItemCommand="DetailsView_news_ItemCommand">
+    <asp:DetailsView ID="DetailsView_news" runat="server" Height="100px" Width="200px" BorderWidth="1" BorderStyle="Solid" AutoGenerateRows="False" DataKeyNames="Id" OnItemDeleting="DetailsView_news_ItemDeleting" OnItemUpdating="DetailsView_news_ItemUpdating" OnModeChanging="DetailsView_news_ModeChanging" OnItemCommand="DetailsView_news_ItemCommand">
         <Fields>
             <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
             <asp:TemplateField HeaderText="dateTitle" SortExpression="dateTitle">

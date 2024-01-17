@@ -25,34 +25,35 @@
     <br />
     <br />
     <asp:Label ID="Label_edit" runat="server" Text="<遊艇列表編輯>"></asp:Label>
-    <asp:GridView ID="GridView_Yachts" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowCancelingEdit="GridView_Yachts_RowCancelingEdit" OnRowDeleting="GridView_Yachts_RowDeleting" OnRowEditing="GridView_Yachts_RowEditing" OnRowUpdating="GridView_Yachts_RowUpdating">
+    <asp:GridView ID="GridView_Yachts" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" BorderWidth="1" BorderStyle="Solid" OnRowCancelingEdit="GridView_Yachts_RowCancelingEdit" OnRowDeleting="GridView_Yachts_RowDeleting" OnRowEditing="GridView_Yachts_RowEditing" OnRowUpdating="GridView_Yachts_RowUpdating">
+        <RowStyle BorderStyle="Solid" BorderWidth="1px" />
         <Columns>
-            <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id"></asp:BoundField>
+            <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" ItemStyle-Width="50px"></asp:BoundField>
             <asp:TemplateField HeaderText="yachtModel" SortExpression="yachtModel">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox_yachtModelT" runat="server" Text='<%# Bind("yachtModel") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox_yachtModelT" runat="server" Text='<%# Bind("yachtModel") %>' Width="150px"></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label_yachtModelT" runat="server" Text='<%# Bind("yachtModel") %>'></asp:Label>
+                    <asp:Label ID="Label_yachtModelT" runat="server" Text='<%# Bind("yachtModel") %>' Width="150px"></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="isNewDesign" SortExpression="isNewDesign">
                 <EditItemTemplate>
-                    <asp:CheckBox ID="CheckBox_isNewDesignT" runat="server" Checked='<%# Bind("isNewDesign") %>' />
+                    <asp:CheckBox ID="CheckBox_isNewDesignT" runat="server" Checked='<%# Bind("isNewDesign") %>' Width="150px"/>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:CheckBox ID="CheckBox_isNewDesignT" runat="server" Checked='<%# Bind("isNewDesign") %>' Enabled="false" />
+                    <asp:CheckBox ID="CheckBox_isNewDesignT" runat="server" Checked='<%# Bind("isNewDesign") %>' Enabled="false" Width="150px"/>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="isNewBuilding" SortExpression="isNewBuilding">
                 <EditItemTemplate>
-                    <asp:CheckBox ID="CheckBox_isNewBuildingT" runat="server" Checked='<%# Bind("isNewBuilding") %>' />
+                    <asp:CheckBox ID="CheckBox_isNewBuildingT" runat="server" Checked='<%# Bind("isNewBuilding") %>' Width="150px"/>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:CheckBox ID="CheckBox_isNewBuildingT" runat="server" Checked='<%# Bind("isNewBuilding") %>' Enabled="false" />
+                    <asp:CheckBox ID="CheckBox_isNewBuildingT" runat="server" Checked='<%# Bind("isNewBuilding") %>' Enabled="false" Width="150px"/>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate" ReadOnly="True"></asp:BoundField>
+            <asp:BoundField DataField="CreatDate" HeaderText="CreatDate" SortExpression="CreatDate" ReadOnly="True" ItemStyle-Width="200px"></asp:BoundField>
             <asp:CommandField ButtonType="Button" ShowDeleteButton="True" ShowEditButton="True"></asp:CommandField>
         </Columns>
     </asp:GridView>
@@ -106,9 +107,10 @@
     <br />
     <asp:Label ID="Label_PhotoList" runat="server" Text="<遊艇照片列表編輯>"></asp:Label>
     <br />
-    <asp:GridView ID="GridView_YachtsPhoto" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowDeleting="GridView_YachtsPhoto_RowDeleting">
+    <asp:GridView ID="GridView_YachtsPhoto" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" BorderWidth="1" BorderStyle="Solid" OnRowDeleting="GridView_YachtsPhoto_RowDeleting">
+        <RowStyle BorderStyle="Solid" BorderWidth="1px" />
         <Columns>
-            <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id"></asp:BoundField>
+            <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" ItemStyle-Width="50px"></asp:BoundField>
             <asp:TemplateField>
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
@@ -117,8 +119,8 @@
                     <asp:Image ID="Image1" runat="server" Width="100" Height="100" ImageUrl='<%# GetRelativeImagePath(Eval("PhotoPath").ToString()) %>' AlternateText="image lost" />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="CreatTime" HeaderText="CreatTime" SortExpression="CreatTime"></asp:BoundField>
-            <asp:BoundField DataField="YachtsId" HeaderText="YachtsId" SortExpression="YachtsId"></asp:BoundField>
+            <asp:BoundField DataField="CreatTime" HeaderText="CreatTime" SortExpression="CreatTime" ItemStyle-Width="200px"></asp:BoundField>
+            <asp:BoundField DataField="YachtsId" HeaderText="YachtsId" SortExpression="YachtsId" ItemStyle-Width="50px"></asp:BoundField>
             <asp:CommandField ButtonType="Button" ShowDeleteButton="True"></asp:CommandField>
         </Columns>
     </asp:GridView>
