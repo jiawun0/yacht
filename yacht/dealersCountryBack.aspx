@@ -166,10 +166,10 @@
 
             <asp:TemplateField HeaderText="dealerImgPath" SortExpression="dealerImgPath">
                 <edititemtemplate>
-                    <asp:FileUpload ID="FileUpload_ImgT" runat="server" ></asp:FileUpload>
+                    <asp:FileUpload ID="FileUpload_ImgT" runat="server" width="100px"></asp:FileUpload>
                 </edititemtemplate>
                 <itemtemplate>
-                    <asp:Label ID="Label_FileUpload_ImgT" runat="server" Text='<%# Bind("dealerImgPath") %>' style="max-width: 50px;" ></asp:Label>
+                    <asp:Label ID="Label_FileUpload_ImgT" runat="server" Text='<%# Bind("dealerImgPath") %>' width="150px" CssClass="overflow-scroll"></asp:Label>
                 </itemtemplate>
             </asp:TemplateField>
 
