@@ -162,6 +162,7 @@
                 <itemtemplate>
                     <asp:Label ID="Label_areaT" runat="server" Text='<%# Bind("area") %>'></asp:Label>
                 </itemtemplate>
+                <ItemStyle BorderStyle="Solid" BorderWidth="1px" />
             </asp:TemplateField>
 
             <asp:TemplateField HeaderText="dealerImgPath" SortExpression="dealerImgPath">
